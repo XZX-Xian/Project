@@ -1,0 +1,35 @@
+.sm li{
+    list-style-type: none;
+    display: inline-block;
+    text-align: center;
+    width: 180px;
+    font-size: 16px;
+
+}
+.sm li a{
+    text-decoration:none;
+    color: white;
+}
+.sm{
+    margin-top: 5px;
+    color: white;
+}
+html, body {
+    margin:0;
+    padding:0;
+}
+
+#bt li{
+    list-style-type: none;
+    padding-top: 3px;
+}
+
+#bt1 li{
+    list-style-type: none;
+    padding-top: 3px;
+}
+
+#bt2 li{
+    list-style-type: none;
+    padding-top: 3px;
+}

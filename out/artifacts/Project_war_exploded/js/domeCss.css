@@ -1,0 +1,104 @@
+.aa {
+    color: #ffffff;
+    background-color: rgba(44, 58, 71, 0.8);
+
+    text-shadow: 1px 1px 1px #4bcffa;
+}
+
+.fm {
+    width: 289px;
+    height: 230px;
+    background: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    top: 80px;
+    border: 1px rgba(44, 58, 71, 0.8) solid;
+
+}
+
+.wjipwd {
+    width: 289px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    top: 80px;
+    border: 1px rgba(44, 58, 71, 0.8) solid;
+}
+
+.name {
+    width: 150px;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 6px;
+}
+
+.pwd {
+    width: 150px;
+    height: 30px;
+    margin-top: 15px;
+    margin-left: 6px;
+}
+
+.yzm {
+    width: 65px;
+    height: 30px;
+    margin-top: 15px;
+    margin-left: 6px;
+}
+
+.inse {
+    margin-top: 15px;
+    font-size: 12px;
+    padding-left: 50px;
+    float: left;
+}
+
+.upda {
+    margin-top: 15px;
+    font-size: 12px;
+    padding-right: 50px;
+    float: right;
+}
+
+.log {
+    margin-top: -16px;
+    width: 80px;
+
+}
+
+.leftlg {
+    position: absolute;
+    left: 6px;
+    top: 65px;
+}
+
+.riglg {
+    position: absolute;
+    right: 6px;
+    top: 65px;
+}
+
+.denlv {
+    margin-top: 15px;
+    font-size: 12px;
+    padding-left: 50px;
+    float: left;
+}
+
+#subject {
+    width: 100%;
+    height: 600px;
+
+    border: 1px red solid;
+    background-color: #ffffff;
+}
+
+#subject div {
+    display: inline-block;
+
+}
+
+#activity li {
+    list-style-type: none;
+    margin-top: 18px;
+    margin-right: 65px;
+}

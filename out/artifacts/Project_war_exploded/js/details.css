@@ -1,0 +1,43 @@
+.shangp li{
+    list-style-type: none;
+    border-bottom:1px solid #ccc
+}
+.sm li{
+    list-style-type: none;
+    display: inline-block;
+    text-align: center;
+    width: 180px;
+    font-size: 16px;
+    margin-top: 7px;
+}
+.sm li a{
+    text-decoration:none;
+    color: white;
+}
+.sm{
+    margin-top: 5px;
+    color: white;
+}
+.c2{
+    background-color: white;
+    position: fixed;
+    width: 400px;
+    height: 300px;
+    top:50%;
+    left: 50%;
+    z-index: 3;
+    margin-top: -150px;
+    margin-left: -200px;
+}
+
+#bg{
+    position: fixed;
+    width: 100%;
+    height:100%;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+}

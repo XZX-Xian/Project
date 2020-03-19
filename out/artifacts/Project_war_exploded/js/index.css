@@ -1,0 +1,50 @@
+.sm li{
+    list-style-type: none;
+    display: inline-block;
+    text-align: center;
+    width: 180px;
+    font-size: 16px;
+
+}
+.sm li a{
+    text-decoration:none;
+    color: white;
+}
+.sm{
+    margin-top: 5px;
+    color: white;
+}
+html, body {
+    margin:0;
+    padding:0;
+    background-color: rgba(236, 240, 241, 0.3);
+
+}
+
+#bt li{
+    list-style-type: none;
+    padding-top: 2px;
+    display: block;
+}
+#bt li img{
+    width: 215px;
+}
+
+#bt1 li{
+    list-style-type: none;
+    padding-top: 2px;
+    display: block;
+}
+#bt1 li img{
+    width: 160px;
+}
+
+#bt2 li{
+    list-style-type: none;
+    padding-top: 2px;
+    display: block;
+}
+#bt2 li img{
+    width: 165px;
+}
+

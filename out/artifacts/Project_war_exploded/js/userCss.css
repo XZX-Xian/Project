@@ -1,0 +1,149 @@
+
+/*框架样式*/
+.sm li {
+    list-style-type: none;
+    display: inline-block;
+    text-align: center;
+    width: 180px;
+    font-size: 16px;
+
+}
+
+.sm li a {
+    text-decoration: none;
+    color: white;
+}
+
+.sm {
+    margin-top: 5px;
+    color: white;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+/*个人信息列表样式*/
+.memleft {
+    margin-left: 150px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.memleft > ul {
+    float: left;
+    list-style: none;
+    height: 640px;
+}
+
+.memleft td {
+    border-bottom: 1px solid #919191;
+}
+
+/*左侧==>列表*/
+#list {
+    width: 120px;
+    background-color: rgba(201, 201, 201, 0.2);
+    /*border: 1px red solid;*/
+    text-align: center;
+    color: #000000;
+    padding: 0px;
+}
+
+#list > li {
+    color: black;
+    border-bottom: 1px #000000 solid;
+    line-height: 40px;
+}
+
+/*右侧==》详细内容*/
+#content {
+    /*如果内容超出则加滚动条*/
+    overflow: auto;
+    height: 650px;
+    width: 1000px;
+    /*border: 1px red solid*/
+}
+
+#content > li {
+    height: 650px;
+}
+
+/*订单样式*/
+.mermtab {
+    padding-top: 10px;
+    text-align: left;
+
+}
+
+/*th通用*/
+th {
+    height: 30px;
+    padding-left: 10px;
+    background-color: rgba(204, 204, 204, 0.47);
+}
+
+.mermtab td {
+    height: 50px;
+}
+
+/*订单状态样式*/
+.mem_saileft {
+    padding-top: 20px;
+}
+
+.mem_saileft > a {
+    margin-left: 10px;
+    color: black;
+}
+
+/*商品收藏样式*/
+.mem_shouc {
+    padding-top: 10px;
+    color: black;
+}
+
+
+.mem_shouc div {
+    padding-left: 10px;
+}
+
+.mem_shouc span {
+    padding-left: 20px;
+}
+
+.collect span {
+    padding-left: 10px;
+}
+
+/*收货地址*/
+.right {
+    /*border: 1px red solid;*/
+    text-align: right;
+}
+
+.memtab tr {
+    height: 60px;
+}
+
+.cfb6 {
+    color: red;
+}
+
+
+/*js添加样式*/
+.sai {
+    background-color: rgba(255, 0, 0, 0.66);
+    color: white;
+}
+
+.list {
+    color: #ed312a;
+    background-color: white;
+}
+
+.a {
+    text-decoration: underline;
+}

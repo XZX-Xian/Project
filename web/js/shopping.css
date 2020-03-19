@@ -1,0 +1,72 @@
+.sm li{
+    list-style-type: none;
+    display: inline-block;
+    text-align: center;
+    width: 180px;
+    font-size: 16px;
+
+}
+.sm li a{
+    text-decoration:none;
+    color: white;
+}
+.sm{
+    margin-top: 5px;
+    color: white;
+}
+/*ul去黑点*/
+ul li {
+    list-style: none;
+}
+
+/*购物车框架*/
+.buyshop {
+    width: 1180px;
+    border: 1px rgba(129, 129, 129, 0.66) solid;
+}
+
+/*选项*/
+.buyli li {
+    padding-left: 80px;
+    display: inline-block;
+}
+
+/*商品*/
+.mermtab {
+    padding-left: 10px;
+}
+#bg{
+    position: fixed;
+    width: 100%;
+    height:100%;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+}
+.c2{
+    background-color: white;
+    position: fixed;
+    width: 400px;
+    height: 300px;
+    top:50%;
+    left: 50%;
+    z-index: 3;
+    margin-top: -150px;
+    margin-left: -200px;
+}
+.collect td{
+    border-bottom: 1px #cccccc solid;
+}
+
+/*结算框*/
+.buyrigh {
+    width: 200px;
+    border: 2px #959595 solid;
+    position: fixed;
+    left: 1150px;
+    bottom: 425px;
+    padding: 5px;
+}

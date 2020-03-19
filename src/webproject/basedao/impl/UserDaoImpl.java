@@ -1,0 +1,664 @@
+package webproject.basedao.impl;
+
+import webproject.basedao.BaseDao;
+import webproject.basedao.UserDao;
+import webproject.entity.Address;
+import webproject.entity.Comm;
+import webproject.entity.User;
+
+import javax.jws.soap.SOAPBinding;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+//压制警告
+@SuppressWarnings("all")
+public class UserDaoImpl extends BaseDao implements UserDao {
+
+    public List<Comm> secom(Comm comm){
+        String sql="SELECT * FROM addcommodity WHERE  AddName LIKE  '%"+comm.getComName()+"%'";
+        System.out.println(comm.getComName());
+        ResultSet rs = null;
+        List<Comm> list = new ArrayList<Comm>();
+        try {
+            rs = super.exceuteQuery(sql, null);
+            while (rs.next()) {
+                Comm com = new Comm();
+                com.setComID(rs.getInt(1));
+                com.setComMoney(rs.getString(2));
+                com.setComColor(rs.getString(3));
+                com.setComSize(rs.getInt(4));
+                com.setComQuantity(rs.getInt(5));
+                com.setComName(rs.getString(6));
+                com.setComCount(rs.getInt(7));
+                com.setComAppCount(rs.getInt(8));
+                com.setComOve(rs.getString(9));
+                com.setComOut(rs.getString(10));
+                com.setComCCTV(rs.getString(11));
+                com.setComtype(rs.getInt(12));
+                list.add(com);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //查询收货地址
+    @Override
+    public List<Address> Seleorder(Address address) {
+        String sql="SELECT *FROM user_address where user_account=?";
+        Object[] obj={address.getAccount()};
+        List<Address> list=new ArrayList<>();
+        ResultSet rs=null;
+        try{
+            rs=super.exceuteQuery(sql,obj);
+            while (rs.next()){
+                Address adds=new Address();
+                adds.setId(rs.getInt(1));
+                adds.setAccount(rs.getString(2));
+                adds.setName(rs.getString(3));
+                adds.setProvince(rs.getString(4));
+                adds.setCity(rs.getString(5));
+                adds.setCounty(rs.getString(6));
+                adds.setAddress(rs.getString(7));
+                adds.setPhone(rs.getString(8));
+                adds.setCode(rs.getString(9));
+                adds.setState(rs.getString(10));
+                list.add(adds);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //订单采购
+    @Override
+    public List<Comm> ddcg(String ids, String useid) {
+        String sql="SELECT * FROM shopping where Addid in("+ids+") and userid=?";
+        Object[] obj={useid};
+        List<Comm> list=new ArrayList<>();
+        ResultSet rs=null;
+        try{
+            rs=super.exceuteQuery(sql,obj);
+            while (rs.next()){
+                Comm com=new Comm();
+                com.setComID(rs.getInt(1));
+                com.setComName(rs.getString(2));
+                com.setComMoney(rs.getString(3));
+                com.setComSize(rs.getInt(4));
+                com.setComOve(rs.getString(5));
+                list.add(com);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //购物车多个删除
+    public int deleteUsers(String ids,String account) {
+        String sql="delete from shopping where Addid in("+ids+") AND userid=?";
+        System.out.println(sql);
+        Object [] params={account};
+        int count=super.executeUpdate(sql,params);
+        return count;
+    }
+
+    //购物车和数据库商品的数量
+    @Override
+    public int shopupda(Comm comm) {
+        String sql="UPDATE shopping set Addsize=? where Addid=? AND userid=?";
+        Object[]obj={comm.getSize(),comm.getComID(),comm.getUserid()};
+        int count=super.executeUpdate(sql,obj);
+        return count;
+    }
+
+    //购物车商品相同
+    @Override
+    public int shopsele(Comm comm) {
+        String sql="SELECT Addsize FROM shopping where userid=? and Addid=?";
+        Object[]obj={comm.getUserid(),comm.getComID()};
+        ResultSet rs=null;
+        int count=0;
+        try{
+            rs=super.exceuteQuery(sql,obj);
+            while (rs.next()){
+                count=rs.getInt(1);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    //查询商品数量
+    @Override
+    public int CommID(int id,String account) {
+        String sql="SELECT Addsize FROM shopping WHERE Addid=? AND userid=?";
+        Object[] parmas={id,account};
+        ResultSet rs=null;
+        int count=0;
+        try {
+            rs=super.exceuteQuery(sql,parmas);
+            while (rs.next()){
+                count=rs.getInt(1);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    @Override
+    public int CommUP(int size,int id, String account) {
+        String sql="UPDATE FROM shopping SET Addsize=? WHERE  Addid=? AND userid=?";
+        Object[] params={size,id,account};
+        int count=super.executeUpdate(sql,params);
+        if (count>0){
+            System.out.println("修改成功");
+        }else {
+            System.out.println("修改失败");
+        }
+
+        return 0;
+    }
+
+    //购物车删除事件
+    @Override
+    public int deleshop(Comm comm) {
+        String sql="DELETE FROM shopping where Addid=?";
+        Object[]obj={comm.getComID()};
+        int count=super.executeUpdate(sql,obj);
+        return count;
+    }
+
+    //添加到购物车
+    @Override
+    public int shopinse(Comm comm) {
+        String sql="INSERT INTO shopping(Addid,AddName,AddMoney,Addsize,mouseove,userid)VALUES(?,?,?,?,?,?)";
+        List<Comm> list=new ArrayList<>();
+        Object[] obj={comm.getComID(),comm.getComName(),comm.getComMoney(),comm.getSize(),comm.getComOve(),comm.getUserid()};
+        int count=super.executeUpdate(sql,obj);
+
+        return count;
+    }
+
+    //通过ID 查询用户购物车
+    @Override
+    public List<Comm> shopdemo(String account) {
+        String sql="SELECT B.addid,B.AddName,B.AddMoney,B.Addsize,b.mouseove FROM user_data as A INNER JOIN shopping as B ON A.user_account=B.userid WHERE A.user_account=?;";
+        List<Comm> list=new ArrayList<>();
+        Object[] obj={account};
+        ResultSet rs=null;
+        try{
+            rs=super.exceuteQuery(sql,obj);
+            while (rs.next()){
+                Comm com=new Comm();
+                com.setComID(rs.getInt(1));
+                com.setComName(rs.getString(2));
+                com.setComMoney(rs.getString(3));
+                com.setComSize(rs.getInt(4));
+                com.setComOve(rs.getString(5));
+                list.add(com);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //娱乐活动商品
+    @Override
+    public  List<Comm> recreationdemo() {
+        int random=(int)(Math.random()*39+1);
+        System.out.println(random);
+        String sql="SELECT *FROM addcommodity where AddId="+random+"";
+        List<Comm>list=new ArrayList<>();
+        ResultSet rs=null;
+        try{
+            rs=super.exceuteQuery(sql,null);
+            while (rs.next()){
+                Comm com=new Comm();
+                com.setComID(rs.getInt(1));
+                com.setComMoney(rs.getString(2));
+                com.setComColor(rs.getString(3));
+                com.setComSize(rs.getInt(4));
+                com.setComQuantity(rs.getInt(5));
+                com.setComName(rs.getString(6));
+                com.setComCount(rs.getInt(7));
+                com.setComAppCount(rs.getInt(8));
+                com.setComOve(rs.getString(9));
+                com.setComOut(rs.getString(10));
+                com.setComCCTV(rs.getString(11));
+                com.setComtype(rs.getInt(12));
+                list.add(com);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //两表联查  条件判断查询的商品资料
+    @Override
+    public List<Comm> Seletedemo(Comm comm) {
+        String sql="SELECT * FROM addcommodity as A INNER JOIN addgoods as B ON A.Addid=B.AddId WHERE A.AddID=?";
+        Object[]obj={comm.getComID()};
+        ResultSet rs=null;
+        List<Comm>list=new ArrayList<>();
+        try{
+            rs=super.exceuteQuery(sql,obj);
+            while (rs.next()){
+                Comm com=new Comm();
+                com.setComID(rs.getInt(1));
+                com.setComMoney(rs.getString(2));
+                com.setComColor(rs.getString(3));
+                com.setComSize(rs.getInt(4));
+                com.setComQuantity(rs.getInt(5));
+                com.setComName(rs.getString(6));
+                com.setComCount(rs.getInt(7));
+                com.setComAppCount(rs.getInt(8));
+                com.setComOve(rs.getString(9));
+                com.setComOut(rs.getString(10));
+                com.setComCCTV(rs.getString(11));
+                com.setComtype(rs.getInt(12));
+                com.setId(rs.getInt(13));
+                com.setBrand(rs.getString(14));
+                com.setProduct(rs.getString(15));
+                com.setModell(rs.getString(16));
+                com.setState(rs.getString(17));
+                list.add(com);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //用户注册
+    @Override
+    public int AddUser(User user) {
+        String sql = "INSERT user_data(user_account,user_pwd,user_phone) VALUES (?,?,?)";
+        Object[] params = {user.getAccount(), user.getPwd(), user.getPhone()};
+        int count = super.executeUpdate(sql, params);
+        return count;
+    }
+
+    //登录用户
+    @Override
+    public boolean userdl(String account,String pwd) {
+        boolean flag=false;
+        String sql="SELECT * FROM user_data WHERE user_account=? and user_pwd=?";
+        Object[] params={account,pwd};
+        ResultSet rs=null;
+        try{
+            rs=super.exceuteQuery(sql,params);
+            if (rs.next()) {
+                flag=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    //登录电话
+    @Override
+    public boolean userdhdl(int phone,String pwd) {
+        boolean flag=false;
+        String sql="SELECT * FROM user_data WHERE user_phone=? and user_pwd=?";
+        Object[] params={phone,pwd};
+        ResultSet rs=null;
+        try{
+            rs=super.exceuteQuery(sql,null);
+            if (rs.next()) {
+                flag=true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    //两表联查
+    @Override
+    public List<Comm> Selectdemo() {
+        String sql="SELECT * FROM addcommodity as A INNER JOIN addgoods as B ON A.Addid=B.AddId";
+        List<Comm>list=new ArrayList<>();
+        ResultSet rs=null;
+        try{
+            rs=super.exceuteQuery(sql,null);
+            while (rs.next()){
+                Comm com=new Comm();
+                com.setComID(rs.getInt(1));
+                com.setComMoney(rs.getString(2));
+                com.setComColor(rs.getString(3));
+                com.setComSize(rs.getInt(4));
+                com.setComQuantity(rs.getInt(5));
+                com.setComName(rs.getString(6));
+                com.setComCount(rs.getInt(7));
+                com.setComAppCount(rs.getInt(8));
+                com.setComOve(rs.getString(9));
+                com.setComOut(rs.getString(10));
+                com.setComCCTV(rs.getString(11));
+                com.setComtype(rs.getInt(12));
+                com.setBrand(rs.getString(13));
+                com.setModell(rs.getString(14));
+                com.setState(rs.getString(15));
+                com.setProduct(rs.getString(16));
+                list.add(com);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //查询全部用户信息
+    @Override
+    public List<User> Seleuser() {
+        String sql="SELECT * FROM user_data";
+        ResultSet rs = null;
+        List<User> list = new ArrayList<User>();
+        try {
+            rs = super.exceuteQuery(sql, null);
+            while (rs.next()) {
+                User user = new User();
+                user.setAccount(rs.getString(1));
+                user.setPwd(rs.getString(2));
+                user.setSex(rs.getString(3));
+                user.setBirthday(rs.getString(4));
+                user.setPhone(rs.getString(5));
+                user.setEmail(rs.getString(6));
+                user.setState(rs.getInt(7));
+                list.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //查询用户信息
+    @Override
+    public List<User> Selete(String id) {
+        String sql = "SELECT * FROM user_data WHERE user_account=?";
+        Object[] params = {id};
+        ResultSet rs = null;
+        List<User> list = new ArrayList<User>();
+        try {
+            rs = super.exceuteQuery(sql, params);
+            while (rs.next()) {
+                User user = new User();
+                user.setAccount(rs.getString(1));
+                user.setPwd(rs.getString(2));
+                user.setSex(rs.getString(3));
+                user.setBirthday(rs.getString(4));
+                user.setPhone(rs.getString(5));
+                user.setEmail(rs.getString(6));
+                user.setState(rs.getInt(7));
+                list.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //查询出用户的姓名
+    @Override
+    public String SeleteName(User user) {
+        String sql = "SELECT userName FROM `user` WHERE userAccount=?";
+        Object[] params = {user.getAccount()};
+        ResultSet rs = null;
+        String name = "";
+        try {
+            rs = super.exceuteQuery(sql, params);
+            while (rs.next()) {
+                name = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
+
+    //修改用户信息
+    @Override
+    public int UserUpdate(User user) {
+        String sql="UPDATE user_data SET user_sex=?,user_birthday=?,user_phone=?,user_email=?,user_region=? WHERE user_account=?";
+        Object[] params={user.getSex(),user.getBirthday(),user.getPhone(),user.getEmail(),user.getState(),user.getAccount()};
+        int count=super.executeUpdate(sql,params);
+        return count;
+    }
+
+    //收货地址查询
+    @Override
+    public List<Address> ShiSelete(String account) {
+        String sql="SELECT * FROM user_address WHERE user_account=?";
+        Object[] params={account};
+        List<Address> list=new ArrayList<Address>();
+        ResultSet rs = null;
+        try {
+            rs=super.exceuteQuery(sql,params);
+            while (rs.next()){
+                Address address=new Address();
+                address.setId(rs.getInt(1));
+                address.setAccount(rs.getString(2));
+                address.setName(rs.getString(3));
+                address.setProvince(rs.getString(4));
+                address.setCity(rs.getString(5));
+                address.setCounty(rs.getString(6));
+                address.setAddress(rs.getString(7));
+                address.setPhone(rs.getString(8));
+                address.setCode(rs.getString(9));
+                address.setState(rs.getString(10));
+                list.add(address);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //收货地址删除
+    @Override
+    public int ShiDelete(int id) {
+        String sql="Delete FROM user_address WHERE id=?";
+        Object[] params={id};
+        int count=super.executeUpdate(sql,params);
+        return count;
+    }
+
+    //查询单个收货地址
+    @Override
+    public Address ShiQuery(int id) {
+        String sql="SELECT * FROM user_address WHERE id=?";
+        Object[] params={id};
+        ResultSet rs=null;
+        Address address=new Address();
+        try {
+            rs=super.exceuteQuery(sql,params);
+            while (rs.next()){
+                address.setId(rs.getInt(1));
+                address.setAccount(rs.getString(2));
+                address.setName(rs.getString(3));
+                address.setProvince(rs.getString(4));
+                address.setCity(rs.getString(5));
+                address.setCounty(rs.getString(6));
+                address.setAddress(rs.getString(7));
+                address.setPhone(rs.getString(8));
+                address.setCode(rs.getString(9));
+                address.setState(rs.getString(10));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return address;
+    }
+
+    //新增收货地址
+    @Override
+    public int ShiAdd(Address address) {
+        String sql="INSERT user_address(user_account,Name,province,city,county,address,phone,code,state) VALUES (?,?,?,?,?,?,?,?,?)";
+        Object[] params={address.getAccount(),address.getName(),address.getProvince(),address.getCity(),address.getCounty(),address.getAddress(),address.getPhone(),address.getCode(),address.getState()};
+        int count=super.executeUpdate(sql,params);
+        return count;
+    }
+
+    //修改收货地址
+    @Override
+    public int ShiUpdate(Address address) {
+        String sql="UPDATE user_address SET Name=?,province=?,city=?,county=?,address=?,phone=?,code=?,state=? WHERE id=?";
+        Object[] params={address.getName(),address.getProvince(),address.getCity(),address.getCounty(),address.getAddress(),address.getPhone(),address.getCode(),address.getState(),address.getId()};
+        int count=super.executeUpdate(sql,params);
+        return count;
+    }
+
+    //查询商品
+    @Override
+    public List<Comm> SeleteCom() {
+        String sql = "SELECT * FROM addcommodity where Addleixing=1";
+        ResultSet rs = null;
+        List<Comm> list = new ArrayList<Comm>();
+        try {
+            rs = super.exceuteQuery(sql, null);
+            while (rs.next()) {
+                Comm com = new Comm();
+                com.setComID(rs.getInt(1));
+                com.setComMoney(rs.getString(2));
+                com.setComColor(rs.getString(3));
+                com.setComSize(rs.getInt(4));
+                com.setComQuantity(rs.getInt(5));
+                com.setComName(rs.getString(6));
+                com.setComCount(rs.getInt(7));
+                com.setComAppCount(rs.getInt(8));
+                com.setComOve(rs.getString(9));
+                com.setComOut(rs.getString(10));
+                com.setComCCTV(rs.getString(11));
+                com.setComtype(rs.getInt(12));
+                list.add(com);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
+    //类型查询商品
+    @Override
+    public List<Comm> SeleteCom(Comm comm) {
+        String sql = "SELECT * FROM addgaragekits WHERE AddType=?";
+        Object[] params = {comm.getComtype()};
+        ResultSet rs = null;
+        List<Comm> list = new ArrayList<Comm>();
+        try {
+            rs = super.exceuteQuery(sql, params);
+            while (rs.next()) {
+                Comm com = new Comm();
+                com.setComID(rs.getInt(1));
+                com.setComMoney(rs.getString(2));
+                com.setComColor(rs.getString(3));
+                com.setComSize(rs.getInt(4));
+                com.setComQuantity(rs.getInt(5));
+                com.setComName(rs.getString(6));
+                com.setComCount(rs.getInt(7));
+                com.setComAppCount(rs.getInt(8));
+                com.setComOve(rs.getString(9));
+                com.setComOut(rs.getString(10));
+                com.setComCCTV(rs.getString(11));
+                com.setComtype(rs.getInt(12));
+                list.add(com);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //通过类型和大小查询商品
+    @Override
+    public List<Comm> SeleteClass(Comm comm) {
+        String sql="SELECT * FROM addcommodity where AddSize=? AND Addleixing=?";
+        Object[] params={comm.getComSize(),comm.getComtype()};
+        ResultSet rs=null;
+        List<Comm> list = new ArrayList<Comm>();
+        try{
+            rs=super.exceuteQuery(sql,params);
+        while (rs.next()){
+            Comm com = new Comm();
+            com.setComID(rs.getInt(1));
+            com.setComMoney(rs.getString(2));
+            com.setComColor(rs.getString(3));
+            com.setComSize(rs.getInt(4));
+            com.setComQuantity(rs.getInt(5));
+            com.setComName(rs.getString(6));
+            com.setComCount(rs.getInt(7));
+            com.setComAppCount(rs.getInt(8));
+            com.setComOve(rs.getString(9));
+            com.setComOut(rs.getString(10));
+            com.setComCCTV(rs.getString(11));
+            com.setComtype(rs.getInt(12));
+            list.add(com);
+        }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //单击换一换切换
+    @Override
+    public List<Comm> Seletehyh(int type,int count,int curr) {
+        String sql="select* from addcommodity where Addleixing=? LIMIT ?,?";
+       Object []obj={type,count,curr};
+        List<Comm> com=new ArrayList<>();
+        ResultSet rs=null;
+        try{
+            rs=super.exceuteQuery(sql,obj);
+            while (rs.next()){
+                Comm comm=new Comm();
+                comm.setComID(rs.getInt(1));
+                comm.setComMoney(rs.getString(2));
+                comm.setComColor(rs.getString(3));
+                comm.setComSize(rs.getInt(4));
+                comm.setComQuantity(rs.getInt(5));
+                comm.setComName(rs.getString(6));
+                comm.setComCount(rs.getInt(7));
+                comm.setComAppCount(rs.getInt(8));
+                comm.setComOve(rs.getString(9));
+                comm.setComOut(rs.getString(10));
+                comm.setComCCTV(rs.getString(11));
+                comm.setComtype(rs.getInt(12));
+                com.add(comm);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return com;
+    }
+
+    //查询类型个数
+    @Override
+    public int sele(int type) {
+        String sql="select count(*) from addcommodity where Addleixing=?";
+        Object[]obj={type};
+        ResultSet rs=null;
+        int count=0;
+        try {
+            rs=super.exceuteQuery(sql,obj);
+            rs.next();
+            count=rs.getInt(1);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+
+
+}
