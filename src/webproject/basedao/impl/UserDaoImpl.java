@@ -14,7 +14,7 @@ import java.util.List;
 //压制警告
 @SuppressWarnings("all")
 public class UserDaoImpl extends BaseDao implements UserDao {
-
+    //模糊查询商品
     public List<Comm> secom(Comm comm){
         String sql="SELECT * FROM addcommodity WHERE  AddName LIKE  '%"+comm.getComName()+"%'";
         System.out.println(comm.getComName());
@@ -103,6 +103,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         System.out.println(sql);
         Object [] params={account};
         int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -112,6 +114,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="UPDATE shopping set Addsize=? where Addid=? AND userid=?";
         Object[]obj={comm.getSize(),comm.getComID(),comm.getUserid()};
         int count=super.executeUpdate(sql,obj);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -156,6 +160,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="UPDATE FROM shopping SET Addsize=? WHERE  Addid=? AND userid=?";
         Object[] params={size,id,account};
         int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
         if (count>0){
             System.out.println("修改成功");
         }else {
@@ -171,6 +177,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="DELETE FROM shopping where Addid=?";
         Object[]obj={comm.getComID()};
         int count=super.executeUpdate(sql,obj);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -181,7 +189,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         List<Comm> list=new ArrayList<>();
         Object[] obj={comm.getComID(),comm.getComName(),comm.getComMoney(),comm.getSize(),comm.getComOve(),comm.getUserid()};
         int count=super.executeUpdate(sql,obj);
-
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -277,12 +286,29 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         return list;
     }
 
+    //删除用户
+    @Override
+    public int DelUser(String account) {
+        String sql="DELETE FROM user_data WHERE user_account=?";
+        String sql1="DELETE FROM user_address WHERE user_account=?";
+        String sql2="DELETE FROM shopping WHERE userid=?";
+        Object[] params={account};
+        int count1=super.executeUpdate(sql1,params);
+        int count2=super.executeUpdate(sql2,params);
+        int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
+        return count;
+    }
+
     //用户注册
     @Override
     public int AddUser(User user) {
         String sql = "INSERT user_data(user_account,user_pwd,user_phone) VALUES (?,?,?)";
         Object[] params = {user.getAccount(), user.getPwd(), user.getPhone()};
         int count = super.executeUpdate(sql, params);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -304,7 +330,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         return flag;
     }
 
-    //登录电话
+    //电话登录
     @Override
     public boolean userdhdl(int phone,String pwd) {
         boolean flag=false;
@@ -431,6 +457,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="UPDATE user_data SET user_sex=?,user_birthday=?,user_phone=?,user_email=?,user_region=? WHERE user_account=?";
         Object[] params={user.getSex(),user.getBirthday(),user.getPhone(),user.getEmail(),user.getState(),user.getAccount()};
         int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -469,6 +497,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="Delete FROM user_address WHERE id=?";
         Object[] params={id};
         int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -505,6 +535,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="INSERT user_address(user_account,Name,province,city,county,address,phone,code,state) VALUES (?,?,?,?,?,?,?,?,?)";
         Object[] params={address.getAccount(),address.getName(),address.getProvince(),address.getCity(),address.getCounty(),address.getAddress(),address.getPhone(),address.getCode(),address.getState()};
         int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -514,6 +546,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="UPDATE user_address SET Name=?,province=?,city=?,county=?,address=?,phone=?,code=?,state=? WHERE id=?";
         Object[] params={address.getName(),address.getProvince(),address.getCity(),address.getCounty(),address.getAddress(),address.getPhone(),address.getCode(),address.getState(),address.getId()};
         int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -546,7 +580,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         }
         return list;
     }
-
 
     //类型查询商品
     @Override
@@ -658,7 +691,5 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         }
         return count;
     }
-
-
 
 }

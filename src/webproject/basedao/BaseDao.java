@@ -68,7 +68,7 @@ public class BaseDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            closeAll();
+//            closeAll();
         }
         return result;
     }

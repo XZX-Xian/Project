@@ -131,6 +131,13 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    //删除用户
+    @Override
+    public int DelUser(String account) {
+        int count=str.DelUser(account);
+        return count;
+    }
+
     //注册用户
     @Override
     public int AddUser(User user) {
@@ -142,18 +149,6 @@ public class UserServiceImpl implements UserService {
         }
         return count;
     }
-
-    //用户登录
-//    @Override
-//    public int UpdateUser(User user) {
-//        int count=str.UpdateUser(user);
-//        if (count>0){
-//            System.out.println("登录成功！");
-//        }else {
-//            System.out.println("登录失败！");
-//        }
-//        return count;
-//    }
 
     //两表联查
     @Override
@@ -172,10 +167,10 @@ public class UserServiceImpl implements UserService {
     public List<User> Seleuser() {
         List<User> list=new ArrayList<User>();
         list=str.Seleuser();
-        for (int i = 0; i <list.size() ; i++) {
-            System.out.println(list.get(i).getAccount());
-            System.out.println(list.get(i).getPwd());
-        }
+//        for (int i = 0; i <list.size() ; i++) {
+//            System.out.println(list.get(i).getAccount());
+//            System.out.println(list.get(i).getPwd());
+//        }
         return list;
     }
 

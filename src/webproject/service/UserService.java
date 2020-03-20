@@ -37,11 +37,11 @@ public interface UserService {
     //查询全部商品
     List<Comm>Seletedemo(Comm comm);
 
+    //删除用户
+    int DelUser(String account);
+
     //注册用户
     int AddUser(User user);
-
-    //用户登录
-//    int UpdateUser(User user);
 
     //两表联查
     List<Comm>Selectdemo();
@@ -75,7 +75,6 @@ public interface UserService {
 
     //查询前6条商品
     List<Comm> SeleteCom();
-
 
     //类型查收商品
     List<Comm> SeleteCom(Comm com);

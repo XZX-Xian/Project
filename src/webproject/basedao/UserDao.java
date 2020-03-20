@@ -20,7 +20,7 @@ public interface UserDao {
     //修改商品个数
     int CommUP(int size,int id,String account);
 
-    //选中删除
+    //放购物车选中删除
     int deleteUsers(String ids,String useid);
 
     //购物车和数据库商品的数量
@@ -43,11 +43,12 @@ public interface UserDao {
 
     //两表联查  条件判断查询的商品资料
     List<Comm>Seletedemo(Comm comm);
+
+    //删除用户
+    int DelUser(String account);
+
     //注册用户
     int AddUser(User user);
-
-    //用户登录
-//    int UpdateUser(User user);
 
     //两表联查
     List<Comm>Selectdemo();
@@ -82,7 +83,6 @@ public interface UserDao {
     //查询前6条商品
     List<Comm> SeleteCom();
 
-
     //类型查收商品
     List<Comm> SeleteCom(Comm com);
 
@@ -99,6 +99,5 @@ public interface UserDao {
     boolean userdl(String account,String pwd);
     //手机登录
     boolean userdhdl(int phone,String pwd);
-
 
 }
