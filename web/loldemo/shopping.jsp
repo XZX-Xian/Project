@@ -270,7 +270,7 @@
         if(ids.length>0){
             if(confirm("确定要删除选中的商品吗")){
                 //确定要删除
-                location.href="http://localhost:8080/Project_war_exploded/dlusesp?shopid="+ids+"&useid="+userid+"";
+                location.href="http://localhost:8080/Project_war_exploded/dlusesp?shopid="+ids;
             }
         }else{
             alert("请先选中要删除的用户数据！");

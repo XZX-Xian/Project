@@ -28,7 +28,6 @@ public class dlshopuse extends HttpServlet {
         //得到账号
         HttpSession session=req.getSession();
         String account=(String)session.getAttribute("account");
-//        String userid=req.getParameter("useid");
 
         UserService use=new UserServiceImpl();
         int count=use.deleteUsers(shopid,account);

@@ -300,6 +300,20 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         super.closeAll();
         return count;
     }
+    //选中删除用户
+    @Override
+    public int DelUserAll(String IDAll) {
+        String sql="DELETE FROM user_data WHERE user_account in("+IDAll+",?)";
+        String sql1="DELETE FROM user_address WHERE user_account in("+IDAll+",?)";
+        String sql2="DELETE FROM shopping WHERE userid in("+IDAll+",?)";
+        Object[] params={IDAll};
+        int count1=super.executeUpdate(sql1,params);
+        int count2=super.executeUpdate(sql2,params);
+        int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
+        return count;
+    }
 
     //用户注册
     @Override

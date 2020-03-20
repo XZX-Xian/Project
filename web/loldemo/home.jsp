@@ -168,8 +168,6 @@
         //单击模糊查询
         $("#search").click(function () {
             var name = $(this).prev().val();
-            var
-            alert(name)
             location.href="http://localhost:8080/Project_war_exploded/";
 
         })

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../css/font.css">
     <link rel="stylesheet" href="../css/xadmin.css">
     <script src="../js/jquery.min.js"></script>
-    <script src="backstage/js/jquery.min.js"></script>
+<%--    <script src="backstage/js/jquery.min.js"></script>--%>
     <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../js/xadmin.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
@@ -63,13 +63,13 @@
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加
         </button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px">共有数据：<%=list.size()%> 条</span>
     </xblock>
     <table class="layui-table">
         <thead>
         <tr>
             <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i
+                <div class="layui-unselect header layui-form-checkbox " lay-skin="primary"><i
                         class="layui-icon">&#xe605;</i></div>
             </th>
             <th>账号</th>
@@ -85,8 +85,8 @@
         <c:forEach items="${list}" var="in">
             <tr>
                 <td>
-                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i
-                            class="layui-icon">&#xe605;</i></div>
+                    <div class="layui-unselect layui-form-checkbox layui-form-checkbox" lay-skin="primary" data-id='2'><i
+                            class="layui-icon">&#xe605;</i><span hidden>${in.account}</span></div>
                 </td>
                 <td>${in.account}</td>
                 <td>${in.sex}</td>
@@ -183,20 +183,31 @@
                     }
                 });
             });
-        }
+        };
+        //选中删除
+        delAll=function(argument) {
+            // var data = tableCheck.getData();
+            var date=new Array();
+            var index=$(".layui-form-checked").length;
+            for(var i=0;i<index;i++){
+                    var id=$(".layui-form-checked:eq("+i+")>span").text(); // value被绑定了ID
+                date.push(id);
+                }
+            layer.confirm('确认要删除吗？' + date, function (index) {
+                //提示弹窗
+                layer.msg('删除成功', {icon: 1,time:2000});
+                $(".layui-form-checked").not('.header').parents('tr').remove();
+                location.href="http://localhost:8080/Project_war_exploded/userdelall?account="+date;
+                // var json={"account":date};
+                // $.getJSON("http://localhost:8080/Project_war_exploded/userdelall",json,function (data) {
+                //     if (data>0){
+
+                    // }
+                // });
+            });
+        };
     });
 
-
-    function delAll(argument) {
-
-        var data = tableCheck.getData();
-
-        layer.confirm('确认要删除吗？' + data, function (index) {
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-    }
 </script>
 </body>
 

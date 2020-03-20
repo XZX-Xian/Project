@@ -138,6 +138,13 @@ public class UserServiceImpl implements UserService {
         return count;
     }
 
+    //选中删除用户
+    @Override
+    public int DelUserAll(String IdAll) {
+        int count=str.DelUserAll(IdAll);
+        return count;
+    }
+
     //注册用户
     @Override
     public int AddUser(User user) {

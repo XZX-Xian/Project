@@ -47,6 +47,9 @@ public interface UserDao {
     //删除用户
     int DelUser(String account);
 
+    //选中删除用户
+    int DelUserAll(String IdAll);
+
     //注册用户
     int AddUser(User user);
 
