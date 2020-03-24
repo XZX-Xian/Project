@@ -35,7 +35,8 @@
 <%
     UserService str = new UserServiceImpl();
     List<User> list = new ArrayList<User>();
-    list = str.Seleuser();
+    String name="";
+    list = str.Seleuser(name);
     request.setAttribute("list", list);
 %>
 <body class="layui-anim layui-anim-up">
@@ -52,18 +53,16 @@
 </div>
 <div class="x-body">
     <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-            <input class="layui-input" placeholder="开始日" name="start" id="start">
-            <input class="layui-input" placeholder="截止日" name="end" id="end">
-            <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-            <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
+<%--            <input class="layui-input" placeholder="开始日" name="start" id="start">--%>
+<%--            <input class="layui-input" placeholder="截止日" name="end" id="end">--%>
+            <input type="text" name="username" placeholder="请输入用户名" <%--autocomplete="off"--%> size="20" id="fuzzy" style="height: 40px;">
+            <button class="layui-btn" onclick="fuzzy()"  <%--lay-submit="" lay-filter="sreach"--%>><i class="layui-icon">&#xe615;</i></button>
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加
         </button>
-        <span class="x-right" style="line-height:40px">共有数据：<%=list.size()%> 条</span>
+<%--        <span class="x-right" style="line-height:40px">共有数据：<%=list.size()%> 条</span>--%>
     </xblock>
     <table class="layui-table">
         <thead>
@@ -81,7 +80,7 @@
             <th>操作</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="listall">
         <c:forEach items="${list}" var="in">
             <tr>
                 <td>
@@ -170,6 +169,52 @@
     }
 
     $(function () {
+        //用户名模糊查询
+        fuzzy=function () {
+          var name=$("#fuzzy").val();
+            var json={"name":name};
+            $("#listall").html("");
+            $.getJSON("http://localhost:8080/Project_war_exploded/userlist",json,function (data) {
+                var list="";
+                $("#listall").html(list);
+                $.each(data,function (i,item) {
+                    list+="    <tr>\n" +
+                        "                <td>\n" +
+                        "                    <div class=\"layui-unselect layui-form-checkbox layui-form-checkbox\" lay-skin=\"primary\" data-id='2'><i\n" +
+                        "                            class=\"layui-icon\">&#xe605;</i><span hidden>"+item.account+"</span></div>\n" +
+                        "                </td>\n" +
+                        "                <td>"+item.account+"</td>\n" +
+                        "                <td>"+item.sex+"</td>\n" +
+                        "                <td>"+item.phone+"</td>\n" +
+                        "                <td>"+item.email+"</td>\n" +
+                        "                <td>"+item.birthday+"</td>\n" +
+                        "                <td>"+item.state+"</td>\n" +
+                        "                    <%--            <td class=\"td-status\">--%>\n" +
+                        "                    <%--              <span class=\"layui-btn layui-btn-normal layui-btn-sm\">已启用</span></td>--%>\n" +
+                        "                <td class=\"td-manage\">\n" +
+                        "                    <a onclick=\"member_stop(this,'10001')\" class=\"layui-btn layui-btn-sm layui-btn-primary\"\n" +
+                        "                       href=\"javascript:;\" title=\"启用\">\n" +
+                        "                        启用\n" +
+                        "                    </a>\n" +
+                        "                    <a title=\"编辑\" class=\"layui-btn layui-btn-sm layui-btn-normal\"\n" +
+                        "                       onclick=\"x_admin_show('编辑','member-edit.jsp',600,400)\" href=\"javascript:;\">\n" +
+                        "                        编辑\n" +
+                        "                    </a>\n" +
+                        "                    <a class=\"layui-btn layui-btn-sm layui-btn-warm\"\n" +
+                        "                       onclick=\"x_admin_show('修改密码','member-password.jsp',600,400)\" title=\"修改密码\" href=\"javascript:;\">\n" +
+                        "                        修改密码\n" +
+                        "                    </a>\n" +
+                        "                    <a title=\"删除\" class=\"layui-btn layui-btn-sm layui-btn-danger\"\n" +
+                        "                       onclick=\"member_del(this,'"+item.account+"')\" href=\"javascript:;\">\n" +
+                        "                        删除\n" +
+                        "                    </a>\n" +
+                        "                </td>\n" +
+                        "            </tr>";
+                });
+                $("#listall").html(list);
+            })
+        };
+
         /*用户-删除*/
         member_del=function(obj, id) {
             layer.confirm('确认要删除吗？', function (index) {
@@ -179,6 +224,7 @@
                     if (data>0){
                         $(obj).parents("tr").remove();
                         //提示弹窗
+                        $("#listall").html("");
                         layer.msg('已删除!', {icon: 1, time: 1000});
                     }
                 });

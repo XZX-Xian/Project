@@ -57,7 +57,7 @@ public interface UserDao {
     List<Comm>Selectdemo();
 
     //查询全部用户
-    List<User> Seleuser();
+    List<User> Seleuser(String name);
 
     //查询用户信息
     List<User> Selete(String id);

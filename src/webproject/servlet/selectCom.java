@@ -1,6 +1,5 @@
 package webproject.servlet;
 
-//import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSON;
 import webproject.entity.Comm;
 import webproject.service.UserService;

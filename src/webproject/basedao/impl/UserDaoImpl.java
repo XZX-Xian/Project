@@ -398,8 +398,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     //查询全部用户信息
     @Override
-    public List<User> Seleuser() {
-        String sql="SELECT * FROM user_data";
+    public List<User> Seleuser(String name) {
+        String sql="SELECT * FROM user_data WHERE user_account LIKE '%"+name+"%'";
         ResultSet rs = null;
         List<User> list = new ArrayList<User>();
         try {

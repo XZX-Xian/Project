@@ -171,9 +171,9 @@ public class UserServiceImpl implements UserService {
 
     //查询全部用户
     @Override
-    public List<User> Seleuser() {
+    public List<User> Seleuser(String name) {
         List<User> list=new ArrayList<User>();
-        list=str.Seleuser();
+        list=str.Seleuser(name);
 //        for (int i = 0; i <list.size() ; i++) {
 //            System.out.println(list.get(i).getAccount());
 //            System.out.println(list.get(i).getPwd());
