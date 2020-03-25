@@ -60,9 +60,7 @@
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加
-        </button>
-<%--        <span class="x-right" style="line-height:40px">共有数据：<%=list.size()%> 条</span>--%>
+        <span class="x-right" style="line-height:40px">共有数据：<%=list.size()%> 条</span>
     </xblock>
     <table class="layui-table">
         <thead>
@@ -76,7 +74,7 @@
             <th>手机</th>
             <th>邮箱</th>
             <th>生日时间</th>
-            <th>状态</th>
+            <th>大区编号</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -96,18 +94,18 @@
                     <%--            <td class="td-status">--%>
                     <%--              <span class="layui-btn layui-btn-normal layui-btn-sm">已启用</span></td>--%>
                 <td class="td-manage">
-                    <a onclick="member_stop(this,'10001')" class="layui-btn layui-btn-sm layui-btn-primary"
-                       href="javascript:;" title="启用">
-                        启用
-                    </a>
-                    <a title="编辑" class="layui-btn layui-btn-sm layui-btn-normal"
-                       onclick="x_admin_show('编辑','member-edit.jsp',600,400)" href="javascript:;">
-                        编辑
-                    </a>
-                    <a class="layui-btn layui-btn-sm layui-btn-warm"
-                       onclick="x_admin_show('修改密码','member-password.jsp',600,400)" title="修改密码" href="javascript:;">
-                        修改密码
-                    </a>
+<%--                    <a onclick="member_stop(this,'10001')" class="layui-btn layui-btn-sm layui-btn-primary"--%>
+<%--                       href="javascript:;" title="启用">--%>
+<%--                        启用--%>
+<%--                    </a>--%>
+<%--                    <a title="编辑" class="layui-btn layui-btn-sm layui-btn-normal"--%>
+<%--                       onclick="x_admin_show('编辑','member-edit.jsp',600,400)" href="javascript:;">--%>
+<%--                        编辑--%>
+<%--                    </a>--%>
+<%--                    <a class="layui-btn layui-btn-sm layui-btn-warm"--%>
+<%--                       onclick="x_admin_show('修改密码','member-password.jsp',600,400)" title="修改密码" href="javascript:;">--%>
+<%--                        修改密码--%>
+<%--                    </a>--%>
                     <a title="删除" class="layui-btn layui-btn-sm layui-btn-danger"
                        onclick="member_del(this,'${in.account}')" href="javascript:;">
                         删除
@@ -189,21 +187,7 @@
                         "                <td>"+item.email+"</td>\n" +
                         "                <td>"+item.birthday+"</td>\n" +
                         "                <td>"+item.state+"</td>\n" +
-                        "                    <%--            <td class=\"td-status\">--%>\n" +
-                        "                    <%--              <span class=\"layui-btn layui-btn-normal layui-btn-sm\">已启用</span></td>--%>\n" +
                         "                <td class=\"td-manage\">\n" +
-                        "                    <a onclick=\"member_stop(this,'10001')\" class=\"layui-btn layui-btn-sm layui-btn-primary\"\n" +
-                        "                       href=\"javascript:;\" title=\"启用\">\n" +
-                        "                        启用\n" +
-                        "                    </a>\n" +
-                        "                    <a title=\"编辑\" class=\"layui-btn layui-btn-sm layui-btn-normal\"\n" +
-                        "                       onclick=\"x_admin_show('编辑','member-edit.jsp',600,400)\" href=\"javascript:;\">\n" +
-                        "                        编辑\n" +
-                        "                    </a>\n" +
-                        "                    <a class=\"layui-btn layui-btn-sm layui-btn-warm\"\n" +
-                        "                       onclick=\"x_admin_show('修改密码','member-password.jsp',600,400)\" title=\"修改密码\" href=\"javascript:;\">\n" +
-                        "                        修改密码\n" +
-                        "                    </a>\n" +
                         "                    <a title=\"删除\" class=\"layui-btn layui-btn-sm layui-btn-danger\"\n" +
                         "                       onclick=\"member_del(this,'"+item.account+"')\" href=\"javascript:;\">\n" +
                         "                        删除\n" +

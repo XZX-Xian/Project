@@ -142,7 +142,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="html/admin-list.html">
+                        <a _href="html/admin-list.jsp">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理员列表</cite>
                         </a>
