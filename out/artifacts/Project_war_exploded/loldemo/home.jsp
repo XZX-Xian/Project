@@ -54,7 +54,8 @@
         var pd = "<%= session.getAttribute("pd")%>";
         //修改页面状态
         if (pd == "null") {
-            location.href = "http://localhost:8080/Project_war_exploded/pagestate";
+            <%session.setAttribute("pd",false);%>
+            // location.href = "http://localhost:8080/Project_war_exploded/pagestate";
         }
 
         //单击登录
@@ -70,21 +71,21 @@
             location.href = "http://localhost:8080/Project_war_exploded/seluer?username=" + username + "&userpwd=" + userpwd + "";
         });
 
-        //得到账号
-        var account = "<%= session.getAttribute("account")%>";
-        if (account != "" && account != null && account != "null") {
-            $("#register").hide();
-            $("#greet").hide();
-            $("#cancel").show();
-            $("#account").text(account);
+    //得到账号
+    var account = "<%= session.getAttribute("account")%>";
+    if (account != "" && account != null && account != "null") {
+        $("#register").hide();
+        $("#greet").hide();
+        $("#cancel").show();
+        $("#account").text(account);
         } else {
             if (url == href && pd == "true") {
                 alert("登录失败!");
                 //重置页面状态
-                location.href = "http://localhost:8080/Project_war_exploded/pagestate";
+                <%session.setAttribute("pd",false);%>
+                // location.href = "http://localhost:8080/Project_war_exploded/pagestate";
             }
-        }
-        ;
+        };
 
         //注销
         $("#cancel").click(function () {

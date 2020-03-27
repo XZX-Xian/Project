@@ -15,14 +15,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="../css/font.css">
         <link rel="stylesheet" href="../css/xadmin.css">
-  
-    
-    
     <link rel="stylesheet" href="../layui/css/layui.css" type="text/css"></link></head>
     <body>
     <div class="x-body layui-anim layui-anim-up">
         <blockquote class="layui-elem-quote">欢迎管理员：
-            <span class="x-red">test</span>！当前时间:2018-04-25 20:50:53</blockquote>
+            <span class="x-red">test</span>！当前时间:2020-04-25 20:50:53</blockquote>
         <fieldset class="layui-elem-field">
             <legend>数据统计</legend>
             <div class="layui-field-box">
@@ -160,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </table>
             </div>
         </fieldset>
-        <blockquote class="layui-elem-quote layui-quote-nm">感谢layui,百度Echarts,jquery,本系统由L-admin提供技术支持。</blockquote>
+<%--        <blockquote class="layui-elem-quote layui-quote-nm">感谢layui,百度Echarts,jquery,本系统由L-admin提供技术支持。</blockquote>--%>
     </div>
    
     </body>

@@ -28,10 +28,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div class="x-body">
-        <form class="layui-form">
+        <form class="layui-form" action="http://localhost:8080/Project_war_exploded/adminadd" >
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
-                  <span class="x-red">*</span>登录名
+                  <span class="x-red">*</span>账号
               </label>
               <div class="layui-input-inline">
                   <input type="text" id="username" name="username" required lay-verify="required"
@@ -49,9 +49,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <input type="text" id="phone" name="phone" required lay-verify="phone"
                   autocomplete="off" class="layui-input">
               </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>将会成为您唯一的登入名
-              </div>
           </div>
           <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
@@ -61,16 +58,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <input type="text" id="L_email" name="email" required lay-verify="email"
                   autocomplete="off" class="layui-input">
               </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
           </div>
           <div class="layui-form-item">
               <label class="layui-form-label"><span class="x-red">*</span>角色</label>
               <div class="layui-input-block">
-                <input type="checkbox" name="like1[write]" lay-skin="primary" title="超级管理员" checked="">
-                <input type="checkbox" name="like1[read]" lay-skin="primary" title="编辑人员">
-                <input type="checkbox" name="like1[write]" lay-skin="primary" title="宣传人员" checked="">
+                <input type="checkbox" name="like1[write]" title="管理员" checked="">
               </div>
           </div>
           <div class="layui-form-item">
@@ -97,9 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  增加
-              </button>
+              <button  class="layui-btn" lay-filter="add" id="add" lay-submit="">增加</button>
           </div>
       </form>
     </div>
@@ -123,24 +113,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             }
           });
-
-          //监听提交
-          form.on('submit(add)', function(data){
-            console.log(data);
-            //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6},function () {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
-            });
-            return false;
-          });
-          
-          
+          $("#add").click(function () {
+              var index = parent.layer.getFrameIndex(window.name);
+              layer.alert("增加成功", {icon: 6,time:2000},function () {});
+              //关闭当前frame
+              parent.layer.close(index);
+          })
         });
     </script>
   </body>
-
 
 </html>

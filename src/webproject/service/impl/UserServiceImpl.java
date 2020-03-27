@@ -3,6 +3,7 @@ package webproject.service.impl;
 import webproject.basedao.UserDao;
 import webproject.basedao.impl.UserDaoImpl;
 import webproject.entity.Address;
+import webproject.entity.Admin;
 import webproject.entity.Comm;
 import webproject.entity.User;
 import webproject.service.UserService;
@@ -12,6 +13,50 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     UserDao str=new UserDaoImpl();
+
+    //新增管理员
+    @Override
+    public int AdminAdd(Admin admin) {
+        int count=str.AdminAdd(admin);
+        return count;
+    }
+
+    //删除管理员
+    @Override
+    public int AdminDel(String account) {
+        int count=str.AdminDel(account);
+        return count;
+    }
+
+    //修改管理员
+    @Override
+    public int AdminUP(Admin admin) {
+        int count=str.AdminUP(admin);
+        return count;
+    }
+
+    //查询管理员
+    @Override
+    public List<Admin> AdminList(String account) {
+        List<Admin> list=new ArrayList<>();
+        list=str.AdminList(account);
+        return list;
+    }
+
+    //模糊查询
+    @Override
+    public List<Admin> AdminDimList(String account) {
+        List<Admin> list=new ArrayList<>();
+        list=str.AdminDimList(account);
+        return list;
+    }
+
+    //管理员登录
+    @Override
+    public int AdminLogin(String account, String pwd) {
+        int count=str.AdminLogin(account,pwd);
+        return count;
+    }
 
     //查询收货地址
     @Override

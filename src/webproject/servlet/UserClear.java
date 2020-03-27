@@ -24,8 +24,10 @@ public class UserClear extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         PrintWriter out=resp.getWriter();
 
+        //账号清空
         HttpSession session=req.getSession();
         session.removeAttribute("account");
+        //修改页面状态
         session.setAttribute("pd",false);
         out.print("");
         out.close();

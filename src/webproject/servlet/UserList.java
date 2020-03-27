@@ -31,15 +31,11 @@ public class UserList extends HttpServlet {
         PrintWriter out=resp.getWriter();
         String name=req.getParameter("name");
 
-        System.out.println("name"+name);
-
         UserService str = new UserServiceImpl();
         List<User> list = new ArrayList<>();
         list = str.Seleuser(name);
         String json=null;
         json= JSON.toJSONString(list);
-
-        System.out.println(json);
 
         out.print(json);
         out.close();

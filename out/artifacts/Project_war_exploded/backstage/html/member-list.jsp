@@ -31,7 +31,6 @@
     <![endif]-->
 </head>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
->
 <%
     UserService str = new UserServiceImpl();
     List<User> list = new ArrayList<User>();
@@ -53,10 +52,8 @@
 </div>
 <div class="x-body">
     <div class="layui-row">
-<%--            <input class="layui-input" placeholder="开始日" name="start" id="start">--%>
-<%--            <input class="layui-input" placeholder="截止日" name="end" id="end">--%>
-            <input type="text" name="username" placeholder="请输入用户名" <%--autocomplete="off"--%> size="20" id="fuzzy" style="height: 40px;">
-            <button class="layui-btn" onclick="fuzzy()"  <%--lay-submit="" lay-filter="sreach"--%>><i class="layui-icon">&#xe615;</i></button>
+            <input type="text" name="username" placeholder="请输入用户名"  size="20" id="fuzzy" style="height: 40px;">
+            <button class="layui-btn" onclick="fuzzy()"><i class="layui-icon">&#xe615;</i></button>
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
@@ -91,21 +88,7 @@
                 <td>${in.email}</td>
                 <td>${in.birthday}</td>
                 <td>${in.state}</td>
-                    <%--            <td class="td-status">--%>
-                    <%--              <span class="layui-btn layui-btn-normal layui-btn-sm">已启用</span></td>--%>
                 <td class="td-manage">
-<%--                    <a onclick="member_stop(this,'10001')" class="layui-btn layui-btn-sm layui-btn-primary"--%>
-<%--                       href="javascript:;" title="启用">--%>
-<%--                        启用--%>
-<%--                    </a>--%>
-<%--                    <a title="编辑" class="layui-btn layui-btn-sm layui-btn-normal"--%>
-<%--                       onclick="x_admin_show('编辑','member-edit.jsp',600,400)" href="javascript:;">--%>
-<%--                        编辑--%>
-<%--                    </a>--%>
-<%--                    <a class="layui-btn layui-btn-sm layui-btn-warm"--%>
-<%--                       onclick="x_admin_show('修改密码','member-password.jsp',600,400)" title="修改密码" href="javascript:;">--%>
-<%--                        修改密码--%>
-<%--                    </a>--%>
                     <a title="删除" class="layui-btn layui-btn-sm layui-btn-danger"
                        onclick="member_del(this,'${in.account}')" href="javascript:;">
                         删除
@@ -208,8 +191,7 @@
                     if (data>0){
                         $(obj).parents("tr").remove();
                         //提示弹窗
-                        $("#listall").html("");
-                        layer.msg('已删除!', {icon: 1, time: 1000});
+                        layer.msg('已删除!', {icon: 111, time: 1000});
                     }
                 });
             });
@@ -228,12 +210,6 @@
                 layer.msg('删除成功', {icon: 1,time:2000});
                 $(".layui-form-checked").not('.header').parents('tr').remove();
                 location.href="http://localhost:8080/Project_war_exploded/userdelall?account="+date;
-                // var json={"account":date};
-                // $.getJSON("http://localhost:8080/Project_war_exploded/userdelall",json,function (data) {
-                //     if (data>0){
-
-                    // }
-                // });
             });
         };
     });
