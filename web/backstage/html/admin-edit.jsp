@@ -116,6 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
           });
 
+          //修改
             $("#add").click(function () {
                 var index = parent.layer.getFrameIndex(window.name);
                 layer.alert("修改成功", {icon: 6,time:2000},function () {});
