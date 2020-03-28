@@ -38,7 +38,7 @@
                     $(".fm:visible").slideUp(300);
                     $(this).removeClass("aa");
                 });
-                //失去焦判断 其他区域是否发生单击事件
+                //失去焦判断 其他区域是否发生1单击事件
                 $(".herd5").on('click',function(e){
                     e.stopPropagation();
                 });
