@@ -13,11 +13,112 @@
     <link rel="stylesheet" type="text/css" href="../js/shopping.css">
     <link rel="stylesheet" type="text/css" href="js/shopping.css">
 </head>
-<%--<style type="text/css"></style>--%>
-<body>
 
+<style type="text/css">
+    .sm li{
+        list-style-type: none;
+        display: inline-block;
+        text-align: center;
+        width: 180px;
+        font-size: 16px;
+        line-height: 36px;
+
+    }
+    .sm li a{
+        text-decoration:none;
+        color: white;
+    }
+    .sm{
+        margin-top: 5px;
+        color: white;
+    }
+    /*ul去黑点*/
+    ul li {
+        list-style: none;
+    }
+
+    /*购物车框架*/
+    .buyshop {
+        width: 1180px;
+        border: 1px rgba(129, 129, 129, 0.66) solid;
+    }
+
+    /*选项*/
+    .buyli li {
+        padding-left: 80px;
+        display: inline-block;
+    }
+
+    /*商品*/
+    .mermtab {
+        padding-left: 10px;
+    }
+    #bg{
+        position: fixed;
+        width: 100%;
+        height:100%;
+        margin: 0;
+        padding: 0;
+        top: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 100;
+    }
+    .c2{
+        background-color: white;
+        position: fixed;
+        width: 400px;
+        height: 300px;
+        top:50%;
+        left: 50%;
+        z-index: 3;
+        margin-top: -150px;
+        margin-left: -200px;
+    }
+.collect td{
+    border-bottom: 1px #cccccc solid;
+}
+
+    .c2cyh{
+        border: orange 1.5px solid;
+        background-color: white;
+        position: fixed;
+        width: 200px;
+        height: 75px;
+        top:50%;
+        left: 50%;
+        z-index: 3;
+        margin-top: -75px;
+        margin-left: -100px;
+    }
+    /*结算框*/
+    .buyrigh {
+        width: 200px;
+        border: 2px #959595 solid;
+        position: fixed;
+        left: 1150px;
+        bottom: 425px;
+        padding: 5px;
+    }
+    /*登录下拉框*/
+    .grzx li{
+        text-align: center;line-height: 30px;width: 75px;height: 30px;border-top: 1px #fff solid;color: #ccc;background-color: rgba(0,0,0,0.4)
+    }
+</style>
+
+<body>
+<%--提示框--%>
+<div class="c2cyh" hidden style="z-index: 101" >
+    <p style="position:absolute;top: 15px;left:80px;font-size: 14px;color: orange"></p>
+    <div align="center"style="z-index: 101;margin-right: 120px;margin-top: 15px">
+        <img style="width: 45px;" src="\subject\loading.png" alt="">
+        <p style="font-size: 11px;color: #ccc;margin-bottom: 1px;">魄罗提示</p>
+        <br/>
+    </div>
+</div>
 <%--遮罩层--%>
 <div id="bg" hidden></div>
+
 <%--最大的主体框--%>
 <div style="width:1518px;;min-width:100%">
     <div class="c2" hidden style="z-index: 101" >
@@ -47,39 +148,34 @@
     </div>
     <div <%--style="position: fixed;z-index: 999"--%>>
         <%--头部导航栏框--%>
-        <div style="height:55px;background-color: white">
+        <div style="height:45px;background-color: white;margin-bottom: 55px">
 
             <%--logo框--%>
-            <div style="width: 300px;height: 55px;display:inline-block;margin-right:600px;margin-left: -20px;text-align: center">
+            <div style="width: 300px;height: 45px;display:inline-block;margin-right:600px;margin-left: -20px;text-align: center">
                 <img src="\subject\loading.png" width="100" style="margin-right: 5px">
                 <div style="display:inline-block;position: absolute;top: 18px"><strong style="font-size: 20px;">魄罗商城</strong></div>
             </div>
-            <%--搜索框--%>
-            <div style="width: 170px;height: 55px;display:inline-block;position:absolute;top: 6px;margin-left: 85px;text-align: center">
-                <input type="search" style="display:inline-block;border-radius:25px;margin-top: 15px;">
-                <img src="\subject\cx.png" alt="" width="35px" style="position: absolute;top: 8px" >
-            </div>
+            <div style="position: absolute;right: 1px;top: 1px">
 
                 <%--登录框--%>
-                <div style="width: 160px;height: 55px;display:inline-block;margin-left: 50px">
-                    <img src="\subject\yhu.png" alt="" width="30"
-                         style="position: absolute;top: 12px;margin-left: 260px;margin-top: 5px">
-                    <strong style="position: absolute;top: 12px;margin-left: 295px;margin-top: 10px;width: 200px"><span
-                            id="greet">欢迎,请</span><a href="#" id="register" class="dlu">登录</a>
-                        <%--存放账号--%>
-                        <label class="userid"></label>
-                        <span id="account"></span>
-                        <span id="cancel" hidden style="padding-left: 10px;color:#EE5A24; ">注销</span></strong>
+                <div style="width: 160px;height: 55px;display:inline-block;margin-right: 25px">
+                    <div  style="position: absolute;top: 5px;margin-top: 3px"><img class="dlu"  src="\subject\yhu.png" alt="" width="40"></div>
+                    <div class="grdiv" style=";margin-left: 40px;border-top: 1px #ffffff solid">
+                        <p class="hyp" hidden style="position: absolute;top: 12px;margin-top: 10px;"><strong style="font-size: 12px;">(<label class="userid"></label>)</strong></p>
+                        <ul style=" padding:0; margin:0;list-style-type: none;margin-top: 60px" hidden class="grzx">
+                            <li>个人中心</li>
+                            <li id="nullopen">注销</li>
+                        </ul>
+                    </div>
                 </div>
 
 
         </div>
+
             <div style="width: 1518px;height: 36px;background-color: #1e272e;">
                 <ul class="sm">
                     <li><strong><a href="http://localhost:8080/Project_war_exploded/loldemo/home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
-                    <li><a href="">手办周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                    <li><a href="">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                    <li><a href="">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
+                    <li><a href="http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo=">商品区</a><img src="\subject\zuo.png" alt="" width="14px"></li>
                 </ul>
             </div>
     </div>
@@ -91,7 +187,6 @@
         <table align="center" class="mermtab" width="1191px" cellspacing="0" cellpadding="10" style="margin-left: -10px;table-layout:fixed">
             <%--选项--%>
             <tr align="center" id="xuan" style="margin-left: -15px;height: 30px;background-color: #fdcb6e;">
-
                 <td style="width: 60px">
                     <input id="selectAll" type="checkbox">
                     <label for="selectAll" style="color: #ffffff">全选 </label>
@@ -186,16 +281,14 @@
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
     $(function () {
-
+        var pds ="<%=session.getAttribute("pds")%>";
         //判断是否登录
         var account ="<%=session.getAttribute("account")%>";
         if (account!=null&&account!=""&&account!="null"){
-            $("#register").hide();
-            $("#greet").hide();
-            $("#cancel").show();
-            $("#account").text(account);
-        }else {
-
+            $(".userid").text(account);
+            $(".hyp").show();
+        }else{
+            $(".userid").hide();
         }
         //获得跳转这里的地址
         var url=document.referrer;
@@ -213,6 +306,17 @@
             $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {})
             location.href = "http://localhost:8080/Project_war_exploded/comselete";
         });
+        if(account=="null"){
+            $(".dlus").click(function () {
+                $(".c2").show();
+                $("#bg").show();
+            });
+        }else{
+            $(".dlus").click(function () {
+                $(".c2").hide();
+                $("#bg").hide();
+            });
+        }
 
         // 单击账号
         $("#account").click(function () {
@@ -227,6 +331,28 @@
             $(".ycgwc").hide();
         }
 
+        //登录框
+        if(account!=""&&account!=null&&account!="null"){
+            $(".grdiv").hover(function () {
+                $(".grzx").show();
+                $(".grzx li").hover(function () {
+                    $(this).css("color","#ffffff")
+                },function () {
+                    $(this).css("color","#ccc")
+                })
+            },function () {
+                $(".grzx").hide();
+            })
+        }
+        //注销
+        $("#nullopen").click(function () {
+            location.href="http://localhost:8080/Project_war_exploded/remouser";
+        });
+        if(pds=="false"){            //判断从登录jsp内传过来的值判断是否登录成功！
+            location.href="http://localhost:8080/Project_war_exploded/loldemo/home.jsp"
+        }
+
+
 
         //删除商品
         $(".deleshop").click(function () {
@@ -234,9 +360,6 @@
            var userid=$(".userid").text();
            location.href="http://localhost:8080/Project_war_exploded/dlshop?shopid="+shopid+"&userid="+userid+"";
         });
-
-
-
         });
         $(".dlu").click(function () {
             $(".c2").show();
@@ -252,7 +375,6 @@
             $(".c2").hide();
             $("#bg").hide();
         });
-
 
     //批量删除
     function deleteUsers(){
@@ -273,7 +395,9 @@
                 location.href="http://localhost:8080/Project_war_exploded/dlusesp?shopid="+ids;
             }
         }else{
-            alert("请先选中要删除的用户数据！");
+            $(".c2cyh").show();
+            $(".c2cyh").children("p").text("请选中要删除的商品!");
+            $(".c2cyh").delay(1000).hide(0);
         }
     }
 //订单采购
@@ -290,7 +414,10 @@
         if(ids.length>0){
             location.href="http://localhost:8080/Project_war_exploded/ddcgsele?shopid="+ids+"&useid="+userid+"";
         }else{
-            alert("请先选中要采购的商品！");
+            $(".c2cyh").show();
+            $(".c2cyh").children("p").text("请选中要采购的商品!");
+            $(".c2cyh").delay(1000).hide(0);
+
         }
     }
 
@@ -327,7 +454,10 @@
             count--;
             if (count < 1) {
                 count = 1;
-                alert("不能低于1")
+                $(".c2cyh").show();
+                $(".c2cyh").children("p").text("不能低于1!");
+                $(".c2cyh").delay(1000).hide(0);
+
             }else{
                 var sums=count;
                 var unit = $(this).parent().prev().find("span").text();
@@ -348,9 +478,12 @@
             count++;
             if(count>$(this).parent().prev().prev().find("p").text()){
                 count--;
-                alert("数量不能大于库存！");
+                $(".c2cyh").show();
+                $(".c2cyh").children("p").text("数量不能大于库存!");
+                $(".c2cyh").delay(1000).hide(0)
+
             }else {
-                alert(count)
+
                 var sums=count;
                 var unit = $(this).parent().prev().find("span").text();
                 var sum = count * unit;
@@ -375,8 +508,7 @@
                     boolea = false;
                     countsum = mo + countsum;
                 }
-            }
-            ;
+            };
             $("#numcount").text(countsum);
 
             //总金额
@@ -405,12 +537,14 @@
 
         };
 
-        // //减个数
-        // $(".minus").click(function () {
-        // });
-        // //加个数
-        // $(".adding").click(function () {
-        // });
+
+        //减个数
+        $(".minus").click(function () {
+        });
+
+        //加个数
+        $(".adding").click(function () {
+        });
 
         //全选
         $('#selectAll').click(function () {

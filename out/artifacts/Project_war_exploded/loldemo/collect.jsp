@@ -1,6 +1,8 @@
 <%@ page import="webproject.entity.User" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="webproject.service.UserService" %>
+<%@ page import="webproject.service.impl.UserServiceImpl" %><%--
   Created by IntelliJ IDEA.
   User: lenovo
   Date: 2020-02-05
@@ -17,6 +19,11 @@
 </head>
 <%--<style type="text/css"></style>--%>
 <body>
+<%
+    UserService str=new UserServiceImpl();
+
+
+%>
 <%--最大的主体框--%>
 <div style="width:1518px;height: 950px;min-width:100%">
 
@@ -96,29 +103,21 @@
                     <tr>
                         <th></th>
                         <th>商品</th>
-                        <th>价格</th>
+                        <th>名称</th>
                         <th>操作</th>
                     </tr>
+<c:forEach items="${list}" var="lit">
                     <tr class="collect">
                         <td>
                             <label>
                                 <input class="wcenter" name="goodsId" value="" type="checkbox">
                             </label>
                         </td>
-                        <td>1212113</td>
-                        <td>￥123</td>
-                        <td><span style="padding-left: 0px">加入购物车</span><span>购买</span><span>删除</span></td>
+                        <td><img src="${lit.comOve}" height="80" width="80"></td>
+                        <td>${lit.comName}</td>
+                        <td><span style="padding-left: 0px">加入购物车</span><span>删除</span></td>
                     </tr>
-                    <tr class="collect">
-                        <td>
-                            <label>
-                                <input class="wcenter" name="goodsId" value="" type="checkbox">
-                            </label>
-                        </td>
-                        <td>1212113</td>
-                        <td>￥123</td>
-                        <td><span style="padding-left: 0px">加入购物车</span><span>购买</span><span>删除</span></td>
-                    </tr>
+</c:forEach>
                 </table>
             </li>
         </ul>

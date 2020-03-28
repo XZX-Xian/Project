@@ -145,10 +145,6 @@
                     })
                 }
             });
-
-
-
-
             //注册
             $("form").submit(function () {
                 var pwd=$(".pwds").val();
@@ -222,9 +218,6 @@
                     })
                 }
             });
-
-
-
         })
 </script>
 <style type="text/css">

@@ -12,6 +12,9 @@ public interface UserDao {
     //收藏商品
     int  collectinse(Comm comm);
 
+    //查询收藏商品
+    List<Collect> CollSele(String account);
+
     //商品模糊查询
     List<Comm> likeorder(Comm comm);
 

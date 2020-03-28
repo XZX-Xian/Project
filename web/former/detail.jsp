@@ -14,7 +14,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>商品详情页</title>
+    <title>注册修改</title>
 </head>
 <style type="text/css">
     .sm li{
@@ -105,13 +105,7 @@
 <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 
-
-
-
-
-
 </script>
-
 
 <body>
 <%--最大的主体框--%>
@@ -124,7 +118,7 @@
             <%--logo框--%>
             <div style="width: 300px;height: 55px;display:inline-block;margin-right:600px;margin-left: -20px;text-align: center">
                 <img src="\subject\loading.png" width="100" style="margin-right: 5px">
-                <div style="display:inline-block;position: absolute;top: 18px"><strong style="font-size: 20px;">魄罗1商城</strong></div>
+                <div style="display:inline-block;position: absolute;top: 18px"><strong style="font-size: 20px;">魄罗商城</strong></div>
             </div>
             <%--搜索框--%>
             <div style="width: 170px;height: 55px;display:inline-block;position:absolute;top: 6px;margin-left: 85px;text-align: center">
@@ -148,10 +142,10 @@
         <%--导航栏内容--%>
         <div style="width: 1518px;height: 36px;background-color: #1e272e;">
             <ul class="sm">
-                <li><strong><a href="loldemo/home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="loldemo/index.jsp">手办周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="#">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="#">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
+                <li><strong><a href="">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
+                <li><a href="">手办周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
+                <li><a href="">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
+                <li><a href="">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
             </ul>
         </div>
     </div>

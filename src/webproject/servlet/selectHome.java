@@ -39,6 +39,7 @@ public class selectHome extends HttpServlet {
             req.setAttribute("listname",list.get(0).getComName());
             req.setAttribute("listcomId",list.get(0).getComID());
             req.setAttribute("listsize",list.get(0).getComSize());
+            req.setAttribute("listquantity",list.get(0).getComQuantity());
             req.setAttribute("listout",list.get(0).getComOut());
             req.setAttribute("listove",list.get(0).getComOve());
             req.setAttribute("listtype",list.get(0).getComtype());
@@ -53,7 +54,7 @@ public class selectHome extends HttpServlet {
             req.setAttribute("listquantity",list.get(0).getComQuantity());
             req.setAttribute("listmodell",list.get(0).getModell());
             req.setAttribute("liststate",list.get(0).getState());
-            req.getRequestDispatcher("loldemo/details.jsp").forward(req, resp);
+            req.getRequestDispatcher("loldemo/index4.jsp").forward(req, resp);
         }else{
             System.out.println("查询失败！");
         }

@@ -332,7 +332,6 @@
 
                         <%--收藏、交易量--%>
                         <button style="border: 1px red solid;width: 45px;height: 45px;position: absolute;top:265px;right: 280px;background-color: white;font-size: 12px">收藏</button>
-
                         <text disabled style="text-align: center;border: 1px red solid;width: 43px;height: 40px;position: absolute;top:325px;right: 280px;background-color: white;font-size: 9px;padding-top: 5px">交易量<p style="margin-top: 5px;font-size: 12px"><%=request.getAttribute("listcount")%></p></text>
                     </div>
 

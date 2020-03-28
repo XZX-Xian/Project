@@ -84,11 +84,6 @@
           $(".perso").attr("src","<%=request.getAttribute("listove")%>");
       });
 
-      // $(".dlus").click(function () {
-      //     $(".c2").show();
-      //     $("#bg").show();
-      // });
-
       //弹框登录
       $(".userdl").click(function () {
           var username=$("input[name=username]").val();
@@ -104,7 +99,7 @@
               var money=$(".mone").text();
                   var size=$("input[name=size]").val();
                       var ove=  $(".oves").text();
-                      var userid=$(".userid").text();
+                      var userid=$("#account").text();
           location.href="http://localhost:8080/Project_war_exploded/inseshop?id="+id+"&name="+name+"&money="+money+"&size="+size+"&ove="+ove+"&userid="+userid+"";
           }else {
               $("#register").trigger('click');
@@ -268,7 +263,6 @@
                                 <strong style="position: absolute;top: 12px;margin-left: 300px;margin-top: 10px;width: 200px;" align="left">
                                     <span id="greet">欢迎,请</span><a href="#" id="register" class="dlu">登录</a>
                                     <%--存放账号--%>
-                                    <label class="userid1"></label>
                                     <span id="account"></span>
                                     <span id="cancel" hidden style="padding-left: 10px;color:#EE5A24; ">注销</span></strong>
                             </div>
@@ -320,9 +314,8 @@
 
                     <div align="left">
                         <ul class="shangp">
-                            <div align="right">
-
-                            </div>
+<%--                            <div align="right">--%>
+<%--                            </div>--%>
                             <li>
                                 <p style="font-size: 24px" class="nam"><%=request.getAttribute("listname")%></p>
                                 <p style="display: inline;font-size: 25px;font-weight: bold" class="mone"><%=request.getAttribute("listmoney")%></p><label style="font-size: 13px">RMB</label>
@@ -332,7 +325,6 @@
 
                         <%--收藏、交易量--%>
                         <button style="border: 1px red solid;width: 45px;height: 45px;position: absolute;top:265px;right: 280px;background-color: white;font-size: 12px">收藏</button>
-
                         <text disabled style="text-align: center;border: 1px red solid;width: 43px;height: 40px;position: absolute;top:325px;right: 280px;background-color: white;font-size: 9px;padding-top: 5px">交易量<p style="margin-top: 5px;font-size: 12px"><%=request.getAttribute("listcount")%></p></text>
                     </div>
 

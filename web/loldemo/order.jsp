@@ -15,7 +15,105 @@
     <link rel="stylesheet" type="text/css" href="../js/order.css">
     <link rel="stylesheet" type="text/css" href="js/order.css">
 </head>
-<%--<style type="text/css"></style>--%>
+
+<style type="text/css">
+    .sm li{
+        list-style-type: none;
+        display: inline-block;
+        text-align: center;
+        width: 180px;
+        font-size: 16px;
+        line-height: 36px;
+
+    }
+    .sm li a{
+        text-decoration:none;
+        color: white;
+    }
+    .sm{
+        margin-top: 5px;
+        color: white;
+    }
+    /*ul去黑点*/
+    ul li {
+        list-style: none;
+    }
+
+    /*购物车框架*/
+    .buyshop {
+        width: 1080px;
+        background-color: #ffffff;
+        border: 1px rgba(129, 129, 129, 0.66) solid;
+    }
+
+
+
+    /*选项*/
+    .buyli li {
+        padding-left: 80px;
+        display: inline-block;
+    }
+
+    #bg{
+        position: fixed;
+        width: 100%;
+        height:100%;
+        margin: 0;
+        padding: 0;
+        top: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 100;
+    }
+    .c2{
+        background-color: white;
+        position: fixed;
+        width: 400px;
+        height: 300px;
+        top:50%;
+        left: 50%;
+        z-index: 3;
+        margin-top: -150px;
+        margin-left: -200px;
+    }
+    .collect td{
+        border-bottom: 1px #cccccc solid;
+    }
+    .grzx li{
+        text-align: center;line-height: 30px;width: 75px;height: 30px;border-top: 1px #fff solid;color: #ccc;background-color: rgba(0,0,0,0.4)
+    }
+    /*结算框*/
+    .buyrigh {
+        width: 200px;
+        border: 2px #959595 solid;
+        position: fixed;
+        left: 1150px;
+        bottom: 425px;
+        padding: 5px;
+    }
+    .c2cyh{
+        border: orange 1.5px solid;
+        background-color: white;
+        position: fixed;
+        width: 200px;
+        height: 75px;
+        top:50%;
+        left: 50%;
+        z-index: 3;
+        margin-top: -75px;
+        margin-left: -100px;
+    }
+
+</style>
+<%--提示框--%>
+<div class="c2cyh" hidden style="z-index: 101" >
+    <p style="position:absolute;top: 15px;left:80px;font-size: 14px;color: orange"></p>
+    <div align="center"style="z-index: 101;margin-right: 120px;margin-top: 15px">
+        <img style="width: 45px;" src="\subject\loading.png" alt="">
+        <p style="font-size: 11px;color: #ccc;margin-bottom: 1px;">魄罗提示</p>
+        <br/>
+    </div>
+</div>
 <body>
 <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
@@ -23,27 +121,64 @@
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
     $(function () {
+        var pds ="<%=session.getAttribute("pds")%>";
         var oves ="<%=request.getAttribute("listove")%>";
         $(".oves").text(oves);
 
         var account ="<%=session.getAttribute("account")%>";
 
         if (account!=null&&account!=""&&account!="null"){
-            $(".dlus").hide();
+            $(".hyp").show();
             $(".userid").text(account);
         }else{
             $(".userid").hide();
-            $(".dlus").show();
+
         }
-        $(".dlus").click(function () {
-            $(".c2").show();
-            $("#bg").show();
+        //登录框
+        if(account!=""&&account!=null&&account!="null"){
+            $(".grdiv").hover(function () {
+                $(".grzx").show();
+                $(".grzx li").hover(function () {
+                    $(this).css("color","#ffffff")
+                },function () {
+                    $(this).css("color","#ccc")
+                })
+            },function () {
+                $(".grzx").hide();
+            })
+        }
+
+        //注销
+        $("#nullopen").click(function () {
+            location.href="http://localhost:8080/Project_war_exploded/remouser";
         });
+        if(pds=="false"){            //判断从登录jsp内传过来的值判断是否登录成功！
+            location.href="http://localhost:8080/Project_war_exploded/loldemo/home.jsp"
+        }
+
+        if(account=="null"){
+            $(".dlus").click(function () {
+                $(".c2").show();
+                $("#bg").show();
+            });
+        }else{
+            $(".dlus").click(function () {
+                $(".c2").hide();
+                $("#bg").hide();
+            });
+        }
+
+        $(".sm li a").hover(function () {
+            $(this).css({"color":"#EE5A24"});
+        },function () {
+            $(this).css({"color":"#ffffff"});
+        });
+
         //弹框登录
         $(".userdl").click(function () {
             var username=$("input[name=username]").val();
             var userpwd=$("input[name=userpwd ]").val();
-            location.href="http://localhost:6060/League_of_Legends_war_exploded/seluer?username="+username+"&userpwd="+userpwd+"";
+            location.href="http://localhost:8080/Project_war_exploded/seluer?username="+username+"&userpwd="+userpwd+"";
         });
         $(".gb").click(function () {
             $(".c2").hide();
@@ -57,7 +192,7 @@
                 var size=$("input[name=size]").val();
                 var ove=  $(".oves").text();
                 var userid=$(".userid").text();
-                location.href="http://localhost:6060/League_of_Legends_war_exploded/inseshop?id="+id+"&name="+name+"&money="+money+"&size="+size+"&ove="+ove+"&userid="+userid+"";
+                location.href="http://localhost:8080/Project_war_exploded/inseshop?id="+id+"&name="+name+"&money="+money+"&size="+size+"&ove="+ove+"&userid="+userid+"";
             }else{
                 alert("请先登录");
                 $(".dlus").click();
@@ -67,7 +202,7 @@
         $(".gouwuc").click(function () {
             if(account!=""&&account!=null&&account!="null"){
                 var userid=$(".userid").text();
-                location.href="http://localhost:6060/League_of_Legends_war_exploded/seleshop?id="+userid+"";
+                location.href="http://localhost:8080/Project_war_exploded/seleshop?id="+userid+"";
             }else{
                 alert("请先登录");
                 $(".dlus").click();
@@ -76,7 +211,7 @@
         });
         $(".shdz").click(function () {
             var userid=$(".userid").text();
-            location.href="http://localhost:6060/League_of_Legends_war_exploded/seleord?userid="+userid+"";
+            location.href="http://localhost:8080/Project_war_exploded/seleord?userid="+userid+"";
         });
 
 
@@ -104,6 +239,38 @@
         };
         $("#summonry").text(moyesum);
 
+//默认选中
+
+        var count = document.getElementsByName("goodsId");
+        for (var i = 0; i < count.length; i++) {
+            var state=($(".wcenter:eq(" + i + ")").next().next().next("span").text());
+            if (state=="默认地址") {
+                $(".wcenter:eq("+i+")").prop('checked',true);
+                $(".wcenter:eq("+i+")").parent().css("border","2px #fbc531 solid");
+            }
+        }
+
+
+
+      $(".wcenter").click(function() {
+          var id=$(this).val();
+          var userid = $(".userid").text();
+          var count = document.getElementsByName("goodsId");
+          var ids = new Array();
+
+          for (var i = 0; i < count.length; i++) {
+              if (count[i].checked != true) {
+                  var idm = count[i].value; // value被绑定了ID
+                  ids.push(idm);
+              }
+          }
+          if (ids.length > 0) {
+              location.href = "http://localhost:8080/Project_war_exploded/oraddup?id=" + id + "&userid=" + userid + "&ids="+ids+"";
+          } else {
+              alert("请先选中地址！");
+          }
+
+      });
 
 
     });
@@ -132,45 +299,54 @@
                 <br/>
                 <input type="button" class="userdl" style="background-color: #ffffff;color: #05c46b;border-radius: 25px;font-weight:bold ;margin-top: 20px;width: 95px" value="登录" >
                 <div align="right" style="margin-right: 15px;margin-top: 10px">
-                    <a href="http://localhost:6060/League_of_Legends_war_exploded/loldemo/denlv.jsp" style="font-size: 11px;" >注册新用户/忘记密码</a>
+                    <a href="http://localhost:8080/Project_war_exploded/loldemo/denlv.jsp" style="font-size: 11px;" >注册新用户/忘记密码</a>
                 </div>
             </form>
         </div>
     </div>
     <div <%--style="position: fixed;z-index: 999"--%>>
         <%--头部导航栏框--%>
-        <div style="height:55px;background-color: white">
+            <div style="height:45px;background-color: white">
 
-            <%--logo框--%>
-            <div style="width: 300px;height: 55px;display:inline-block;margin-right:600px;margin-left: -20px;text-align: center">
-                <img src="\subject\loading.png" width="100" style="margin-right: 5px">
-                <div style="display:inline-block;position: absolute;top: 18px"><strong style="font-size: 20px;">魄罗商城</strong></div>
-            </div>
-            <%--搜索框--%>
-            <div style="width: 170px;height: 55px;display:inline-block;position:absolute;top: 6px;margin-left: 85px;text-align: center">
-                <input type="search" style="display:inline-block;border-radius:25px;margin-top: 15px;">
-                <img src="\subject\cx.png" alt="" width="35px" style="position: absolute;top: 8px" >
-            </div>
+                <%--logo框--%>
+                <div style="width: 300px;height: 45px;display:inline-block;margin-right:600px;margin-left: -20px;text-align: center">
+                    <img src="\subject\loading.png" width="100" style="margin-right: 5px">
+                    <div style="display:inline-block;position: absolute;top: 18px"><strong style="font-size: 20px;">魄罗商城</strong></div>
+                </div>
+           <%--     &lt;%&ndash;搜索框&ndash;%&gt;
+                <div style="width: 170px;height: 55px;display:inline-block;position:absolute;top: 6px;margin-left: 85px;text-align: center">
+                    <input class="shopse" type="search" style="display:inline-block;border-radius:25px;margin-top: 15px;">
+                    <img class="shopsele" src="\subject\cx.png" alt="" width="35px" style="position: absolute;top: 8px" >
+                </div>--%>
 
-            <%--登录框--%>
-            <div style="width: 160px;height: 55px;display:inline-block;margin-left: 50px">
-                <img src="\subject\yhu.png" alt="" width="30" style="position: absolute;top: 12px;margin-left: 290px;margin-top: 5px">
-                <strong style="position: absolute;top: 12px;margin-left: 330px;margin-top: 10px;width: 200px">欢迎,<a class="dlus">请登录</a><label class="userid"></label></strong>
 
-            </div>
-            <%--购物车框--%>
-            <div style="width: 120px;height: 55px;display:inline-block;margin-right: 10px">
-                <img src="\subject\gwc.png" alt="" width="35px" style="position: absolute;top: 12px;margin-left: 280px;margin-top: 3px">
-                <strong style="position: absolute;top: 12px;margin-left: 320px;margin-top: 10px;width: 90px"><a class="gouwuc">购物车</a></strong>
-            </div>
 
-        </div>
+                <div style="position: absolute;right: 1px;top: 1px">
+
+
+                    <%--登录框--%>
+                    <div style="width: 160px;height: 55px;display:inline-block;margin-right: 25px">
+                        <div  style="position: absolute;top: 5px;margin-top:3px"><img src="\subject\yhu.png" class="dlus" alt="" width="40"></div>
+                        <div class="grdiv" style=";margin-left: 50px;border-top: 1px #ffffff solid">
+                            <p hidden class="hyp" style="position: absolute;top: 12px;margin-top: 10px;"><strong style="font-size: 12px;">(<label class="userid"></label>)</strong></p>
+                            <ul style=" padding:0; margin:0;list-style-type: none;margin-top: 60px" hidden class="grzx">
+                                <li>个人中心</li>
+                                <li id="nullopen">注销</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                  <%--  &lt;%&ndash;购物车框&ndash;%&gt;
+                    <div class="gouwuc" style="width: 120px;height: 55px;display:inline-block;margin-right: 10px">
+                        <img src="\subject\gwc.png" alt="" width="35px" style="position: absolute;top: 12px;margin-top: 3px">
+                        <strong style="position: absolute;top: 12px;margin-top: 10px;width: 90px;margin-left: 50px"><a>购物车</a></strong>
+                    </div>--%>
+                </div>
+            </div>
         <div style="width: 1518px;height: 36px;background-color: #1e272e;">
             <ul class="sm">
-                <li><strong><a href="http://localhost:6060/League_of_Legends_war_exploded/loldemo/home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="">手办周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
+                <li><strong><a href="http://localhost:8080/Project_war_exploded/loldemo/home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
+                <li><a href="http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo=">商品区</a><img src="\subject\zuo.png" alt="" width="14px"></li>
             </ul>
         </div>
     </div>
@@ -180,12 +356,13 @@
         <div class="buyshop"  style="margin-top: 15px">
             <p align="left" style="color: #000000;margin-left: 15px">确认收货地址 </p>
             <div align="left" >
-                <c:forEach items="${listord}" var="lord">
+                <c:forEach items="${listord}" var="lits">
                     <ul style="list-style-type: none">
-                        <li  style="border: 1px #cccccc solid;line-height: 40px;background-color: #ffffff;height: 40px;width: 1000px"><input type="checkbox"><span></span>;地址：<span>
-                        </span><span style="margin-left: 50px">
-                        默认地址,----<a href="">删除</a>
-                    </span>
+                        <li  style="border: 1px #cccccc solid;line-height: 40px;background-color: #ffffff;height: 40px;width: 1000px">
+                            <input  class="wcenter" name="goodsId" value="${lits.id}" type="radio" >
+                            收货人：<span>${lits.name}</span>
+                            收货地址： <span>${lits.province}${lits.city}${lits.county}${lits.address}</span>
+                            <span style="position: absolute;left: 780px;font-size: 14px;color: #ccc">${lits.state}</span>
                         </li>
                     </ul>
                 </c:forEach>

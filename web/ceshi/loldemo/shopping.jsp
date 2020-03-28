@@ -149,10 +149,7 @@
             </form>
         </div>
     </div>
-
-
     <div <%--style="position: fixed;z-index: 999"--%>>
-
         <%--头部导航栏框--%>
         <div style="height:45px;background-color: white;margin-bottom: 55px">
 
@@ -161,9 +158,6 @@
                 <img src="\subject\loading.png" width="100" style="margin-right: 5px">
                 <div style="display:inline-block;position: absolute;top: 18px"><strong style="font-size: 20px;">魄罗商城</strong></div>
             </div>
-
-
-
             <div style="position: absolute;right: 1px;top: 1px">
 
                 <%--登录框--%>
@@ -188,10 +182,6 @@
                 </ul>
             </div>
     </div>
-
-
-
-
     <div align="center">
     <%--购物车主体--%>
     <div class="buyshop"  align="center">
@@ -302,8 +292,6 @@
         }else{
             $(".userid").hide();
         }
-
-
         if(account=="null"){
             $(".dlus").click(function () {
                 $(".c2").show();
@@ -353,11 +341,7 @@
            var userid=$(".userid").text();
            location.href="http://localhost:6060/League_of_Legends_war_exploded/dlshop?shopid="+shopid+"&userid="+userid+"";
         });
-
-
-
         });
-
         //弹框登录
         $(".userdl").click(function () {
             var username=$("input[name=username]").val();
@@ -368,9 +352,6 @@
             $(".c2").hide();
             $("#bg").hide();
         });
-
-
-
 
     //批量删除
     function deleteUsers(){
@@ -416,8 +397,6 @@
 
         }
     }
-
-
 
         //绑定事件
         //选中
@@ -493,11 +472,6 @@
         });
 
 
-
-
-
-
-
         //总量计算
         var moyesum = function () {
             //总数量
@@ -543,13 +517,10 @@
 
         //减个数
         $(".minus").click(function () {
-
         });
 
         //加个数
         $(".adding").click(function () {
-
-
         });
 
         //全选
@@ -566,12 +537,6 @@
                 });
                 moyesum();
             };
-
-
-
-
-
-
     });
 </script>
 </html>

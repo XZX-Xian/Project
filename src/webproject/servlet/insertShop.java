@@ -25,8 +25,8 @@ public class insertShop extends HttpServlet {
         int size = Integer.parseInt(req.getParameter("size"));
         String ove = req.getParameter("ove");
         //获得账号
-        HttpSession session=req.getSession();
-        String userid = (String)session.getAttribute("account");
+        HttpSession session = req.getSession();
+        String userid = (String) session.getAttribute("account");
 
         UserService use = new UserServiceImpl();
         Comm com = new Comm();
@@ -36,12 +36,24 @@ public class insertShop extends HttpServlet {
         com.setSize(size);
         com.setComOve(ove);
         com.setUserid(userid);
-      int count=use.shopinse(com);
-        if (count>0){
-            System.out.println("添加到购物车成功！");
-            req.getRequestDispatcher("loldemo/home.jsp").forward(req, resp);
-        }else{
-            System.out.println("添加到购物车失败！");
+
+        int sumdemo = use.shopsele(com);
+        if (sumdemo > 0) {
+            System.out.println("数据库内包含并且，商品详情页选中的数是:" + com.getSize());
+            System.out.println("数据库里面的值：" + sumdemo);
+            int sum = (com.getSize()) + (sumdemo);
+            req.getRequestDispatcher("/shopud?userid=" + userid + "&shopid=" + id + "&sum=" + sum + "").forward(req, resp);
+        } else {
+            System.out.println("数据库没有包含包含并且，商品详情页选中的数是::" + com.getSize());
+            System.out.println("里面没有此商品");
+            int count = use.shopinse(com);
+            if (count > 0) {
+                System.out.println("添加到购物车成功！");
+                resp.sendRedirect("http://localhost:8080/Project_war_exploded/seleshop");
+//                req.getRequestDispatcher("http://localhost:8080/Project_war_exploded/seleshop").forward(req, resp);
+            } else {
+                System.out.println("添加到购物车失败！");
+            }
         }
     }
 

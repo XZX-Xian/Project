@@ -27,6 +27,7 @@ public class selectuserUp extends HttpServlet {
             usr.setAccount(Name);
             usr.setPwd(Pwd);
             usr.setPhone(Phone);
+
         UserService us=new UserServiceImpl();
        int count=us.AddUser(usr);
        if (count>0){

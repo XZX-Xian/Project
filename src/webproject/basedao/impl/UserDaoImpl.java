@@ -43,6 +43,31 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         return count;
     }
 
+    //查询收藏商品
+    @Override
+    public List<Collect> CollSele(String account) {
+        String sql="SELECT * FROM usercollect WHERE Userid=?";
+        Object[] params={account};
+        ResultSet rs=null;
+        List<Collect> list=new ArrayList<>();
+        try {
+            rs=super.exceuteQuery(sql,params);
+            while (rs.next()){
+                Collect coll=new Collect();
+                coll.setShopid(rs.getInt(1));
+                coll.setName(rs.getString(2));
+                coll.setMoney(rs.getString(3));
+                coll.setSize(rs.getInt(4));
+                coll.setOce(rs.getString(5));
+                coll.setAccount(rs.getString(6));
+                list.add(coll);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     //模糊查询商品
     @Override
     public List<Comm> likeorder(Comm comm) {

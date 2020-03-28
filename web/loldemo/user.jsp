@@ -69,7 +69,7 @@
         <ul id="list">
             <li><a href="#" style="color: black" id="shopping">我的购物车</a></li>
             <li><a href="#" style="color: black" id="order">我的订单</a></li>
-            <li><a href="#" style="color: black" id="collect">商品收藏</a></li>
+            <li><a href="http://localhost:8080/Project_war_exploded/collinse" style="color: black" id="collect">商品收藏</a></li>
             <li><a href="#" style="color: black" id="site">收货地址</a></li>
             <li><a href="#" style="color: black" id="data">个人资料</a></li>
         </ul>

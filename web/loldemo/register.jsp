@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>登录首页</title>
+    <title>后台</title>
     <link rel="stylesheet" type="text/css" href="../js/domeCss.css">
     <link rel="stylesheet" type="text/css" href="js/domeCss.css">
     <link rel="stylesheet" type="text/css" href="../js/register.css">

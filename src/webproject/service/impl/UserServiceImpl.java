@@ -79,6 +79,14 @@ public class UserServiceImpl implements UserService {
         return count;
     }
 
+    //查询收藏商品
+    @Override
+    public List<Collect> CollSele(String account) {
+        List<Collect> list=new ArrayList<>();
+        list=str.CollSele(account);
+        return list;
+    }
+
     //商品模糊查询
     @Override
     public List<Comm> likeorder(Comm comm) {
