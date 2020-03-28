@@ -1,13 +1,36 @@
 package webproject.service;
 
-import webproject.entity.Address;
-import webproject.entity.Admin;
-import webproject.entity.Comm;
-import webproject.entity.User;
+import webproject.entity.*;
 
 import java.util.List;
 
 public interface UserService {
+    //判断商品是否被用户收藏
+    int collectsele(Comm comm);
+
+    //收藏商品
+    int collectinse(Comm comm);
+
+    //商品模糊查询
+    List<Comm> likeorder(Comm comm);
+
+    //新增订单
+    int orderInse(Order ord);
+
+    //地址的状态清空
+    int addressUp(String ids, String userid);
+
+    //选中的id为默地址
+    int orderaddressUp(int id, String userid);
+
+    //地址
+    List<Address> Seleorder(Address ads);
+
+    //订单采购
+    List<Comm> ddcg(String ids, String useid);
+
+    //选中删除
+    int deleteUsers(String ids, String useid);
 
     //新增管理员
     int AdminAdd(Admin admin);
@@ -25,15 +48,7 @@ public interface UserService {
     List<Admin> AdminDimList(String account);
 
     //管理员登录
-    int AdminLogin(String account,String pwd);
-
-    //地址
-    List<Address> Seleorder(Address ads);
-    //订单采购
-    List<Comm> ddcg(String ids,String useid);
-
-    //选中删除
-    int deleteUsers(String ids,String useid);
+    int AdminLogin(String account, String pwd);
 
     //购物车和数据库商品的数量
     int shopupda(Comm comm);
@@ -54,22 +69,29 @@ public interface UserService {
     List<Comm> recreationdemo();
 
     //查询全部商品
-    List<Comm>Seletedemo(Comm comm);
+    List<Comm> Seletedemo(Comm comm);
 
+    //忘记密码
+    int Updateuser(User user);
     //删除用户
     int DelUser(String account);
 
     //选中删除用户
     int DelUserAll(String IdAll);
+    //查询全部用户
+    List<User> Seleuser(String name);
 
     //注册用户
     int AddUser(User user);
 
     //两表联查
-    List<Comm>Selectdemo();
+    List<Comm> Selectdemo();
 
     //查询全部用户
-    List<User> Seleuser(String name);
+    List<User> Seleuser();
+
+    //用户登录修改状态
+    int UpdateUser(User user);
 
     //查询用户信息
     List<User> Selete(String id);
@@ -111,8 +133,8 @@ public interface UserService {
     int sele(int type);
 
     //用户登录
-    boolean userdl(String account,String pwd);
+    boolean userdl(String account, String pwd);
 
     //手机登录
-    boolean userdhdl(int phone,String pwd);
+    boolean userdhdl(int phone, String pwd);
 }

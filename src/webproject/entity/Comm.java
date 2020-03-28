@@ -4,6 +4,7 @@ package webproject.entity;
  * 商品信息
  */
 public class Comm {
+    private String account;
     private int comID;          //商品编号
     private String comMoney;    //商品价格
     private String comColor;    //商品颜色
@@ -175,5 +176,13 @@ public class Comm {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 }

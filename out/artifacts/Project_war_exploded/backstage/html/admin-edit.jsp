@@ -120,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $("#add").click(function () {
                 var index = parent.layer.getFrameIndex(window.name);
                 layer.alert("修改成功", {icon: 6,time:2000},function () {});
-                //关闭当前frame
+                //关闭当前framea
                 parent.layer.close(index);
             })
           

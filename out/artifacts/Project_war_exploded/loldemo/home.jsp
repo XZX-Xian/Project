@@ -18,7 +18,126 @@
     <link rel="stylesheet" type="text/css" href="../js/home.css">
     <link rel="stylesheet" type="text/css" href="js/home.css">
 </head>
-<%--<style type="text/css"></style>--%>
+<style type="text/css">
+    .sm li{
+        list-style-type: none;
+        display: inline-block;
+        text-align: center;
+        width: 180px;
+        font-size: 16px;
+        line-height: 36px;
+
+    }
+    .sm li a{
+        text-decoration:none;
+        color: white;
+    }
+    .sm{
+        margin-top: 5px;
+        color: white;
+    }
+    html, body {
+        margin:0;
+        padding:0;
+    }
+
+    #bt li{
+        list-style-type: none;
+        padding-top: 3px;
+    }
+
+    #bt1 li{
+        list-style-type: none;
+        padding-top: 3px;
+    }
+
+    #bt2 li{
+        list-style-type: none;
+        padding-top: 3px;
+    }
+    #spl ul{
+/*      border: 1px black solid;*/
+        width: 260px;
+        height: 290px;
+        display: inline-block;
+        margin-left: 58px;
+        margin-top: 45px;
+    }
+    #spl ul li{
+        list-style-type: none;
+        font-size: 18px;
+        color: black;
+        font-weight: bold;
+    }
+    #spl ul div{
+        text-align: center;
+        margin-top: 20px;
+   /*     border: 1px red solid;*/
+        width: 200px;
+        height: 185px;
+
+    }
+    #spl ul div img{
+        height: 190px;
+        width: 190px;
+      max-width: 190px;
+    }
+    #smk{
+        margin-top: -60px;
+        margin-left: 650px;
+    }
+    #smk li{
+         display: inline-block;
+        font-size: 10px;
+        line-height: 20px; margin: 0 1px;
+        width: 20px; height: 20px;
+        border-radius: 50%; background: #ffffff;
+        text-align: center; color: #ffffff;
+        margin-left: 20px;
+
+    }
+    .c2{
+        background-color: white;
+        position: fixed;
+        width: 400px;
+        height: 300px;
+        top:50%;
+        left: 50%;
+        z-index: 3;
+        margin-top: -150px;
+        margin-left: -200px;
+    }
+    .c2cyh{
+        border: orange 1.5px solid;
+        background-color: white;
+        position: fixed;
+        width: 200px;
+        height: 75px;
+        top:50%;
+        left: 50%;
+        z-index: 3;
+        margin-top: -75px;
+        margin-left: -100px;
+    }
+    .grzx li{
+        text-align: center;line-height: 30px;width: 75px;height: 30px;border-top: 1px #fff solid;color: #ccc;background-color: rgba(0,0,0,0.4)
+    }
+
+    #bg{
+        position: fixed;
+        width: 100%;
+        height:100%;
+        margin: 0;
+        padding: 0;
+        top: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 100;
+    }
+
+
+
+</style>
 <%
     Comm com = new Comm();
     UserService str = new UserServiceImpl();
@@ -53,9 +172,25 @@
         //获的页面状态
         var pd = "<%= session.getAttribute("pd")%>";
         //修改页面状态
+        var account ="<%=session.getAttribute("account")%>";
         if (pd == "null") {
             <%session.setAttribute("pd",false);%>
             // location.href = "http://localhost:8080/Project_war_exploded/pagestate";
+        }
+        var account ="<%=session.getAttribute("account")%>";
+        var pd ="<%=session.getAttribute("pd")%>";
+        var pds ="<%=session.getAttribute("pds")%>";
+
+        if(account=="null"){
+            $(".dlu").click(function () {
+                $(".c2").show();
+                $("#bg").show();
+            });
+        }else{
+            $(".dlu").click(function () {
+                $(".c2").hide();
+                $("#bg").hide();
+            });
         }
 
         //单击登录
@@ -68,24 +203,27 @@
         $(".userdl").click(function () {
             var username = $("input[name=username]").val();
             var userpwd = $("input[name=userpwd ]").val();
-            location.href = "http://localhost:8080/Project_war_exploded/seluer?username=" + username + "&userpwd=" + userpwd + "";
-        });
-
-    //得到账号
-    var account = "<%= session.getAttribute("account")%>";
-    if (account != "" && account != null && account != "null") {
-        $("#register").hide();
-        $("#greet").hide();
-        $("#cancel").show();
-        $("#account").text(account);
+                var red=/^\S{6,10}$/;
+                if(username==""||userpwd==""){
+                    $(".c2cyh").show();
+                   $(".c2cyh").children("p").text("请先填完数据!");
+                    $(".c2cyh").delay(1000).hide(0);
+                }else if (!red.test(username)){
+                    $(".c2cyh").show();
+                    $(".c2cyh").children("p").text("账户格式错误!");
+                    $(".c2cyh").delay(1000).hide(0);
         } else {
-            if (url == href && pd == "true") {
-                alert("登录失败!");
-                //重置页面状态
+                    location.href="http://localhost:8080/Project_war_exploded/seluer?username="+username+"&userpwd="+userpwd+"";
+                }
+            });
+
+
+            if(pd=="true"){            //判断从登录jsp内传过来的值判断是否登录成功！
                 <%session.setAttribute("pd",false);%>
-                // location.href = "http://localhost:8080/Project_war_exploded/pagestate";
+                $(".c2cyh").show();
+                $(".c2cyh").children("p").text("登录失败!");
+                $(".c2cyh").delay(2000).hide(0);
             }
-        };
 
         //注销
         $("#cancel").click(function () {
@@ -97,10 +235,29 @@
             })
         });
 
-        // 单击账号
-        $("#account").click(function () {
-            var id = $(this).text();
-            location.href = "http://localhost:8080/Project_war_exploded/userquery?id=" + id;
+            //弹框正则判断
+            //密码
+            $("input[name=userpwd ]").blur(function () {
+                var userpwd=$("input[name=userpwd ]").val();
+                if(userpwd==""){
+                    $(".c2cyh").show();
+                    $(".c2cyh").children("p").text("密码不能为空!");
+                    $(".c2cyh").delay(1000).hide(0);
+                }
+            });
+            //用户
+            $("input[name=username]").blur(function () {
+                var username=$("input[name=username]").val();
+                var red=/^\S{6,10}$/;
+                if(username==""){
+                    $(".c2cyh").show();
+                    $(".c2cyh").children("p").text("用户不能为空!");
+                    $(".c2cyh").delay(1000).hide(0);
+                }else if (!red.test(username)){
+                    $(".c2cyh").show();
+                    $(".c2cyh").children("p").text("用户格式错误!");
+                    $(".c2cyh").delay(1000).hide(0);
+                }
         });
 
         //关闭登录框
@@ -108,6 +265,24 @@
             $(".c2").hide();
             $("#bg").hide();
         });
+            $(".gbs").click(function () {
+                $(".c2c").hide();
+                $("#bg").hide();
+            });
+
+            if (account!=null&&account!=""&&account!="null"){
+                $(".userid").text(account);
+                $(".dltis").css("right","110px")
+                $(".hyp").show();
+            }else{
+                $(".userid").hide();
+            }
+
+            $(".sm li a").hover(function () {
+                $(this).css({"color":"#EE5A24"});
+            },function () {
+                $(this).css({"color":"#ffffff"});
+            });
 
         var count = 0;
         timers(count);
@@ -135,7 +310,7 @@
                 $(".imgs").eq(count).css("display", "block");
                 $("#smk li:eq(" + count + ")").css("background", "#fed330");
                 $("#smk li:eq(" + count + ")").siblings().css("background", "#ffffff");
-            }, 1000);
+            }, 4000);
         }
 
         $("#img1").click(function () {
@@ -160,17 +335,43 @@
             if (account != "" && account != null && account != "null") {
                 location.href = "http://localhost:8080/Project_war_exploded/seleshop";
             } else {
-                alert("请先登录");
+                    $(".c2cyh").show();
+                    $(".c2cyh").children("p").text("请先登录!");
+                    $(".c2cyh").delay(1000).hide(0);
                 $(".dlu").click();
                 return false;
             }
+
+            });
+            //登录框
+            if(account!=""&&account!=null&&account!="null"){
+                $(".grdiv").hover(function () {
+                    $(".grzx").show();
+                    $(".grzx li").hover(function () {
+                        $(this).css("color","#ffffff")
+                    },function () {
+                        $(this).css("color","#ccc")
         })
+                },function () {
+                    $(".grzx").hide();
+                })
+            }
+            //注销
+            $("#nullopen").click(function () {
+                $(".dltis").css("right","50px")
+                $(".hyp").hide();
+                location.href="http://localhost:8080/Project_war_exploded/remouser";
+            });
+            if(pds=="false"){            //判断从登录jsp内传过来的值判断是否登录成功！
+                <%session.setAttribute("pds",true);%>
+                $(".c2cyh").show();
+                $(".c2cyh").children("p").text("注销成功!");
+                $(".c2cyh").delay(2000).hide(0);
+            }
 
-        //单击模糊查询
-        $("#search").click(function () {
-            var name = $(this).prev().val();
-            location.href="http://localhost:8080/Project_war_exploded/";
-
+            $(".shopsele").click(function () {
+               var shopdemo=$(".shopse").val();
+                location.href="http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo="+shopdemo;
         })
     });
 </script>
@@ -210,8 +411,18 @@
             </form>
         </div>
     </div>
-    <%--最大的主体框--%>
-    <div style="width:1518px;height: 950px;min-width:100%">
+    <%--提示框--%>
+    <div class="c2cyh" hidden style="z-index: 101" >
+        <p style="position:absolute;top: 15px;left:80px;font-size: 14px;color: orange"></p>
+                <div align="center"style="z-index: 101;margin-right: 120px;margin-top: 15px">
+                    <img style="width: 45px;" src="\subject\loading.png" alt="">
+                    <p style="font-size: 11px;color: #ccc;margin-bottom: 1px;">魄罗提示</p>
+                    <br/>
+                </div>
+    </div>
+
+<%--最大的主体框--%>
+<div style="width:1518px;height: 950px;min-width:100%">
 
         <div <%--style="position: fixed;z-index: 999"--%>>
             <%--头部导航栏框--%>
@@ -251,10 +462,9 @@
             <%--导航栏内容--%>
             <div style="width: 1518px;height: 36px;background-color: #1e272e;">
                 <ul class="sm">
-                    <li><strong><a href="#">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
-                    <li><a href="index.jsp">手办周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                    <li><a href="">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                    <li><a href="">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
+                <li><strong><a href="">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
+                <li><a href="http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo=">商品区</a><img src="\subject\zuo.png" alt="" width="14px"></li>
+
                 </ul>
             </div>
         </div>
@@ -272,8 +482,7 @@
                                                                                        style="display: none"></a>
             <a href="http://localhost:8080/Project_war_exploded/loldemo/demo1.jsp"><img src="\subject\sy3.jpg" alt=""
                                                                                         width="1518px" height="502px"
-                                                                                        class="imgs" name="2"
-                                                                                        style="display: none"></a>
+                                                                                        class="imgs" name="2"style="display: none"></a>
 
             <ul id="smk">
                 <li></li>
@@ -282,17 +491,18 @@
             </ul>
         </div>
 
-        <div style="border: 1px red solid;width: 1517px;height: 460px" id="spl">
-            <div align="center"
-                 style="margin-top: 50px;margin-left: 35px;width: 230px;height: 40px;border: 1px red solid">
-                <p style="display: inline-block">娱乐活动：<span style="display: inline-block;color: red">随机商品！</span></p>
+
+
+    <div style="border: 1px #ffffff solid;width: 1517px;height: 460px" id="spl">
+        <div align="center" style="margin-top: 50px;margin-left: 35px;width: 230px;height: 40px;border: 1px #ffffff solid">
+            <p style="display: inline-block">娱乐活动：<span style="display: inline-block;color: red">随机商品</span></p>
             </div>
             <c:forEach items="${list1}" var="lit">
                 <ul>
                     <div id="img1">
-                        <img src="${lit.comOve}">
+                <img style="width: 165px" src="${lit.comOve}">
                         <p style="text-align: center">${lit.comName}</p>
-                        <p hidden class="lit1">${lit.comID}</p>
+                <label hidden class="lit1">${lit.comID}</label>
                     </div>
                 </ul>
             </c:forEach>
@@ -302,7 +512,7 @@
                 <ul>
 
                     <div id="img2">
-                        <img style="width: 180px;" src="${lit.comOve}">
+                <img style="width: 165px"  src="${lit.comOve}">
                         <p style="text-align: center">${lit.comName}</p>
                         <label class="lit2" hidden>${lit.comID}</label>
                     </div>
@@ -312,7 +522,7 @@
                 <c:forEach items="${list3}" var="lit">
 
                     <div id="img3">
-                        <img style="width: 180px" src="${lit.comOve}">
+                <img style="width: 165px"  src="${lit.comOve}">
                         <p style="text-align: center">${lit.comName}</p>
                         <label class="lit3" hidden>${lit.comID}</label>
                     </div>
@@ -324,7 +534,7 @@
                 <ul>
 
                     <div id="img4">
-                        <img style="width: 180px" src="${lit.comOve}">
+                <img style="width: 165px"  src="${lit.comOve}">
                         <p style="text-align: center">${lit.comName}</p>
                         <label class="lit4" hidden>${lit.comID}</label>
                     </div>
@@ -332,7 +542,7 @@
             </c:forEach>
         </div>
 
-        <div style="padding-left: 200px;padding-top: 20px" onclick="deleteUsers()">删除选中的商品</div>
+<%--        <div style="padding-left: 200px;padding-top: 20px" onclick="deleteUsers()">删除选中的商品</div>--%>
 
         <%--三个标标--%>
         <div style="width: 1090px;height: 80px;display: inline-block;margin-left: 120px;margin-top: 10px">
@@ -369,6 +579,6 @@
             </ul>
 
         </div>
-
+</table>
 </body>
 </html>

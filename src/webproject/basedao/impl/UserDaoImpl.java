@@ -32,23 +32,28 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     }
 
+    //收藏商品
     @Override
     public int collectinse(Comm comm) {
         String sql="INSERT INTO usercollect(shopID,Name,Money,Size,Ove,userid)VALUES(?,?,?,?,?,?)";
         Object[]obj={comm.getComID(),comm.getComName(),comm.getComMoney(),comm.getComQuantity(),comm.getComOve(),comm.getUserid()};
         int count=super.executeUpdate(sql,obj);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
     //模糊查询商品
-    public List<Comm> secom(Comm comm){
+    @Override
+    public List<Comm> likeorder(Comm comm) {
         String sql="SELECT * FROM addcommodity WHERE  AddName LIKE  '%"+comm.getComName()+"%'";
+        List<Comm>list=new ArrayList<>();
+        ResultSet rs=null;
+        System.out.println("模糊SQL"+sql);
         System.out.println(comm.getComName());
-        ResultSet rs = null;
-        List<Comm> list = new ArrayList<Comm>();
-        try {
-            rs = super.exceuteQuery(sql, null);
-            while (rs.next()) {
+        try{
+            rs=super.exceuteQuery(sql,null);
+            while (rs.next()){
                 Comm com = new Comm();
                 com.setComID(rs.getInt(1));
                 com.setComMoney(rs.getString(2));
@@ -64,7 +69,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                 com.setComtype(rs.getInt(12));
                 list.add(com);
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
         return list;
@@ -76,6 +81,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="INSERT INTO admin_data(account,pwd,phone,email,time)VALUES(?,?,?,?,?)";
         Object[] params={admin.getAccount(),admin.getPwd(),admin.getPhone(),admin.getEmail(),admin.getDate()};
         int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -85,6 +92,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="DELETE FROM admin_data WHERE account in ("+account+",?)";
         Object[] params={account};
         int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -96,24 +105,59 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="INSERT INTO userorder(ordernumber,shopID,Name,Money,Size,Ove,userid,state)VALUES("+random+",?,?,?,?,?,?,"+states+")";
         Object[] obj={ord.getShopID(),ord.getName(),ord.getMoney(),ord.getSize(),ord.getOve(),ord.getUserid()};
         int count=super.executeUpdate(sql,obj);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
+    //地址的状态清空
     @Override
     public int addressUp(String ids, String userid) {
         String sql="UPDATE user_address set state=\"\" where id in("+ids+") AND user_account=?";
         Object[] obj={userid};
         int count=super.executeUpdate(sql,obj);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
-
+    //选中的id为默地址
     @Override
     public int orderaddressUp(int id, String userid) {
         String sql="UPDATE user_address set state=\"默认地址\" where id=? AND user_account=?";
         Object[] obj={id,userid};
         int count=super.executeUpdate(sql,obj);
+        //手动关闭mysql
+        super.closeAll();
         return count;
+    }
+
+    //通过ID 查询用户购物车
+    @Override
+    public List<Comm> shopdemo(Comm comm) {
+        String sql="SELECT  B.addid,C.AddQuantity,B.AddName,B.AddMoney,B.Addsize,b.mouseove FROM user_data as A\n" +
+                " INNER JOIN shopping as B ON A.account=B.userid \n" +
+                "INNER JOIN addcommodity C ON B.Addid=C.AddId\n" +
+                "WHERE A.user_account=?;";
+        List<Comm> list=new ArrayList<>();
+        Object[] obj={comm.getAccount()};
+        ResultSet rs=null;
+        try{
+            rs=super.exceuteQuery(sql,obj);
+            while (rs.next()){
+                Comm com=new Comm();
+                com.setComID(rs.getInt(1));
+                com.setComQuantity(rs.getInt(2));
+                com.setComName(rs.getString(3));
+                com.setComMoney(rs.getString(4));
+                com.setComSize(rs.getInt(5));
+                com.setComOve(rs.getString(6));
+                list.add(com);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
     }
 
     //修改管理员
@@ -122,6 +166,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="UPDATE admin_data SET pwd=?,phone=?,email=? WHERE  account=?";
         Object[] params={admin.getPwd(),admin.getPhone(),admin.getEmail(),admin.getAccount()};
         int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -301,6 +347,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         return count;
     }
 
+    //修改商品个数
     @Override
     public int CommUP(int size,int id, String account) {
         String sql="UPDATE FROM shopping SET Addsize=? WHERE  Addid=? AND userid=?";
@@ -455,6 +502,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         super.closeAll();
         return count;
     }
+
     //选中删除用户
     @Override
     public int DelUserAll(String IDAll) {

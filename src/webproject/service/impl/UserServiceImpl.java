@@ -2,10 +2,7 @@ package webproject.service.impl;
 
 import webproject.basedao.UserDao;
 import webproject.basedao.impl.UserDaoImpl;
-import webproject.entity.Address;
-import webproject.entity.Admin;
-import webproject.entity.Comm;
-import webproject.entity.User;
+import webproject.entity.*;
 import webproject.service.UserService;
 
 import java.util.ArrayList;
@@ -43,7 +40,7 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
-    //模糊查询
+    //模糊查询管理员
     @Override
     public List<Admin> AdminDimList(String account) {
         List<Admin> list=new ArrayList<>();
@@ -55,6 +52,77 @@ public class UserServiceImpl implements UserService {
     @Override
     public int AdminLogin(String account, String pwd) {
         int count=str.AdminLogin(account,pwd);
+        return count;
+    }
+
+    //判断商品是否被用户收藏
+    @Override
+    public int collectsele(Comm comm) {
+        int count=str.collectsele(comm);
+        if (count>0){
+            System.out.println("收藏过此商品");
+        }else {
+            System.out.println("没收藏过");
+        }
+        return count;
+    }
+
+    //收藏商品
+    @Override
+    public int collectinse(Comm comm) {
+        int count=str.collectinse(comm);
+        if (count>0){
+            System.out.println("收藏商品成功！！impl");
+        }else{
+            System.out.println("收藏商品失败！impl");
+        }
+        return count;
+    }
+
+    //商品模糊查询
+    @Override
+    public List<Comm> likeorder(Comm comm) {
+        List<Comm>list=new ArrayList<>();
+        list=str.likeorder(comm);
+        for (int i = 0; i <list.size() ; i++) {
+            System.out.println("模糊查询："+list.get(i).getComID());
+            System.out.println("模糊查询："+list.get(i).getComName());
+        }
+        return list;
+    }
+    //新增订单
+    @Override
+    public int orderInse(Order ord) {
+        int count=str.orderInse(ord);
+        if (count>0){
+            System.out.println("新增订单商品成功！！impl");
+        }else{
+            System.out.println("新增订单商品失败！impl");
+        }
+        return count;
+    }
+    //地址的状态清空
+    @Override
+    public int addressUp(String ids, String userid) {
+        int count=str.addressUp(ids,userid);
+        System.out.println(userid);
+        if (count>0){
+            System.out.println("默认地址以外清空成功！impl");
+        }else{
+            System.out.println("默认地址以外清空失败！impl");
+        }
+        return count;
+    }
+    //选中的id为默地址
+    @Override
+    public int orderaddressUp(int id, String userid) {
+        int count=str.orderaddressUp(id,userid);
+        System.out.println(userid);
+        if (count>0){
+            System.out.println("默认地址设置成功！impl");
+        }else{
+            System.out.println("默认地址设置失败！impl");
+        }
         return count;
     }
 
@@ -176,6 +244,11 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    @Override
+    public int Updateuser(User user) {
+        return 0;
+    }
+
     //删除用户
     @Override
     public int DelUser(String account) {
@@ -214,15 +287,21 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    @Override
+    public List<User> Seleuser() {
+        return null;
+    }
+
+    @Override
+    public int UpdateUser(User user) {
+        return 0;
+    }
+
     //查询全部用户
     @Override
     public List<User> Seleuser(String name) {
         List<User> list=new ArrayList<User>();
         list=str.Seleuser(name);
-//        for (int i = 0; i <list.size() ; i++) {
-//            System.out.println(list.get(i).getAccount());
-//            System.out.println(list.get(i).getPwd());
-//        }
         return list;
     }
 
