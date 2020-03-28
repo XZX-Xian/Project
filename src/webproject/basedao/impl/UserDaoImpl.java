@@ -2,10 +2,7 @@ package webproject.basedao.impl;
 
 import webproject.basedao.BaseDao;
 import webproject.basedao.UserDao;
-import webproject.entity.Address;
-import webproject.entity.Admin;
-import webproject.entity.Comm;
-import webproject.entity.User;
+import webproject.entity.*;
 
 import javax.jws.soap.SOAPBinding;
 import java.sql.ResultSet;
@@ -15,6 +12,34 @@ import java.util.List;
 //压制警告
 @SuppressWarnings("all")
 public class UserDaoImpl extends BaseDao implements UserDao {
+
+    //判断商品是否被用户收藏
+    @Override
+    public int collectsele(Comm comm) {
+        String sql="SELECT count(1)FROM usercollect WHERE shopId=? and Userid=?";
+        Object[]obj={comm.getComID(),comm.getUserid()};
+        ResultSet rs=null;
+        int count=0;
+        try{
+            rs=super.exceuteQuery(sql,obj);
+            while (rs.next()){
+                count=rs.getInt(1);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return count;
+
+    }
+
+    @Override
+    public int collectinse(Comm comm) {
+        String sql="INSERT INTO usercollect(shopID,Name,Money,Size,Ove,userid)VALUES(?,?,?,?,?,?)";
+        Object[]obj={comm.getComID(),comm.getComName(),comm.getComMoney(),comm.getComQuantity(),comm.getComOve(),comm.getUserid()};
+        int count=super.executeUpdate(sql,obj);
+        return count;
+    }
+
     //模糊查询商品
     public List<Comm> secom(Comm comm){
         String sql="SELECT * FROM addcommodity WHERE  AddName LIKE  '%"+comm.getComName()+"%'";
@@ -60,6 +85,34 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="DELETE FROM admin_data WHERE account in ("+account+",?)";
         Object[] params={account};
         int count=super.executeUpdate(sql,params);
+        return count;
+    }
+
+    //新增订单
+    @Override
+    public int orderInse(Order ord) {
+        int random=(int)(Math.random()*1889999999);
+        String states="0";
+        String sql="INSERT INTO userorder(ordernumber,shopID,Name,Money,Size,Ove,userid,state)VALUES("+random+",?,?,?,?,?,?,"+states+")";
+        Object[] obj={ord.getShopID(),ord.getName(),ord.getMoney(),ord.getSize(),ord.getOve(),ord.getUserid()};
+        int count=super.executeUpdate(sql,obj);
+        return count;
+    }
+
+    @Override
+    public int addressUp(String ids, String userid) {
+        String sql="UPDATE user_address set state=\"\" where id in("+ids+") AND user_account=?";
+        Object[] obj={userid};
+        int count=super.executeUpdate(sql,obj);
+        return count;
+    }
+
+
+    @Override
+    public int orderaddressUp(int id, String userid) {
+        String sql="UPDATE user_address set state=\"默认地址\" where id=? AND user_account=?";
+        Object[] obj={id,userid};
+        int count=super.executeUpdate(sql,obj);
         return count;
     }
 
@@ -314,7 +367,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //娱乐活动商品
     @Override
     public  List<Comm> recreationdemo() {
-        int random=(int)(Math.random()*39+1);
+        int random=(int)(Math.random()*38);
         System.out.println(random);
         String sql="SELECT *FROM addcommodity where AddId="+random+"";
         List<Comm>list=new ArrayList<>();
@@ -377,6 +430,15 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             e.printStackTrace();
         }
         return list;
+    }
+
+    //忘记密码
+    @Override
+    public int Updateuser(User user) {
+        String sql="update user SET pwd=? where account=? and phone= ?";
+        Object []obj={user.getPwd(),user.getAccount(),user.getPhone()};
+        int count=super.executeUpdate(sql,obj);
+        return count;
     }
 
     //删除用户

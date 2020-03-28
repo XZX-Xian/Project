@@ -1,13 +1,31 @@
 package webproject.basedao;
 
-import webproject.entity.Address;
-import webproject.entity.Admin;
-import webproject.entity.Comm;
-import webproject.entity.User;
+import webproject.entity.*;
 
 import java.util.List;
 
 public interface UserDao {
+
+    //判断商品是否被用户收藏
+    int collectsele(Comm comm);
+
+    //收藏商品
+    int  collectinse(Comm comm);
+
+    //商品模糊查询
+    List<Comm> likeorder(Comm comm);
+
+    //新增订单
+    int orderInse(Order ord);
+
+    //地址的状态清空
+    int addressUp(String ids, String userid);
+
+    //选中的id为默地址
+    int orderaddressUp(int id, String userid);
+
+    //购物车查询
+    List<Comm> shopdemo(Comm comm);
 
     //新增管理员
     int AdminAdd(Admin admin);
@@ -62,6 +80,9 @@ public interface UserDao {
 
     //两表联查  条件判断查询的商品资料
     List<Comm>Seletedemo(Comm comm);
+
+    //忘记密码
+    int Updateuser(User user);
 
     //删除用户
     int DelUser(String account);
