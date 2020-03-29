@@ -86,7 +86,7 @@
                     $(".c2cyh").children("p").text("请先填完全部框!");
                     $(".c2cyh").delay(1000).hide(0);
                 }else{
-                    /*location.href="http://localhost:8080/Project_war_exploded/upuser?Uppwd="+Uppwd+"&Upname="+Upname+"&Updh="+Upname;*/
+                    location.href="http://localhost:8080/Project_war_exploded/upuser?Uppwd="+Uppwd+"&Upname="+Upname+"&Updh="+Upname;
 
                 }
 
@@ -288,7 +288,6 @@
                             <label  style="margin-left: 5px;font-size: 22px;color: #333333;"><span class="wjname">忘记密码</span> | <span class="zc">注册</span>    </label>
                         </div>
 
-
                             <%--忘记密码--%>
                             <div class="wjmm" align="left" style="margin-top: 18px;margin-left: 5px;">
                                 <div  id="wjmm" style="background-color: #ffffff;display: inline-block;border: 1px #ffffff solid;width: 530px;height: 400px">
@@ -325,10 +324,6 @@
                                     </div>
                                 </div>
                                 </div>
-
-
-
-
 
                         <%--注册--%>
                         <div  align="right" style="margin-top: -420px;margin-right: 5px;" >

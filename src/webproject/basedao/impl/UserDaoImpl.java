@@ -886,7 +886,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //单击换一换切换
     @Override
     public List<Comm> Seletehyh(int type,int count,int curr) {
-        String sql="select* from addcommodity where Addleixing=? LIMIT ?,?";
+        String sql="select * from addcommodity where Addleixing=? LIMIT ?,?";
        Object []obj={type,count,curr};
         List<Comm> com=new ArrayList<>();
         ResultSet rs=null;
