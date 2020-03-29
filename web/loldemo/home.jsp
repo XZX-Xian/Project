@@ -268,6 +268,10 @@
             }
         };
         //用户
+        var userpd=false;
+        $("input[name=username]").click(function () {
+            userpd=true;
+        });
         $("input[name=username]").blur(function () {
             var username = $("input[name=username]").val();
             var red = /^\S{6,10}$/;
@@ -276,7 +280,7 @@
                 $(".c2cyh").children("p").text("用户不能为空!");
                 $(".c2cyh").delay(1000).hide(0);
             } else {
-                if (!red.test(username)) {
+                if (!red.test(username)&userpd) {
                     $(".c2cyh").show();
                     $(".c2cyh").children("p").text("用户格式错误!");
                     $(".c2cyh").delay(1000).hide(0);
@@ -419,8 +423,6 @@
 <%--遮罩层--%>
 <div id="bg" hidden></div>
 <table border="1px" align="center">
-
-
     <div class="c2" hidden style="z-index: 101">
         <div align="center">
             <div align="right">
