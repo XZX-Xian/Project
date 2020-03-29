@@ -163,7 +163,7 @@
                     <div class="grdiv" style=";margin-left: 40px;border-top: 1px #ffffff solid">
                         <p class="hyp" hidden style="position: absolute;top: 12px;margin-top: 10px;"><strong style="font-size: 12px;">(<label class="userid"></label>)</strong></p>
                         <ul style=" padding:0; margin:0;list-style-type: none;margin-top: 60px" hidden class="grzx">
-                            <li>个人中心</li>
+                            <li id="user">个人中心</li>
                             <li id="nullopen">注销</li>
                         </ul>
                     </div>
@@ -269,11 +269,6 @@
         </ul>
 
     </div>
-
-
-
-
-
 </body>
 <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
@@ -281,6 +276,11 @@
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
     $(function () {
+
+        //个人中心
+        $("#user").click(function () {
+            location.href = "http://localhost:8080/Project_war_exploded/userquery";
+        })
         var pds ="<%=session.getAttribute("pds")%>";
         //判断是否登录
         var account ="<%=session.getAttribute("account")%>";
@@ -412,7 +412,7 @@
             }
         }
         if(ids.length>0){
-            location.href="http://localhost:8080/Project_war_exploded/ddcgsele?shopid="+ids+"&useid="+userid+"";
+            location.href="http://localhost:8080/Project_war_exploded/ddcgsel?shopid="+ids+"&useid="+userid+"";
         }else{
             $(".c2cyh").show();
             $(".c2cyh").children("p").text("请选中要采购的商品!");

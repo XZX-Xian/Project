@@ -151,9 +151,9 @@
         //获的页面状态
         var pd = "<%= session.getAttribute("pd")%>";
         //修改页面状态
-        if (pd == "null") {
-            location.href = "http://localhost:8080/Project_war_exploded/pagestate";
-        }
+        // if (pd == "null") {
+            // location.href = "http://localhost:8080/Project_war_exploded/pagestate";
+        // }
         //单击登录
         $(".dlu").click(function () {
             $(".c2").show();
@@ -166,7 +166,7 @@
         var type = 1;//默认为1
         var name;
 
-        shopsele();
+        // shopsele();
         var homesele = "<%=request.getParameter("shopdemo")%>";
 
 
@@ -291,87 +291,89 @@
                             "                                    </li>\n"
                     }
                 });
+            })
+        }
 
-                //套装
-                $("#sel").change(function () {
-                    var size = $('#sel option:selected').val();
-                    var type = $("#shob").val();
+        //套装
+        $("#sel").change(function () {
+            var size = $('#sel option:selected').val();
+            var type = $("#shob").val();
 
-                    var json = {"size": size, "type": type};
-                    $.getJSON("http://localhost:8080/League_of_Legends_war_exploded/selcom", json, function (data) {
-                        $("#sese").html("");
-                        var jsonData = JSON.stringify(data);// 转成JSON格式
-                        var results = $.parseJSON(jsonData);// 转成JSON对象
-                        var a = "";
-                        var count = 0;
-                        $.each(results, function (i, item) {
-                            count++;
-                            if (i < 6) {
-                                a += "                                  <li style=\"display: inline-block;margin: 16px 30px;text-align: center;\" class=\"tup\">\n" +
-                                    "                                        <div style=\"width: 185px; height: 195px;margin: 0 50px\">\n" +
-                                    "                                            <a href=\"\"><img src=\"" + item.comOve + "\" alt=\"\" width=\"165\">\n" +
-                                    "<label hidden class='itid'>" + item.comID + "</label>" +
-                                    "                                                <img src=\"" + item.comOut + "\" alt=\"\" width=\"135\" hidden ></a>\n" +
-                                    "                                        </div>\n" +
-                                    "                                        <div style=\"margin-bottom: 0\" >\n" +
-                                    "                                            <p style=\"margin: 20px 35px 0;font-size: 16px;line-height: 31px\"><a style=\"color:salmon\">[英雄联盟]</a>" + item.comName + "<strong style=\"padding-top: 5px\"><br/>价格:" + item.comMoney + "元</strong></p>\n" +
-                                    "                                        </div>\n" +
-                                    "                                    </li>"
+            var json = {"size": size, "type": type};
+            $.getJSON("http://localhost:8080/League_of_Legends_war_exploded/selcom", json, function (data) {
+                $("#sese").html("");
+                var jsonData = JSON.stringify(data);// 转成JSON格式
+                var results = $.parseJSON(jsonData);// 转成JSON对象
+                var a = "";
+                var count = 0;
+                $.each(results, function (i, item) {
+                    count++;
+                    if (i < 6) {
+                        a += "                                  <li style=\"display: inline-block;margin: 16px 30px;text-align: center;\" class=\"tup\">\n" +
+                            "                                        <div style=\"width: 185px; height: 195px;margin: 0 50px\">\n" +
+                            "                                            <a href=\"\"><img src=\"" + item.comOve + "\" alt=\"\" width=\"165\">\n" +
+                            "<label hidden class='itid'>" + item.comID + "</label>" +
+                            "                                                <img src=\"" + item.comOut + "\" alt=\"\" width=\"135\" hidden ></a>\n" +
+                            "                                        </div>\n" +
+                            "                                        <div style=\"margin-bottom: 0\" >\n" +
+                            "                                            <p style=\"margin: 20px 35px 0;font-size: 16px;line-height: 31px\"><a style=\"color:salmon\">[英雄联盟]</a>" + item.comName + "<strong style=\"padding-top: 5px\"><br/>价格:" + item.comMoney + "元</strong></p>\n" +
+                            "                                        </div>\n" +
+                            "                                    </li>"
 
-                            } else {
-                                a += "                                    <li hidden style=\"display: inline-block;margin: 16px 35px;text-align: center;\" class=\"tup\" >\n" +
-                                    "                                    <div hidden style=\"width: 185px; height: 195px;margin: 0 46px\">\n" +
-                                    "                                        <a href=\"\"><img src=\"" + item.comOve + "\" alt=\"\" height='215px' width=\"178px\">\n" +
-                                    "                                            <img src=\"" + item.comOut + "\" alt=\"\" width=\"137px\" hidden ></a>\n" +
-                                    "                                    </div>\n" +
-                                    "                                    <div hidden style=\"margin-bottom: 0\" >\n" +
-                                    "                                        <p style=\"margin: 20px 35px 0;font-size: 16px;line-height: 31px\"><a style=\"color:salmon\">[英雄联盟]</a>" + item.comName + "<strong style=\"padding-top: 5px\"><br/>价格:" + item.comMoney + "元</strong></p>\n" +
-                                    "                                    </div>\n" +
-                                    "                                    </li>\n"
-                            }
-
-                        });
-                        $("#sese").append(a);
-                        if (count <= 6) {
-                            $(".gend").hide();
-                            $(".shoh").hide();
-                        } else {
-                            $(".gend").show();
-                            $(".shoh").hide();
-                        }
-                        $(".tup").hover(function () {
-                            $(this).children("div").children("a").children("img:eq(1)").show()
-                            $(this).css({"box-shadow": "darkgrey  0px 0px 5px 5px"});
-                            $(this).children("div").next().css({"background-color": "rgba(255, 221, 89,1.0)"})
-                            $(this).css({"transform": "scale(1.08)"});
-                            $(this).children("div").children("a").children("img:eq(0)").hide()
-                        }, function () {
-                            $(this).children("div").children("a").children("img:eq(0)").show()
-                            $(this).children("div").slideDown(600).css({"background-color": "#ffffff"});
-                            $(this).css({"box-shadow": "0px 0px 0px 0px"});
-                            $(this).css({"transform": "scale(1)"});
-                            $(this).children("div").children("a").children("img:eq(1)").hide()
-                        });
-                    })
+                    } else {
+                        a += "                                    <li hidden style=\"display: inline-block;margin: 16px 35px;text-align: center;\" class=\"tup\" >\n" +
+                            "                                    <div hidden style=\"width: 185px; height: 195px;margin: 0 46px\">\n" +
+                            "                                        <a href=\"\"><img src=\"" + item.comOve + "\" alt=\"\" height='215px' width=\"178px\">\n" +
+                            "                                            <img src=\"" + item.comOut + "\" alt=\"\" width=\"137px\" hidden ></a>\n" +
+                            "                                    </div>\n" +
+                            "                                    <div hidden style=\"margin-bottom: 0\" >\n" +
+                            "                                        <p style=\"margin: 20px 35px 0;font-size: 16px;line-height: 31px\"><a style=\"color:salmon\">[英雄联盟]</a>" + item.comName + "<strong style=\"padding-top: 5px\"><br/>价格:" + item.comMoney + "元</strong></p>\n" +
+                            "                                    </div>\n" +
+                            "                                    </li>\n"
+                    }
 
                 });
-                //登录判断
-                if (account == "null") {
-                    $(".dlu").click(function () {
-                        $(".c2").show();
-                        $("#bg").show();
-                    });
+                $("#sese").append(a);
+                if (count <= 6) {
+                    $(".gend").hide();
+                    $(".shoh").hide();
                 } else {
-                    $(".dlu").click(function () {
-                        $(".c2").hide();
-                        $("#bg").hide();
-                    });
+                    $(".gend").show();
+                    $(".shoh").hide();
                 }
-                $(".demo").click(function () {
-                    var leix = $(this).children("input").val();
+                $(".tup").hover(function () {
+                    $(this).children("div").children("a").children("img:eq(1)").show()
+                    $(this).css({"box-shadow": "darkgrey  0px 0px 5px 5px"});
+                    $(this).children("div").next().css({"background-color": "rgba(255, 221, 89,1.0)"})
+                    $(this).css({"transform": "scale(1.08)"});
+                    $(this).children("div").children("a").children("img:eq(0)").hide()
+                }, function () {
+                    $(this).children("div").children("a").children("img:eq(0)").show()
+                    $(this).children("div").slideDown(600).css({"background-color": "#ffffff"});
+                    $(this).css({"box-shadow": "0px 0px 0px 0px"});
+                    $(this).css({"transform": "scale(1)"});
+                    $(this).children("div").children("a").children("img:eq(1)").hide()
+                });
+            })
 
-                    // var cs=$(".cs").val();
-                    var cs = $(this).children(".cs").val();
+        });
+        //登录判断
+        if (account == "null") {
+            $(".dlu").click(function () {
+                $(".c2").show();
+                $("#bg").show();
+            });
+        } else {
+            $(".dlu").click(function () {
+                $(".c2").hide();
+                $("#bg").hide();
+            });
+        }
+        $(".demo").click(function () {
+            var leix = $(this).children("input").val();
+
+            // var cs=$(".cs").val();
+            var cs = $(this).children(".cs").val();
 
             var a = parseInt(cs);
             if (a >= 4) {
@@ -458,7 +460,7 @@
         });
 
 
-                $(".gb").click(function () {
+        $(".gb").click(function () {
             $(".c2").hide();
             $("#bg").hide();
         });
@@ -515,42 +517,41 @@
             $(this).css({"color": "#ffffff"});
         });
 
-                $(".tup").hover(function () {
-                    $(this).children("div").children("a").children("img:eq(1)").show();
-                    $(this).css({"box-shadow": "darkgrey  0px 0px 5px 5px"});
-                    $(this).children("div").next().css({"background-color": "rgba(255, 221, 89,1.0)"});
-                    $(this).children("div")
-                    $(this).css({"transform": "scale(1.08)"});
-                    $(this).children("div").children("a").children("img:eq(0)").hide()
+        $(".tup").hover(function () {
+            $(this).children("div").children("a").children("img:eq(1)").show();
+            $(this).css({"box-shadow": "darkgrey  0px 0px 5px 5px"});
+            $(this).children("div").next().css({"background-color": "rgba(255, 221, 89,1.0)"});
+            $(this).children("div")
+            $(this).css({"transform": "scale(1.08)"});
+            $(this).children("div").children("a").children("img:eq(0)").hide()
 
-                }, function () {
-                    $(this).children("div").children("a").children("img:eq(0)").show();
-                    $(this).children("div").slideDown(600).css({"background-color": "#ffffff"});
-                    $(this).css({"box-shadow": "0px 0px 0px 0px"});
-                    $(this).css({"transform": "scale(1)"});
-                    $(this).children("div").children("a").children("img:eq(1)").hide()
+        }, function () {
+            $(this).children("div").children("a").children("img:eq(0)").show();
+            $(this).children("div").slideDown(600).css({"background-color": "#ffffff"});
+            $(this).css({"box-shadow": "0px 0px 0px 0px"});
+            $(this).css({"transform": "scale(1)"});
+            $(this).children("div").children("a").children("img:eq(1)").hide()
 
-                });
+        });
 
-                //跳转商品详情
-                $(".tup").click(function () {
-                    var name = $(this).next("p").text()
-                    location.href = "http://localhost:8080/Project_war_exploded/selehome?name=" + name + "";
-                })
+        //跳转商品详情
+        $(".tup").click(function () {
+            var name = $(this).next("p").text()
+            location.href = "http://localhost:8080/Project_war_exploded/selehome?name=" + name + "";
+        })
 
-                $(".gend").click(function () {
-                    $("#zhuti li>div:hidden").show();
-                    $(".shoh").show();
-                    $(this).hide();
-                });
+        $(".gend").click(function () {
+            $("#zhuti li>div:hidden").show();
+            $(".shoh").show();
+            $(this).hide();
+        });
 
-                $(".shoh").click(function () {
-                    $("#zhuti li:gt(5)>div:visible").hide();
-                    $(".gend").show();
-                    $(this).hide();
-                });
-            })
-
+        $(".shoh").click(function () {
+            $("#zhuti li:gt(5)>div:visible").hide();
+            $(".gend").show();
+            $(this).hide();
+        });
+    });
 </script>
 
 <body>

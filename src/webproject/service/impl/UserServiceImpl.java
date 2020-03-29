@@ -84,6 +84,10 @@ public class UserServiceImpl implements UserService {
     public List<Collect> CollSele(String account) {
         List<Collect> list=new ArrayList<>();
         list=str.CollSele(account);
+        for (int i=0;i<list.size();i++){
+            System.out.println(list.get(i).getAccount());
+            System.out.println(list.get(i).getName());
+        }
         return list;
     }
 
@@ -103,9 +107,9 @@ public class UserServiceImpl implements UserService {
     public int orderInse(Order ord) {
         int count=str.orderInse(ord);
         if (count>0){
-            System.out.println("新增订单商品成功！！impl");
+            System.out.println("新增订单商品成功！");
         }else{
-            System.out.println("新增订单商品失败！impl");
+            System.out.println("新增订单商品失败！");
         }
         return count;
     }
@@ -147,10 +151,10 @@ public class UserServiceImpl implements UserService {
     public List<Comm> ddcg(String ids, String useid) {
         List<Comm> list=new ArrayList();
         list=str.ddcg(ids,useid);
-        for (int i = 0; i <list.size() ; i++) {
-            System.out.println(list.get(i).getComID());
-            System.out.println(list.get(i).getComName());
-        }
+//        for (int i = 0; i <list.size() ; i++) {
+//            System.out.println(list.get(i).getComID());
+//            System.out.println(list.get(i).getComName());
+//        }
         return list;
     }
 
@@ -220,11 +224,10 @@ public class UserServiceImpl implements UserService {
     public List<Comm> shopdemo(String account) {
         List<Comm> list=new ArrayList<Comm>();
         list=str.shopdemo(account);
-        for (int i = 0; i <list.size() ; i++) {
-            System.out.println(list.get(i).getComOve());
-            System.out.println(list.get(i).getComName());
-
-        }
+//        for (int i = 0; i <list.size() ; i++) {
+//            System.out.println(list.get(i).getComOve());
+//            System.out.println(list.get(i).getComName());
+//        }
         return list;
     }
 
@@ -233,10 +236,10 @@ public class UserServiceImpl implements UserService {
     public List<Comm> recreationdemo() {
         List<Comm> list=new ArrayList();
         list=str.recreationdemo();
-        for (int i = 0; i <list.size() ; i++) {
-            System.out.println(list.get(i).getComID());
-            System.out.println(list.get(i).getComSize());
-        }
+//        for (int i = 0; i <list.size() ; i++) {
+//            System.out.println(list.get(i).getComID());
+//            System.out.println(list.get(i).getComSize());
+//        }
         return list;
     }
 
@@ -245,10 +248,10 @@ public class UserServiceImpl implements UserService {
     public List<Comm>Seletedemo(Comm comm) {
         List<Comm> list=new ArrayList<Comm>();
         list=str.Seletedemo(comm);
-        for (int i = 0; i <list.size() ; i++) {
-            System.out.println(list.get(i).getComName());
-            System.out.println(list.get(i).getComID());
-        }
+//        for (int i = 0; i <list.size() ; i++) {
+//            System.out.println(list.get(i).getComName());
+//            System.out.println(list.get(i).getComID());
+//        }
         return list;
     }
 

@@ -37,7 +37,7 @@
 	String result = alipayClient.execute(alipayRequest).getBody();
 	
 	//输出
-	System.out.println(result);
+	out.println(result);
 %>
 <body>
 </body>

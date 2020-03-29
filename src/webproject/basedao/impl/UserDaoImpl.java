@@ -16,7 +16,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //判断商品是否被用户收藏
     @Override
     public int collectsele(Comm comm) {
-        String sql="SELECT count(1)FROM usercollect WHERE shopId=? and Userid=?";
+        String sql="SELECT count(1) FROM usercollect WHERE shopId=? and Userid=?";
         Object[]obj={comm.getComID(),comm.getUserid()};
         ResultSet rs=null;
         int count=0;
@@ -74,8 +74,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql="SELECT * FROM addcommodity WHERE  AddName LIKE  '%"+comm.getComName()+"%'";
         List<Comm>list=new ArrayList<>();
         ResultSet rs=null;
-        System.out.println("模糊SQL"+sql);
-        System.out.println(comm.getComName());
         try{
             rs=super.exceuteQuery(sql,null);
             while (rs.next()){
@@ -264,7 +262,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //查询收货地址
     @Override
     public List<Address> Seleorder(Address address) {
-        String sql="SELECT *FROM user_address where user_account=?";
+        String sql="SELECT * FROM user_address where user_account=?";
         Object[] obj={address.getAccount()};
         List<Address> list=new ArrayList<>();
         ResultSet rs=null;
@@ -440,7 +438,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public  List<Comm> recreationdemo() {
         int random=(int)(Math.random()*38);
-        System.out.println(random);
         String sql="SELECT *FROM addcommodity where AddId="+random+"";
         List<Comm>list=new ArrayList<>();
         ResultSet rs=null;

@@ -73,10 +73,10 @@
 			//付款完成后，支付宝系统发送该交易状态通知
 		}
 
-		System.out.println("success");
+		out.println("success");
 		
 	}else {//验证失败
-		System.out.println("fail");
+		out.println("fail");
 	
 		//调试用，写文本函数记录程序运行情况是否正常
 		//String sWord = AlipaySignature.getSignCheckContentV1(params);

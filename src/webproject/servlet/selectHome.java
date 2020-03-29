@@ -26,14 +26,14 @@ public class selectHome extends HttpServlet {
         list=us.Seletedemo(com);
 
     /*    测试是否能查询到*/
-          for (int i = 0; i <list.size() ; i++) {
-            System.out.println(list.get(i).getComSize());
-            System.out.println(list.get(i).getComID());
-            System.out.println(list.get(i).getModell());
-            System.out.println(list.get(i).getBrand());
-            System.out.println(list.get(i).getProduct());
-            System.out.println(list.get(i).getState());
-        }
+//          for (int i = 0; i <list.size() ; i++) {
+//            System.out.println(list.get(i).getComSize());
+//            System.out.println(list.get(i).getComID());
+//            System.out.println(list.get(i).getModell());
+//            System.out.println(list.get(i).getBrand());
+//            System.out.println(list.get(i).getProduct());
+//            System.out.println(list.get(i).getState());
+//        }
         if (name>0){
             System.out.println("查询成功！");
             req.setAttribute("listname",list.get(0).getComName());

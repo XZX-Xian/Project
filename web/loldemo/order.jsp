@@ -272,7 +272,17 @@
 
       });
 
-
+        //提交订单
+        $("#sumrder").click(function () {
+           var money=$("#summonry").text();
+           var count=$(".collname").length;
+            var ids=new Array();
+            for(var i=0;i<count;i++){
+                    var name=$(".collname:eq("+i+")").html();
+                    ids.push(name);
+            }
+            location.href="http://localhost:8080/Project_war_exploded/payment/index.jsp?ids="+ids+"&money="+money;
+        })
     });
 </script>
 <%--遮罩层--%>
@@ -393,7 +403,7 @@
                    <c:forEach items="${list1}" var="lit">
                        <tr style="text-align: center;" class="collect" >
                            <td><img src="${lit.comOve}" height="80" width="80"></td>
-                            <td>${lit.comName}</td>
+                            <td class="collname">${lit.comName}</td>
                            <td>￥<span>${lit.comMoney}</span></td>
                            <td>
                                <input  type="text" value="${lit.comSize}" readonly="readonly" size="1">
@@ -413,7 +423,7 @@
                         <div style="display: inline;margin-left: 15px;margin-right: 15px">总额:¥<span id="summonry" style="color: #e84118;font-size: 19px;font-weight: bold"></span></div>
                         <div style="display:inline-block;">
                             <div align="right" style="margin-top: 1px">
-                                <input type="button" value="提交订单" style="border:none;font-size: 15px;font-weight: bold;color: #ffffff;background-color: orangered;width: 203px;height: 50px;margin-top: -1px">
+                                <input type="button" id="sumrder" value="提交订单" style="border:none;font-size: 15px;font-weight: bold;color: #ffffff;background-color: orangered;width: 203px;height: 50px;margin-top: -1px">
                             </div>
 
                     </div>

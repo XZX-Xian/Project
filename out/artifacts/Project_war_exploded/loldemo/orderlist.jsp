@@ -57,9 +57,9 @@
         <div style="width: 1518px;height: 36px;background-color: #1e272e;">
             <ul class="sm">
                 <li><strong><a href="">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="">手办周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
+                <li><a href=""></a><img src="\subject\zuo.png" alt="" width="14px"></li>
+<%--                <li><a href="">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
+<%--                <li><a href="">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
             </ul>
         </div>
     </div>
@@ -82,7 +82,7 @@
                     <a href="javascript:doChangeStateOrder(2);" id="detailsHer_2">待付款</a>
                     <a href="javascript:doChangeStateOrder(3);" id="detailsHer_3">待发货</a>
                     <a href="javascript:doChangeStateOrder(4);" id="detailsHer_4">待收货</a>
-                    <a href="javascript:doChangeStateOrder(6);" id="detailsHer_6">待评价</a>
+                    <a href="javascript:doChangeStateOrder(6);" id="detailsHer_5">待评价</a>
                 </div>
                 <table class="mermtab" width="100%" cellspacing="0" cellpadding="10" border="0">
                     <tr>

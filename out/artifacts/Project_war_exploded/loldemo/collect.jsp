@@ -20,7 +20,7 @@
 <%--<style type="text/css"></style>--%>
 <body>
 <%
-    UserService str=new UserServiceImpl();
+    UserService str = new UserServiceImpl();
 
 
 %>
@@ -48,8 +48,11 @@
                 <img src="\subject\yhu.png" alt="" width="30"
                      style="position: absolute;top: 12px;margin-left: 290px;margin-top: 5px">
                 <strong style="position: absolute;top: 12px;margin-left: 295px;margin-top: 10px;width: 200px"><span
-                        id="greet">欢迎,请</span><a href="http://localhost:8080/Project_war_exploded/webproject/loldemo/denlv.jsp" id="register">登录</a>
-                    <span id="account"></span><span id="cancel" hidden style="padding-left: 10px;color:#EE5A24; ">注销</span></strong>
+                        id="greet">欢迎,请</span><a
+                        href="http://localhost:8080/Project_war_exploded/webproject/loldemo/denlv.jsp"
+                        id="register">登录</a>
+                    <span id="account"></span><span id="cancel" hidden
+                                                    style="padding-left: 10px;color:#EE5A24; ">注销</span></strong>
 
             </div>
             <%--购物车框--%>
@@ -63,10 +66,11 @@
         <%--导航栏内容--%>
         <div style="width: 1518px;height: 36px;background-color: #1e272e;">
             <ul class="sm">
-                <li><strong><a href="loldemo/home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="loldemo/index.jsp">手办周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="#">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-                <li><a href="#">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>
+                <li><strong><a href="loldemo/home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px">
+                </li>
+                <li><a href="loldemo/index.jsp">商品区</a><img src="\subject\zuo.png" alt="" width="14px"></li>
+<%--                <li><a href="#">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
+<%--                <li><a href="#">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
             </ul>
         </div>
     </div>
@@ -89,11 +93,10 @@
                         <input id="selectAll" onclick="selectAll()" type="checkbox">
                         <label for="selectAll">全选</label>
                     </div>
-
-                    <span>
-                                   <a href="javascript:addAllToCart();" class="shouc"
-                                      style="background-color: red;color: white;">加入购物车</a>
-                        </span>
+                    <%--                    <span>--%>
+                    <%--                                   <a href="javascript:addAllToCart();" class="shouc"--%>
+                    <%--                                      style="background-color: red;color: white;">加入购物车</a>--%>
+                    <%--                        </span>--%>
                     <span>
                                      <a href="javascript:deleteAllFavorite();" class="shouc2"
                                         style="color: black;">删除</a>
@@ -106,18 +109,18 @@
                         <th>名称</th>
                         <th>操作</th>
                     </tr>
-<c:forEach items="${list}" var="lit">
-                    <tr class="collect">
-                        <td>
-                            <label>
-                                <input class="wcenter" name="goodsId" value="" type="checkbox">
-                            </label>
-                        </td>
-                        <td><img src="${lit.comOve}" height="80" width="80"></td>
-                        <td>${lit.comName}</td>
-                        <td><span style="padding-left: 0px">加入购物车</span><span>删除</span></td>
-                    </tr>
-</c:forEach>
+                    <c:forEach items="${list}" var="lit">
+                        <tr class="collect">
+                            <td>
+                                <label>
+                                    <input class="wcenter" name="goodsId" value="" type="checkbox">
+                                </label>
+                            </td>
+                            <td><img src="${lit.oce}" onclick="collimg(${lit.shopid})" height="80" width="80"></td>
+                            <td>${lit.name}</td>
+                            <td><span style="padding-left: 0px">加入购物车</span><span>删除</span></td>
+                        </tr>
+                    </c:forEach>
                 </table>
             </li>
         </ul>
@@ -164,6 +167,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
+        collimg=function (id) {
+            location.href = "http://localhost:8080/Project_war_exploded/selehome?name="+id;
+        };
         //判断是否直接跳入
         // var url = document.referrer;
         // if (url == null || url == "") {
@@ -176,7 +182,8 @@
             $("#greet").hide();
             $("#cancel").show();
             $("#account").text(account);
-        };
+        }
+        ;
 
         //注销
         $("#cancel").click(function () {
@@ -184,33 +191,34 @@
             $("#greet").show();
             $("#cancel").hide();
             $("#account").text("");
-            $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {})
-            location.href="http://localhost:8080/Project_war_exploded/comselete";
+            $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {
+            })
+            location.href = "http://localhost:8080/Project_war_exploded/comselete";
         });
 
         // 单击账号
         $("#account").click(function () {
-            location.href="http://localhost:8080/Project_war_exploded/userquery";
+            location.href = "http://localhost:8080/Project_war_exploded/userquery";
         });
 
         //购物车
         $("#shopping").click(function () {
-            location.href="..";
+            location.href = "http://localhost:8080/Project_war_exploded/seleshop";
         });
 
         // 我的订单
         $("#order").click(function () {
-            location.href="..";
+            location.href = "..";
         });
 
         // 商品收藏
-        $("#collect").click(function () {
-            location.href="..";
+        $("#data").click(function () {
+            location.href = "http://localhost:8080/Project_war_exploded/userquery";
         });
 
         // 收货地址
         $("#site").click(function () {
-            location.href="http://localhost:8080/Project_war_exploded/shiselete";
+            location.href = "http://localhost:8080/Project_war_exploded/shiselete";
         });
 
         //默认添加样式

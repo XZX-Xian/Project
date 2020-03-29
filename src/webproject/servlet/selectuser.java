@@ -35,12 +35,10 @@ public class selectuser extends HttpServlet {
         boolean flag;
         flag=usr.userdl(account,pwd);
         if (flag){
-            System.out.println("登录成功！");
             session.setAttribute("account",account);
         }else{
             //设置页面状态
             session.setAttribute("pd",!flag);
-            System.out.println("登录失败！");
             session.removeAttribute("account");
             session.setAttribute("pd",true);
         }

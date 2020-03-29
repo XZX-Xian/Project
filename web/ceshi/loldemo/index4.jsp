@@ -44,7 +44,6 @@
       });
       var account ="<%=session.getAttribute("account")%>";
       if (account!=null&&account!=""&&account!="null"){
-
           $(".userid").text(account);
           $(".hyp").show();
           $(".dltis").css("right","290px");
@@ -69,10 +68,10 @@
       //注销
       $("#nullopen").click(function () {
           $(".dltis").css("right","210px");
-          location.href="http://localhost:6060/League_of_Legends_war_exploded/remouser";
+          location.href="http://localhost:8080/Project_war_exploded/remouser";
       });
       if(pds=="false"){            //判断从登录jsp内传过来的值判断是否登录成功！
-          location.href="http://localhost:6060/League_of_Legends_war_exploded/loldemo/home.jsp"
+          location.href="http://localhost:8080/Project_war_exploded/loldemo/home.jsp"
       }
 
 
@@ -142,7 +141,7 @@
               $(".c2cyh").children("p").text("账户格式错误!");
               $(".c2cyh").delay(1000).hide(0);
           }else {
-              location.href="http://localhost:6060/League_of_Legends_war_exploded/seluer?username="+username+"&userpwd="+userpwd+"";
+              location.href="http://localhost:8080/Project_war_exploded/seluer?username="+username+"&userpwd="+userpwd+"";
           }
       });
       if(pd=="true"){            //判断从登录jsp内传过来的值判断是否登录成功！
@@ -198,7 +197,7 @@
               var size=$("input[name=size]").val();
               var ove=  $(".oves").text();
               var userid=$(".userid").text();
-              location.href="http://localhost:6060/League_of_Legends_war_exploded/inseshop?id="+id+"&name="+name+"&money="+money+"&size="+size+"&ove="+ove+"&userid="+userid+"";
+              location.href="http://localhost:8080/Project_war_exploded/inseshop?id="+id+"&name="+name+"&money="+money+"&size="+size+"&ove="+ove+"&userid="+userid+"";
           }else{
               $(".c2cyh").show();
               $(".c2cyh").children("p").text("请先登录");
@@ -210,7 +209,7 @@
       $(".gouwuc").click(function () {
           if(account!=""&&account!=null&&account!="null"){
               var userid=$(".userid").text();
-              location.href="http://localhost:6060/League_of_Legends_war_exploded/seleshop?id="+userid+"";
+              location.href="http://localhost:8080/Project_war_exploded/seleshop?id="+userid+"";
           }else{
               $(".c2cyh").show();
               $(".c2cyh").children("p").text("请先登录!");
@@ -240,7 +239,7 @@
           var size=$("input[name=size]").val();
           var ove=  $(".oves").text();
           if(account!=""&&account!=null&&account!="null"){
-               location.href="http://localhost:6060/League_of_Legends_war_exploded/collinse?id="+id+"&name="+name+"&money="+money+"&size="+size+"&ove="+ove+"&userid="+userid;
+               location.href="http://localhost:8080/Project_war_exploded/collinse?id="+id+"&name="+name+"&money="+money+"&size="+size+"&ove="+ove+"&userid="+userid;
           }else{
               $(".c2cyh").show();
               $(".c2cyh").children("p").text("请先登录,再收藏");
@@ -359,7 +358,7 @@
                     <br/>
                     <input type="button" class="userdl" style="background-color: #ffffff;color: #05c46b;border-radius: 25px;font-weight:bold ;margin-top: 20px;width: 95px" value="登录" >
                     <div align="right" style="margin-right: 15px;margin-top: 10px">
-                        <a href="http://localhost:6060/League_of_Legends_war_exploded/loldemo/denlv.jsp" style="font-size: 11px;" >注册新用户/忘记密码</a>
+                        <a href="http://localhost:8080/Project_war_exploded/loldemo/denlv.jsp" style="font-size: 11px;" >注册新用户/忘记密码</a>
                     </div>
                 </form>
             </div>
@@ -423,8 +422,8 @@
                     <div  style="width: 1082px;height: 36px;margin-top: 35px;">
                         <div align="left" style="width: 1082px;height: 36px;background-color: #0abb26;">
                             <ul  class="sm">
-                                <li><strong><a href="http://localhost:6060/League_of_Legends_war_exploded/loldemo/home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
-                                <li><a href="http://localhost:6060/League_of_Legends_war_exploded/loldemo/index.jsp?shopdemo=">商品区</a><img src="\subject\zuo.png" alt="" width="14px"></li>
+                                <li><strong><a href="http://localhost:8080/Project_war_exploded/loldemo/home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
+                                <li><a href="http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo=">商品区</a><img src="\subject\zuo.png" alt="" width="14px"></li>
                             </ul>
                         </div>
                     </div>

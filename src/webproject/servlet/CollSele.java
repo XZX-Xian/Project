@@ -21,13 +21,21 @@ import java.util.List;
 public class CollSele extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         HttpSession session=request.getSession();
         String account=(String)session.getAttribute("account");
+
         UserService str=new UserServiceImpl();
         List<Collect> list=new ArrayList<>();
         list=str.CollSele(account);
-        request.setAttribute("list",list);
-        request.getRequestDispatcher("http://localhost:8080/Project_war_exploded/loldemo/collect.jsp").forward(request, response);
+        for (int i=0;i<list.size();i++){
+            System.out.println(list.get(i).getAccount());
+        }
+        if (list.size()>0){
+            request.setAttribute("list",list);
+            request.getRequestDispatcher("/loldemo/collect.jsp").forward(request, response);
+        }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

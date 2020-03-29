@@ -15,13 +15,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 订单表收货地址
+ */
+@WebServlet(name = "seleOrder",urlPatterns = "/seleord")
 public class seleOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            String userid=req.getParameter("userid");
+//            String userid=req.getParameter("userid");
+
+       HttpSession session=req.getSession();
+       String userid=(String)session.getAttribute("account");
+
         List<Address> list=new ArrayList<>();
         Address ads=new Address();
         ads.setAccount(userid);
+        System.out.println(ads.getAccount());
         UserService use=new UserServiceImpl();
             list=use.Seleorder(ads);
             for (int i = 0; i < list.size(); i++) {

@@ -15,8 +15,8 @@
 <html>
 <head>
     <title>首页</title>
-<%--    <link rel="stylesheet" type="text/css" href="../js/home.css">--%>
-<%--    <link rel="stylesheet" type="text/css" href="js/home.css">--%>
+    <%--    <link rel="stylesheet" type="text/css" href="../js/home.css">--%>
+    <%--    <link rel="stylesheet" type="text/css" href="js/home.css">--%>
 </head>
 <style type="text/css">
     .sm li {
@@ -251,14 +251,22 @@
 
         //弹框正则判断
         //密码
-        $("input[name=userpwd ]").blur(function () {
+        // $("input[name=userpwd ]").blur(function () {
+        //     var userpwd = $("input[name=userpwd ]").val();
+        //     if (userpwd == "") {
+        //         $(".c2cyh").show();
+        //         $(".c2cyh").children("p").text("密码不能为空!");
+        //         $(".c2cyh").delay(1000).hide(0);
+        //     }
+        // });
+        pwdblur = function () {
             var userpwd = $("input[name=userpwd ]").val();
             if (userpwd == "") {
                 $(".c2cyh").show();
                 $(".c2cyh").children("p").text("密码不能为空!");
                 $(".c2cyh").delay(1000).hide(0);
             }
-        });
+        };
         //用户
         $("input[name=username]").blur(function () {
             var username = $("input[name=username]").val();
@@ -387,12 +395,23 @@
 
         $(".shopsele").click(function () {
             var shopdemo = $(".shopse").val();
-            location.href = "http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo=" + shopdemo;
+            if (name == "") {
+                var x = confirm("不能查询空商品,是否跳转到商品页面");
+                if (x == true) {
+                    location.href = "http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo="
+                } else {
+
+                }
+            } else {
+                location.href = "http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo=" + shopdemo;
+            }
         })
         //个人中心
         $("#user").click(function () {
             location.href = "http://localhost:8080/Project_war_exploded/userquery";
         })
+
+
     });
 </script>
 
@@ -418,10 +437,8 @@
                        style="margin-top: -5px;width: 250px;height: 35px;margin-bottom: 25px;font-size: 13px;display: block"
                        placeholder="用户名">
 
-
-                <input type="password" name="userpwd" class="pwd"
+                <input type="password" name="userpwd" onblur="pwdblur()" class="pwd"
                        style="margin-left: 5px;width: 250px;height: 35px;font-size: 13px" placeholder="密码">
-
                 <br/>
                 <input type="button" class="userdl"
                        style="background-color: #ffffff;color: #05c46b;border-radius: 25px;font-weight:bold ;margin-top: 20px;width: 95px"
@@ -465,7 +482,8 @@
                 <div style="position: absolute;right: 1px;top: 1px">
 
                     <%--登录框--%>
-                    <div class="dltis" style="width: 160px;height: 55px;display:inline-block;position: absolute;right: 100px">
+                    <div class="dltis"
+                         style="width: 160px;height: 55px;display:inline-block;position: absolute;right: 100px">
                         <div style="position: absolute;top: 10px;"><img src="\subject\yhu.png" class="dlu" alt=""
                                                                         width="40"></div>
                         <div class="grdiv" style="margin-left: 40px;border-top: 1px #ffffff solid">
@@ -499,7 +517,7 @@
             <%--海报框--%>
             <div id="stu" style="/*margin-top:80px;*/display:inline-block;">
 
-                <a href="http://localhost:8080/Project_war_exploded/loldemo/index.jsp"><img src="\subject\sy1.jpg"
+                <a href="http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo="><img src="\subject\sy1.jpg"
                                                                                             alt=""
                                                                                             width="1518px"
                                                                                             height="502px"
@@ -509,7 +527,7 @@
                                                                                            width="1518px" height="502px"
                                                                                            class="imgs" name="1"
                                                                                            style="display: none"></a>
-                <a href="http://localhost:8080/Project_war_exploded/loldemo/demo1.jsp"><img src="\subject\sy3.jpg"
+                <a href="http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo="><img src="\subject\sy3.jpg"
                                                                                             alt=""
                                                                                             width="1518px"
                                                                                             height="502px"
