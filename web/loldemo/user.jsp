@@ -281,9 +281,8 @@
             $("#cancel").hide();
             $("#account").text("");
             $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {});
-            location.href="http://localhost:8080/Project_war_exploded/comselete";
+            // location.href="http://localhost:8080/Project_war_exploded/comselete";
         });
-
 
         // 单击账号
         $("#account").click(function () {
@@ -302,13 +301,13 @@
 
         // 我的订单
         $("#order").click(function () {
-            location.href="..";
+            location.href="http://localhost:8080/Project_war_exploded/orderlist";
         });
 
         // 商品收藏
-        // $("#collect").click(function () {
-        //     location.href="..";
-        // });
+        $("#collect").click(function () {
+            location.href="http://localhost:8080/Project_war_exploded/collsele";
+        });
 
         // 收货地址
         $("#site").click(function () {

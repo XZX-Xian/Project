@@ -73,7 +73,7 @@
             <th>生日时间</th>
             <th>大区编号</th>
             <th>操作</th>
-        </tr>
+        </tr>`
         </thead>
         <tbody id="listall">
         <c:forEach items="${list}" var="in">

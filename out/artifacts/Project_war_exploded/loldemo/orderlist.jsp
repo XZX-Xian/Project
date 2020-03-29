@@ -58,8 +58,6 @@
             <ul class="sm">
                 <li><strong><a href="">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
                 <li><a href=""></a><img src="\subject\zuo.png" alt="" width="14px"></li>
-<%--                <li><a href="">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
-<%--                <li><a href="">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
             </ul>
         </div>
     </div>
@@ -92,16 +90,16 @@
                         <th>状态</th>
                         <th>操作</th>
                     </tr>
-                    <tr>
-                        <td>1212113</td>
-                        <td>123</td>
-                        <td>2010</td>
-                        <td>123</td>
-                        <td>111111</td>
-                    </tr>
+                    <c:forEach items="${list}" var="in">
+                        <tr>
+                            <td>${in.Name}</td>
+                            <td>${in.ordernumber}</td>
+                            <td>${in.Money}</td>
+                            <td><span hidden class="state">${in.State}</span><span></span></td>
+                        </tr>
+                    </c:forEach>
                 </table>
             </li>
-
         </ul>
     </div>
 </div>
@@ -153,6 +151,25 @@
         // if (url == null || url == "") {
         //     location.href = "http://localhost:8080/Project_war_exploded/comselete";
         // }
+
+            var count=$(".state").length;
+            for (var i=0;i<count;i++){
+                var id=$(".state:eq("+i+")").text();
+                switch (id) {
+                    case 0:
+                        $(".state:eq("+i+")").next().text("待付款");
+                        break;
+                    case 1:
+                        $(".state:eq("+i+")").next().text("待发货");
+                        break;
+                    case 2:
+                        $(".state:eq("+i+")").next().text("待收货");
+                        break;
+                    case 3:
+                        $(".state:eq("+i+")").next().text("待评价");
+                        break;
+                }
+            }
 
         //得到账号
         var account = "<%= session.getAttribute("account")%>";
