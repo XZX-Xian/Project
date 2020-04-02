@@ -52,15 +52,12 @@
                     <img src="\subject\gwc.png" alt="" width="35px" style="position: absolute;top: 12px;margin-left: 280px;margin-top: 3px">
                     <strong style="position: absolute;top: 12px;margin-left: 320px;margin-top: 10px;width: 90px"><a>购物车</a></strong>
                 </div>
-
         </div>
         <%--导航栏内容--%>
         <div style="width: 1518px;height: 36px;background-color: #1e272e;">
             <ul class="sm">
                 <li><strong><a href="loldemo/home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
                 <li><a href="loldemo/index.jsp">商品区</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-<%--                <li><a href="#">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
-<%--                <li><a href="#">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
             </ul>
         </div>
     </div>
@@ -286,11 +283,10 @@
             $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {})
         });
 
-        //判断是否直接跳入
-        var url = document.referrer;
+        // 判断是否直接跳入
         if (url == null || url == "") {
-            location.href = "http://localhost:8080/Project_war_exploded/comselete";
-        };
+            location.href = "http://localhost:8080/Project_war_exploded/loldemo/home.jsp";
+        }
 
         //注销
         $("#cancel").click(function () {
@@ -318,7 +314,7 @@
         });
         // 我的订单
         $("#order").click(function () {
-            location.href="..";
+            location.href="http://localhost:8080/Project_war_exploded/orderlist";
         });
 
         // 商品收藏

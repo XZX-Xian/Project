@@ -43,24 +43,23 @@
                 <img src="\subject\cx.png" alt="" width="35px" style="position: absolute;top: 8px">
             </div>
 
-            <%--登录框--%>
-            <div style="width: 160px;height: 55px;display:inline-block;margin-left: 50px">
-                <img src="\subject\yhu.png" alt="" width="30"
-                     style="position: absolute;top: 12px;margin-left: 290px;margin-top: 5px">
-                <strong style="position: absolute;top: 12px;margin-left: 295px;margin-top: 10px;width: 200px"><span
-                        id="greet">欢迎,请</span><a
-                        href="http://localhost:8080/Project_war_exploded/webproject/loldemo/denlv.jsp"
-                        id="register">登录</a>
-                    <span id="account"></span><span id="cancel" hidden
-                                                    style="padding-left: 10px;color:#EE5A24; ">注销</span></strong>
-
-            </div>
+                <%--登录框--%>
+                <div style="width: 160px;height: 55px;display:inline-block;margin-left: 50px">
+                    <img src="\subject\yhu.png" alt="" width="30"
+                         style="position: absolute;top: 12px;margin-left: 260px;margin-top: 5px">
+                    <strong style="position: absolute;top: 12px;margin-left: 295px;margin-top: 10px;width: 200px"><span
+                            id="greet">欢迎,请</span><a href="#" id="register" class="dlu">登录</a>
+                        <%--存放账号--%>
+                        <label class="userid"></label>
+                        <span id="account"></span>
+                        <span id="cancel" hidden style="padding-left: 10px;color:#EE5A24; ">注销</span></strong>
+                </div>
             <%--购物车框--%>
-            <div style="width: 120px;height: 55px;display:inline-block;margin-right: 10px">
-                <img src="\subject\gwc.png" alt="" width="35px"
-                     style="position: absolute;top: 12px;margin-left: 280px;margin-top: 3px">
-                <strong style="position: absolute;top: 12px;margin-left: 320px;margin-top: 10px;width: 90px"><a href="">购物车</a></strong>
-            </div>
+                <%--购物车框--%>
+                <div class="gouwuc" style="width: 120px;height: 55px;display:inline-block;margin-right: 10px">
+                    <img src="\subject\gwc.png" alt="" width="35px" style="position: absolute;top: 12px;margin-left: 280px;margin-top: 3px">
+                    <strong style="position: absolute;top: 12px;margin-left: 320px;margin-top: 10px;width: 90px"><a>购物车</a></strong>
+                </div>
 
         </div>
         <%--导航栏内容--%>
@@ -69,8 +68,6 @@
                 <li><strong><a href="loldemo/home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px">
                 </li>
                 <li><a href="loldemo/index.jsp">商品区</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-<%--                <li><a href="#">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
-<%--                <li><a href="#">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
             </ul>
         </div>
     </div>
@@ -118,7 +115,7 @@
                             </td>
                             <td><img src="${lit.oce}" onclick="collimg(${lit.shopid})" height="80" width="80"></td>
                             <td>${lit.name}</td>
-                            <td><span style="padding-left: 0px">加入购物车</span><span>删除</span></td>
+                            <td><%--<span style="padding-left: 0px">加入购物车</span>--%><span>删除</span></td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -170,11 +167,11 @@
         collimg=function (id) {
             location.href = "http://localhost:8080/Project_war_exploded/selehome?name="+id;
         };
-        //判断是否直接跳入
-        // var url = document.referrer;
-        // if (url == null || url == "") {
-        //     location.href = "http://localhost:8080/Project_war_exploded/comselete";
-        // }
+        // 判断是否直接跳入
+        var url = document.referrer;
+        if (url == null || url == "") {
+            location.href = "http://localhost:8080/Project_war_exploded/loldemo/home.jsp";
+        }
         //得到账号
         var account = "<%= session.getAttribute("account")%>";
         if (account != "" && account != null && account != "null") {
@@ -206,9 +203,14 @@
             location.href = "http://localhost:8080/Project_war_exploded/seleshop";
         });
 
+        //单击购物车
+        $(".gouwuc").click(function () {
+            location.href="http://localhost:8080/Project_war_exploded/seleshop";
+        });
+
         // 我的订单
         $("#order").click(function () {
-            location.href = "..";
+            location.href="http://localhost:8080/Project_war_exploded/orderlist";
         });
 
         // 商品收藏

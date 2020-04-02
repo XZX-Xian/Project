@@ -59,8 +59,6 @@
             <ul class="sm">
                 <li><strong><a href="loldemo/home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
                 <li><a href="http://localhost:8080/Project_war_exploded/loldemo/index.jsp">商品区</a><img src="\subject\zuo.png" alt="" width="14px"></li>
-<%--                <li><a href="#">赛事周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
-<%--                <li><a href="#">服饰周边</a><img src="\subject\zuo.png" alt="" width="14px"></li>--%>
             </ul>
         </div>
     </div>
@@ -268,10 +266,9 @@
             }
         };
 
-
-        //判断是否直接跳入
+        // 判断是否直接跳入
         if (url == null || url == "") {
-            location.href = "http://localhost:8080/Project_war_exploded/comselete";
+            location.href = "http://localhost:8080/Project_war_exploded/loldemo/home.jsp";
         }
 
         //注销

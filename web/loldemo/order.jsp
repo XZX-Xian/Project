@@ -323,17 +323,7 @@
                     <img src="\subject\loading.png" width="100" style="margin-right: 5px">
                     <div style="display:inline-block;position: absolute;top: 18px"><strong style="font-size: 20px;">魄罗商城</strong></div>
                 </div>
-           <%--     &lt;%&ndash;搜索框&ndash;%&gt;
-                <div style="width: 170px;height: 55px;display:inline-block;position:absolute;top: 6px;margin-left: 85px;text-align: center">
-                    <input class="shopse" type="search" style="display:inline-block;border-radius:25px;margin-top: 15px;">
-                    <img class="shopsele" src="\subject\cx.png" alt="" width="35px" style="position: absolute;top: 8px" >
-                </div>--%>
-
-
-
                 <div style="position: absolute;right: 1px;top: 1px">
-
-
                     <%--登录框--%>
                     <div style="width: 160px;height: 55px;display:inline-block;margin-right: 25px">
                         <div  style="position: absolute;top: 5px;margin-top:3px"><img src="\subject\yhu.png" class="dlus" alt="" width="40"></div>
@@ -345,12 +335,6 @@
                             </ul>
                         </div>
                     </div>
-
-                  <%--  &lt;%&ndash;购物车框&ndash;%&gt;
-                    <div class="gouwuc" style="width: 120px;height: 55px;display:inline-block;margin-right: 10px">
-                        <img src="\subject\gwc.png" alt="" width="35px" style="position: absolute;top: 12px;margin-top: 3px">
-                        <strong style="position: absolute;top: 12px;margin-top: 10px;width: 90px;margin-left: 50px"><a>购物车</a></strong>
-                    </div>--%>
                 </div>
             </div>
         <div style="width: 1518px;height: 36px;background-color: #1e272e;">

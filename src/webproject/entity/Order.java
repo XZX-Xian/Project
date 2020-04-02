@@ -2,21 +2,13 @@ package webproject.entity;
 
 public class Order {
     private int ordernumber;
-    private int  shopID;
-    private String Name;
-    private String Money;
-    private int Size;
-    private String Ove;
-    private String Userid;
-    private  String State;
-
-    public String getState() {
-        return State;
-    }
-
-    public void setState(String state) {
-        State = state;
-    }
+    private int shopID;
+    private String name;
+    private String money;
+    private int size;
+    private String ove;
+    private String userid;
+    private String state;
 
     public int getOrdernumber() {
         return ordernumber;
@@ -35,42 +27,50 @@ public class Order {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getMoney() {
-        return Money;
+        return money;
     }
 
     public void setMoney(String money) {
-        Money = money;
+        this.money = money;
     }
 
     public int getSize() {
-        return Size;
+        return size;
     }
 
     public void setSize(int size) {
-        Size = size;
+        this.size = size;
     }
 
     public String getOve() {
-        return Ove;
+        return ove;
     }
 
     public void setOve(String ove) {
-        Ove = ove;
+        this.ove = ove;
     }
 
     public String getUserid() {
-        return Userid;
+        return userid;
     }
 
     public void setUserid(String userid) {
-        Userid = userid;
+        this.userid = userid;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

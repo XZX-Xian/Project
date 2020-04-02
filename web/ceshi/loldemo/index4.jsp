@@ -391,12 +391,6 @@
                             <p style="font-size: 12px;color: #ccc">商品详情</p>
                         </div>
                     </div>
-                   <%--     &lt;%&ndash;搜索框&ndash;%&gt;
-                    <div style="width: 170px;height: 55px;display:inline-block;position:absolute;left:550px;top: 6px;text-align: center">
-                        <input type="search" style="width: 400px;height: 40px;display:inline-block;border-radius:25px;margin-top: 15px;padding-left: 10px;font-size: 18px">
-                        <img src="\subject\cx.png" alt="" width="35 px" style="position: absolute;top: 15px;left: 405px" >
-                    </div>--%>
-
 
                             <%--登录框--%>
                             <div class="dltis" style="width: 160px;height: 47px;display:inline-block;position: absolute;right: 210px;">

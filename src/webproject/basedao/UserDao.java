@@ -28,7 +28,7 @@ public interface UserDao {
     int orderaddressUp(int id, String userid);
 
     //购物车查询
-    List<Comm> shopdemo(Comm comm);
+//    List<Comm> shopdemo(Comm comm);
 
     //新增管理员
     int AdminAdd(Admin admin);

@@ -157,13 +157,14 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     //通过ID 查询用户购物车
     @Override
-    public List<Comm> shopdemo(Comm comm) {
-        String sql="SELECT  B.addid,C.AddQuantity,B.AddName,B.AddMoney,B.Addsize,b.mouseove FROM user_data as A\n" +
-                " INNER JOIN shopping as B ON A.account=B.userid \n" +
-                "INNER JOIN addcommodity C ON B.Addid=C.AddId\n" +
+    public List<Comm> shopdemo(String account) {
+        String sql="SELECT  B.addid,C.AddQuantity,B.AddName,B.AddMoney,B.Addsize,B.mouseove \n" +
+                "FROM user_data as A\n" +
+                "INNER JOIN shopping as B ON A.user_account=B.userid\n" +
+                "INNER JOIN addcommodity as C ON B.Addid=C.AddId\n" +
                 "WHERE A.user_account=?;";
         List<Comm> list=new ArrayList<>();
-        Object[] obj={comm.getAccount()};
+        Object[] obj={account};
         ResultSet rs=null;
         try{
             rs=super.exceuteQuery(sql,obj);
@@ -411,28 +412,28 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     }
 
     //通过ID 查询用户购物车
-    @Override
-    public List<Comm> shopdemo(String account) {
-        String sql="SELECT B.addid,B.AddName,B.AddMoney,B.Addsize,b.mouseove FROM user_data as A INNER JOIN shopping as B ON A.user_account=B.userid WHERE A.user_account=?;";
-        List<Comm> list=new ArrayList<>();
-        Object[] obj={account};
-        ResultSet rs=null;
-        try{
-            rs=super.exceuteQuery(sql,obj);
-            while (rs.next()){
-                Comm com=new Comm();
-                com.setComID(rs.getInt(1));
-                com.setComName(rs.getString(2));
-                com.setComMoney(rs.getString(3));
-                com.setComSize(rs.getInt(4));
-                com.setComOve(rs.getString(5));
-                list.add(com);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return list;
-    }
+//    @Override
+//    public List<Comm> shopdemo(String account) {
+//        String sql="SELECT B.addid,B.AddName,B.AddMoney,B.Addsize,b.mouseove FROM user_data as A INNER JOIN shopping as B ON A.user_account=B.userid WHERE A.user_account=?;";
+//        List<Comm> list=new ArrayList<>();
+//        Object[] obj={account};
+//        ResultSet rs=null;
+//        try{
+//            rs=super.exceuteQuery(sql,obj);
+//            while (rs.next()){
+//                Comm com=new Comm();
+//                com.setComID(rs.getInt(1));
+//                com.setComName(rs.getString(2));
+//                com.setComMoney(rs.getString(3));
+//                com.setComSize(rs.getInt(4));
+//                com.setComOve(rs.getString(5));
+//                list.add(com);
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return list;
+//    }
 
     //娱乐活动商品
     @Override
@@ -823,7 +824,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //类型查询商品
     @Override
     public List<Comm> SeleteCom(Comm comm) {
-        String sql = "SELECT * FROM addgaragekits WHERE AddType=?";
+        String sql = "SELECT * FROM addcommodity WHERE Addleixing=?";
         Object[] params = {comm.getComtype()};
         ResultSet rs = null;
         List<Comm> list = new ArrayList<Comm>();

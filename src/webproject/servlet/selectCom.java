@@ -34,20 +34,18 @@ public class selectCom extends HttpServlet {
         com.setComName(name);
         List<Comm>list=new ArrayList<>();
         UserService us=new UserServiceImpl();
+        //类型判断
         if (size>0){
             list=us.SeleteClass(com);
-        }else if (name!=""&&name!=null){
+        }else if (name!=""&&name!=null){    //模糊查询
             list=us.likeorder(com);
         }else{
-            list=us.SeleteCom(com);
+            list=us.SeleteCom(com);         //默认查询手办
         }
         String json=null;
-//        json=JSONArray.toJSONString(list);
             json= JSON.toJSONString(list);
-        System.out.println(json);
         out.print(json);
         out.close();
-
     }
 
     @Override

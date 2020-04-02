@@ -92,10 +92,10 @@
                     </tr>
                     <c:forEach items="${list}" var="in">
                         <tr>
-                            <td>${in.Name}</td>
+                            <td>${in.name}</td>
                             <td>${in.ordernumber}</td>
-                            <td>${in.Money}</td>
-                            <td><span hidden class="state">${in.State}</span><span></span></td>
+                            <td>${in.money}</td>
+                            <td><span hidden class="state">${in.state}</span><span></span></td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -142,30 +142,28 @@
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="webproject/js/jquery-1.12.4.js"></script>
-<script type="text/javascript" src="webproject/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        //判断是否直接跳入
+        // 判断是否直接跳入
         var url = document.referrer;
-        // if (url == null || url == "") {
-        //     location.href = "http://localhost:8080/Project_war_exploded/comselete";
-        // }
+        if (url == null || url == "") {
+            location.href = "http://localhost:8080/Project_war_exploded/loldemo/home.jsp";
+        }
 
             var count=$(".state").length;
             for (var i=0;i<count;i++){
                 var id=$(".state:eq("+i+")").text();
                 switch (id) {
-                    case 0:
+                    case "0":
                         $(".state:eq("+i+")").next().text("待付款");
                         break;
-                    case 1:
+                    case "1":
                         $(".state:eq("+i+")").next().text("待发货");
                         break;
-                    case 2:
+                    case "2":
                         $(".state:eq("+i+")").next().text("待收货");
                         break;
-                    case 3:
+                    case "3":
                         $(".state:eq("+i+")").next().text("待评价");
                         break;
                 }
@@ -187,26 +185,27 @@
             $("#cancel").hide();
             $("#account").text("");
             $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {});
-            location.href="http://localhost:8080/Project_war_exploded/comselete";
+            // location.href="http://localhost:8080/Project_war_exploded/comselete";
         });
 
         // 单击账号
         $("#account").click(function () {
             location.href="http://localhost:8080/Project_war_exploded/userquery";
         });
-        //购物车
-        $("#shopping").click(function () {
-            location.href="..";
+
+        //单击购物车
+        $(".gouwuc").click(function () {
+            location.href="http://localhost:8080/Project_war_exploded/seleshop";
         });
 
-        // 我的订单
-        $("#order").click(function () {
-            location.href="..";
+        // 我的购物车
+        $("#shopping").click(function () {
+            location.href="http://localhost:8080/Project_war_exploded/seleshop";
         });
 
         // 商品收藏
         $("#collect").click(function () {
-            location.href="..";
+            location.href="http://localhost:8080/Project_war_exploded/collsele";
         });
 
         // 收货地址

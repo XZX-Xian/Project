@@ -249,16 +249,6 @@
             })
         });
 
-        //弹框正则判断
-        //密码
-        // $("input[name=userpwd ]").blur(function () {
-        //     var userpwd = $("input[name=userpwd ]").val();
-        //     if (userpwd == "") {
-        //         $(".c2cyh").show();
-        //         $(".c2cyh").children("p").text("密码不能为空!");
-        //         $(".c2cyh").delay(1000).hide(0);
-        //     }
-        // });
         pwdblur = function () {
             var userpwd = $("input[name=userpwd ]").val();
             if (userpwd == "") {
@@ -267,6 +257,7 @@
                 $(".c2cyh").delay(1000).hide(0);
             }
         };
+
         //用户
         var userpd=false;
         $("input[name=username]").click(function () {
@@ -283,6 +274,7 @@
                 if (!red.test(username)&userpd) {
                     $(".c2cyh").show();
                     $(".c2cyh").children("p").text("用户格式错误!");
+                    userpd=false;
                     $(".c2cyh").delay(1000).hide(0);
                 }
             }
@@ -312,6 +304,7 @@
             $(this).css({"color": "#ffffff"});
         });
 
+        //图片轮播
         var count = 0;
         timers(count);
         $("#smk li:eq(0)").css("background", "#fed330");
@@ -326,7 +319,6 @@
         }, function () {
             timers(indexs);
         });
-
 
         function timers(count) {
             timer = window.setInterval(function () {
@@ -369,8 +361,8 @@
                 $(".dlu").click();
                 return false;
             }
-
         });
+
         //登录框
         if (account != "" && account != null && account != "null") {
             $(".grdiv").hover(function () {
@@ -384,12 +376,14 @@
                 $(".grzx").hide();
             })
         }
+
         //注销
         $("#nullopen").click(function () {
             $(".dltis").css("right", "50px")
             $(".hyp").hide();
             location.href = "http://localhost:8080/Project_war_exploded/remouser";
         });
+
         if (pds == "false") {            //判断从登录jsp内传过来的值判断是否登录成功！
             <%session.setAttribute("pds",true);%>
             $(".c2cyh").show();
@@ -397,19 +391,18 @@
             $(".c2cyh").delay(2000).hide(0);
         }
 
-        $(".shopsele").click(function () {
-            var shopdemo = $(".shopse").val();
-            if (name == "") {
+        $("#search").click(function () {
+            var shop= $("#sear").val();
+            if (shop == "") {
                 var x = confirm("不能查询空商品,是否跳转到商品页面");
                 if (x == true) {
                     location.href = "http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo="
-                } else {
-
-                }
+                } else {}
             } else {
-                location.href = "http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo=" + shopdemo;
+                location.href = "http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo=" + shop;
             }
-        })
+        });
+
         //个人中心
         $("#user").click(function () {
             location.href = "http://localhost:8080/Project_war_exploded/userquery";
@@ -476,13 +469,11 @@
                 </div>
                 <%--搜索框--%>
                 <div style="width: 170px;height: 55px;display:inline-block;position:absolute;top: 6px;margin-left: 85px;text-align: center">
-                    <input type="search" style="display:inline-block;border-radius:25px;margin-top: 15px;">
+                    <input type="search" value="" style="display:inline-block;border-radius:25px;margin-top: 15px;" id="sear">
                     <img src="\subject\cx.png" alt="" width="35px" style="position: absolute;top: 8px" id="search">
                 </div>
 
-
                 <div style="position: absolute;right: 1px;top: 1px">
-
                     <%--登录框--%>
                     <div class="dltis"
                          style="width: 160px;height: 55px;display:inline-block;position: absolute;right: 100px">

@@ -23,7 +23,6 @@ public class selectShop extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session=req.getSession();
         String spid =(String)session.getAttribute("account");
-
         List<Comm> list = new ArrayList<>();
         UserService use = new UserServiceImpl();
         Comm com = new Comm();
@@ -31,7 +30,7 @@ public class selectShop extends HttpServlet {
 //        if (spid > 0) {
             list = use.shopdemo(spid);
 //            for (int i = 0; i < list.size(); i++) {
-//                System.out.println("xx"+list.get(i).getComID());
+//                System.out.println("xx"+list.get(i).getComQuantity());
 //                System.out.println(list.get(i).getComName());
 //            }
 //            System.out.println("个数"+list.size());

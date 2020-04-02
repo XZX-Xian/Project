@@ -15,8 +15,8 @@
 <html>
 <head>
     <title>周边商城</title>
-    <link rel="stylesheet" type="text/css" href="../js/index.css">
-    <link rel="stylesheet" type="text/css" href="js/index.css">
+    <%--    <link rel="stylesheet" type="text/css" href="../js/index.css">--%>
+    <%--    <link rel="stylesheet" type="text/css" href="js/index.css">--%>
 </head>
 <style type="text/css">
     .sm li {
@@ -145,20 +145,20 @@
     $(function () {
 
         //获得跳转这里的地址
-        var url = document.referrer;
+        // var url = document.referrer;
         //获得当前页面的地址
-        var href = window.location.href;
+        // var href = window.location.href;
         //获的页面状态
-        var pd = "<%= session.getAttribute("pd")%>";
+        <%--var pd = "<%= session.getAttribute("pd")%>";--%>
         //修改页面状态
         // if (pd == "null") {
-            // location.href = "http://localhost:8080/Project_war_exploded/pagestate";
+        // location.href = "http://localhost:8080/Project_war_exploded/pagestate";
         // }
         //单击登录
-        $(".dlu").click(function () {
-            $(".c2").show();
-            $("#bg").show();
-        });
+        // $(".dlu").click(function () {
+        //     $(".c2").show();
+        //     $("#bg").show();
+        // });
         var pds = "<%=session.getAttribute("pds")%>";
         var account = "<%=session.getAttribute("account")%>";
         var pd = "<%=session.getAttribute("pd")%>";
@@ -166,7 +166,7 @@
         var type = 1;//默认为1
         var name;
 
-        // shopsele();
+        shopsele();
         var homesele = "<%=request.getParameter("shopdemo")%>";
 
 
@@ -183,11 +183,11 @@
             shopsele();
         });
         //弹框登录
-        $(".userdl").click(function () {
-            var username = $("input[name=username]").val();
-            var userpwd = $("input[name=userpwd ]").val();
-            location.href = "http://localhost:8080/Project_war_exploded/seluer?username=" + username + "&userpwd=" + userpwd + "";
-        });
+        // $(".userdl").click(function () {
+        //     var username = $("input[name=username]").val();
+        //     var userpwd = $("input[name=userpwd ]").val();
+        //     location.href = "http://localhost:8080/Project_war_exploded/seluer?username=" + username + "&userpwd=" + userpwd + "";
+        // });
 
         $(".shopsele").click(function () {
             name = $(".shopse").val();
@@ -199,9 +199,7 @@
                 if (x == true) {
                     location.href = "http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo="
                 } else {
-
                 }
-
             } else {
                 $("#sel").hide();
                 $(".fuss").hide();
@@ -217,36 +215,36 @@
             $(".shopsele").click();
         }
         //得到账号
-        var account = "<%= session.getAttribute("account")%>";
-        if (account != "" && account != null && account != "null") {
-            $("#register").hide();
-            $("#greet").hide();
-            $("#cancel").show();
-            $("#account").text(account);
-        } else {
-            if (url == href && pd == "true") {
-                alert("登录失败!");
-                //重置页面状态
-                location.href = "http://localhost:8080/Project_war_exploded/pagestate";
-            }
-        }
-        ;
+        <%--var account = "<%= session.getAttribute("account")%>";--%>
+        <%--if (account != "" && account != null && account != "null") {--%>
+        <%--    $("#register").hide();--%>
+        <%--    $("#greet").hide();--%>
+        <%--    $("#cancel").show();--%>
+        <%--    $("#account").text(account);--%>
+        <%--} else {--%>
+        <%--    if (url == href && pd == "true") {--%>
+        <%--        alert("登录失败!");--%>
+        <%--        //重置页面状态--%>
+        <%--        location.href = "http://localhost:8080/Project_war_exploded/pagestate";--%>
+        <%--    }--%>
+        <%--}--%>
+        <%--;--%>
 
-        //注销
-        $("#cancel").click(function () {
-            $("#register").show();
-            $("#greet").show();
-            $("#cancel").hide();
-            $("#account").text("");
-            $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {
-            })
-        });
-
-        // 单击账号
-        $("#account").click(function () {
-            var id = $(this).text();
-            location.href = "http://localhost:8080/Project_war_exploded/userquery?id=" + id;
-        });
+        // //注销
+        // $("#cancel").click(function () {
+        //     $("#register").show();
+        //     $("#greet").show();
+        //     $("#cancel").hide();
+        //     $("#account").text("");
+        //     $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {
+        //     })
+        // });
+        //
+        // // 单击账号
+        // $("#account").click(function () {
+        //     var id = $(this).text();
+        //     location.href = "http://localhost:8080/Project_war_exploded/userquery?id=" + id;
+        // });
 
 
         function shopsele() {
@@ -282,7 +280,7 @@
                     } else {
                         a += "                                    <li hidden style=\"display: inline-block;margin: 16px 35px;text-align: center;\" class=\"tup\" >\n" +
                             "                                    <div hidden style=\"width: 185px; height: 195px;margin: 0 46px\">\n" +
-                            "                                        <a href=\"http://localhost:8080/Project_war_exploded/selehome?name=" + item.comID + "\"><img src=\"" + item.comOve + "\" alt=\"\" height='215px' width=\"178px\">\n" +
+                            "                                        <a href=\"http://localhost:6060/League_of_Legends_war_exploded/selehome?name=" + item.comID + "\"><img src=\"" + item.comOve + "\" alt=\"\" height='215px' width=\"178px\">\n" +
                             "                                            <img src=\"" + item.comOut + "\" alt=\"\" width=\"137px\" hidden ></a>\n" +
                             "                                    </div>\n" +
                             "                                    <div hidden style=\"margin-bottom: 0\" >\n" +
@@ -290,48 +288,6 @@
                             "                                    </div>\n" +
                             "                                    </li>\n"
                     }
-                });
-            })
-        }
-
-        //套装
-        $("#sel").change(function () {
-            var size = $('#sel option:selected').val();
-            var type = $("#shob").val();
-
-            var json = {"size": size, "type": type};
-            $.getJSON("http://localhost:8080/League_of_Legends_war_exploded/selcom", json, function (data) {
-                $("#sese").html("");
-                var jsonData = JSON.stringify(data);// 转成JSON格式
-                var results = $.parseJSON(jsonData);// 转成JSON对象
-                var a = "";
-                var count = 0;
-                $.each(results, function (i, item) {
-                    count++;
-                    if (i < 6) {
-                        a += "                                  <li style=\"display: inline-block;margin: 16px 30px;text-align: center;\" class=\"tup\">\n" +
-                            "                                        <div style=\"width: 185px; height: 195px;margin: 0 50px\">\n" +
-                            "                                            <a href=\"\"><img src=\"" + item.comOve + "\" alt=\"\" width=\"165\">\n" +
-                            "<label hidden class='itid'>" + item.comID + "</label>" +
-                            "                                                <img src=\"" + item.comOut + "\" alt=\"\" width=\"135\" hidden ></a>\n" +
-                            "                                        </div>\n" +
-                            "                                        <div style=\"margin-bottom: 0\" >\n" +
-                            "                                            <p style=\"margin: 20px 35px 0;font-size: 16px;line-height: 31px\"><a style=\"color:salmon\">[英雄联盟]</a>" + item.comName + "<strong style=\"padding-top: 5px\"><br/>价格:" + item.comMoney + "元</strong></p>\n" +
-                            "                                        </div>\n" +
-                            "                                    </li>"
-
-                    } else {
-                        a += "                                    <li hidden style=\"display: inline-block;margin: 16px 35px;text-align: center;\" class=\"tup\" >\n" +
-                            "                                    <div hidden style=\"width: 185px; height: 195px;margin: 0 46px\">\n" +
-                            "                                        <a href=\"\"><img src=\"" + item.comOve + "\" alt=\"\" height='215px' width=\"178px\">\n" +
-                            "                                            <img src=\"" + item.comOut + "\" alt=\"\" width=\"137px\" hidden ></a>\n" +
-                            "                                    </div>\n" +
-                            "                                    <div hidden style=\"margin-bottom: 0\" >\n" +
-                            "                                        <p style=\"margin: 20px 35px 0;font-size: 16px;line-height: 31px\"><a style=\"color:salmon\">[英雄联盟]</a>" + item.comName + "<strong style=\"padding-top: 5px\"><br/>价格:" + item.comMoney + "元</strong></p>\n" +
-                            "                                    </div>\n" +
-                            "                                    </li>\n"
-                    }
-
                 });
                 $("#sese").append(a);
                 if (count <= 6) {
@@ -355,8 +311,8 @@
                     $(this).children("div").children("a").children("img:eq(1)").hide()
                 });
             })
+        }
 
-        });
         //登录判断
         if (account == "null") {
             $(".dlu").click(function () {
@@ -444,7 +400,11 @@
                 $(".c2cyh").delay(1000).hide(0);
             }
         });
-        //密码
+        //判断用户格式
+        var userpd = false;
+        $("input[name=username]").click(function () {
+            userpd = true;
+        });
         $("input[name=username]").blur(function () {
             var username = $("input[name=username]").val();
             var red = /^\S{6,10}$/;
@@ -452,13 +412,14 @@
                 $(".c2cyh").show();
                 $(".c2cyh").children("p").text("用户不能为空!");
                 $(".c2cyh").delay(1000).hide(0);
-            } else if (!red.test(username)) {
-                $(".c2cyh").show();
-                $(".c2cyh").children("p").text("用户格式错误!");
-                $(".c2cyh").delay(1000).hide(0);
+            } else {
+                if (!red.test(username) & userpd) {
+                    $(".c2cyh").show();
+                    $(".c2cyh").children("p").text("用户格式错误!");
+                    $(".c2cyh").delay(1000).hide(0);
+                }
             }
         });
-
 
         $(".gb").click(function () {
             $(".c2").hide();
@@ -551,6 +512,11 @@
             $(".gend").show();
             $(this).hide();
         });
+        //个人中心
+        $("#user").click(function () {
+            location.href = "http://localhost:8080/Project_war_exploded/userquery";
+        })
+
     });
 </script>
 
@@ -623,7 +589,7 @@
                     <p class="hyp" hidden style="position: absolute;top: 12px;margin-top: 10px;"><strong
                             style="font-size: 13px;">(<label class="userid"></label>)</strong></p>
                     <ul style=" padding:0; margin:0;list-style-type: none;margin-top: 60px" hidden class="grzx">
-                        <li>个人中心</li>
+                        <li id="user">个人中心</li>
                         <li id="nullopen">注销</li>
                     </ul>
                 </div>

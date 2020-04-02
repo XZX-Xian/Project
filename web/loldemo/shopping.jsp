@@ -236,8 +236,6 @@
                                 <input onclick="ddcg()" type="button" value="采购" style="border:none;font-size: 15px;font-weight: bold;color: #ffffff;background-color: #05c46b;width: 203px;height: 50px;margin-top: -1px">
                             </div>
                         </div>
-
-                         <!--无商品 去结算-样式 buy_bothui-->
                 </div>
             </div>
         </div>
@@ -267,7 +265,6 @@
                     客服邮箱：54181452@.qq.com </p>
             </li>
         </ul>
-
     </div>
 </body>
 <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>

@@ -232,7 +232,6 @@
                             "                                    </li>\n"
                     }
                 });
-
                 $("#sese").append(a);
                 if (count <= 6) {
                     $(".gend").hide();
@@ -346,7 +345,11 @@
                 $(".c2cyh").delay(1000).hide(0);
             }
         });
-        //密码
+        //判断用户格式
+        var userpd = false;
+        $("input[name=username]").click(function () {
+            userpd = true;
+        });
         $("input[name=username]").blur(function () {
             var username = $("input[name=username]").val();
             var red = /^\S{6,10}$/;
@@ -354,10 +357,12 @@
                 $(".c2cyh").show();
                 $(".c2cyh").children("p").text("用户不能为空!");
                 $(".c2cyh").delay(1000).hide(0);
-            } else if (!red.test(username)) {
+            } else {
+                if (!red.test(username) & userpd) {
                 $(".c2cyh").show();
                 $(".c2cyh").children("p").text("用户格式错误!");
                 $(".c2cyh").delay(1000).hide(0);
+            }
             }
         });
 
@@ -450,8 +455,7 @@
             $(".gend").show();
             $(this).hide();
         });
-    })
-
+    });
 </script>
 
 <body>
