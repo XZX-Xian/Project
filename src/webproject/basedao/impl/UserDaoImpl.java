@@ -71,7 +71,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //模糊查询商品
     @Override
     public List<Comm> likeorder(Comm comm) {
-        String sql="SELECT * FROM addcommodity WHERE  AddName LIKE  '%"+comm.getComName()+"%'";
+        String sql="SELECT * FROM addcommodity WHERE  AddName LIKE  '%"+comm.getComName()+"%' AND AddQuantity<> 0";
         List<Comm>list=new ArrayList<>();
         ResultSet rs=null;
         try{
@@ -374,7 +374,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //修改商品个数
     @Override
     public int CommUP(int size,int id, String account) {
-        String sql="UPDATE FROM shopping SET Addsize=? WHERE  Addid=? AND userid=?";
+        String sql="UPDATE FROM shopping SET Addsize=? WHERE Addid=? AND userid=?";
         Object[] params={size,id,account};
         int count=super.executeUpdate(sql,params);
         //手动关闭mysql
@@ -384,7 +384,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         }else {
             System.out.println("修改失败");
         }
-
         return 0;
     }
 
@@ -794,7 +793,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //查询商品
     @Override
     public List<Comm> SeleteCom() {
-        String sql = "SELECT * FROM addcommodity where Addleixing=1";
+        String sql = "SELECT * FROM addcommodity where Addleixing=1 AND AddQuantity<> 0";
         ResultSet rs = null;
         List<Comm> list = new ArrayList<Comm>();
         try {
@@ -824,7 +823,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //类型查询商品
     @Override
     public List<Comm> SeleteCom(Comm comm) {
-        String sql = "SELECT * FROM addcommodity WHERE Addleixing=?";
+        String sql = "SELECT * FROM addcommodity WHERE Addleixing=? AND AddQuantity<> 0";
         Object[] params = {comm.getComtype()};
         ResultSet rs = null;
         List<Comm> list = new ArrayList<Comm>();
@@ -855,7 +854,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //通过类型和大小查询商品
     @Override
     public List<Comm> SeleteClass(Comm comm) {
-        String sql="SELECT * FROM addcommodity where AddSize=? AND Addleixing=?";
+        String sql="SELECT * FROM addcommodity where AddSize=? AND Addleixing=? AND AddQuantity<>0";
         Object[] params={comm.getComSize(),comm.getComtype()};
         ResultSet rs=null;
         List<Comm> list = new ArrayList<Comm>();

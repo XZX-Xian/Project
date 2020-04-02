@@ -209,17 +209,17 @@ h2 {
 				<dl class="content">
 					<dt>商户订单号 ：</dt>
 					<dd>
-						<input id="WIDout_trade_no" name="WIDout_trade_no" readonly />
+						<input id="WIDout_trade_no" name="WIDout_trade_no" value="<%=request.getParameter("ordernumber")%>" readonly />
 					</dd>
 					<hr class="one_line">
-					<dt>订单名称 ：</dt>
+					<dt>收货人 ：</dt>
 					<dd>
-						<input id="WIDsubject" name="WIDsubject"  readonly />
+						<input id="WIDsubject" name="WIDsubject"  value="<%=request.getParameter("name")%>" readonly />
 					</dd>
 					<hr class="one_line">
 					<dt>付款金额 ：</dt>
 					<dd>
-						<input id="WIDtotal_amount" name="WIDtotal_amount" readonly />
+						<input id="WIDtotal_amount" name="WIDtotal_amount" value="<%=request.getParameter("money")%>" readonly />
 					</dd>
 					<hr class="one_line">
 					<dt>商品描述：</dt>
@@ -393,11 +393,11 @@ h2 {
 		sNow += String(vNow.getMinutes());
 		sNow += String(vNow.getSeconds());
 		sNow += String(vNow.getMilliseconds());
-		var money=<%=request.getParameter("money")%>;
+		<%--var money=<%=request.getParameter("money")%>;--%>
 		<%--var ids="<%=request.getParameter("ids")%>";--%>
-		document.getElementById("WIDout_trade_no").value =  sNow;
-		document.getElementById("WIDsubject").value = "商品";
-		document.getElementById("WIDtotal_amount").value = money;
+		// document.getElementById("WIDout_trade_no").value =  sNow;
+		// document.getElementById("WIDsubject").value = "商品";
+		// document.getElementById("WIDtotal_amount").value = money;
 	}
 
 	GetDateNow();

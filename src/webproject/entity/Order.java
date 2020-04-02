@@ -1,5 +1,8 @@
 package webproject.entity;
 
+/**
+ * 订单表实体类
+ */
 public class Order {
     private int ordernumber;
     private int shopID;
@@ -9,6 +12,7 @@ public class Order {
     private String ove;
     private String userid;
     private String state;
+    private int addressID;
 
     public int getOrdernumber() {
         return ordernumber;
@@ -72,5 +76,13 @@ public class Order {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public int getAddressID() {
+        return addressID;
+    }
+
+    public void setAddressID(int addressID) {
+        this.addressID = addressID;
     }
 }

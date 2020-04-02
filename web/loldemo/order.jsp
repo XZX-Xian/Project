@@ -121,6 +121,13 @@
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
     $(function () {
+
+        //获得跳转这里的地址
+        var url=document.referrer;
+        // 判断是否直接跳入
+        if (url == null || url == "") {
+            location.href = "http://localhost:8080/Project_war_exploded/loldemo/home.jsp";
+        }
         var pds ="<%=session.getAttribute("pds")%>";
         var oves ="<%=request.getAttribute("listove")%>";
         $(".oves").text(oves);
@@ -184,21 +191,21 @@
             $(".c2").hide();
             $("#bg").hide();
         });
-        $(".gwc").click(function () {
-            if(account!=""&&account!=null&&account!="null"){
-                var id=$(".bh").text();
-                var name=$(".nam").text();
-                var money=$(".mone").text();
-                var size=$("input[name=size]").val();
-                var ove=  $(".oves").text();
-                var userid=$(".userid").text();
-                location.href="http://localhost:8080/Project_war_exploded/inseshop?id="+id+"&name="+name+"&money="+money+"&size="+size+"&ove="+ove+"&userid="+userid+"";
-            }else{
-                alert("请先登录");
-                $(".dlus").click();
-                return false;
-            }
-        });
+        // $(".gwc").click(function () {
+        //     if(account!=""&&account!=null&&account!="null"){
+        //         var id=$(".bh").text();
+        //         var name=$(".nam").text();
+        //         var money=$(".mone").text();
+        //         var size=$("input[name=size]").val();
+        //         var ove=  $(".oves").text();
+        //         var userid=$(".userid").text();
+        //         location.href="http://localhost:8080/Project_war_exploded/inseshop?id="+id+"&name="+name+"&money="+money+"&size="+size+"&ove="+ove+"&userid="+userid+"";
+        //     }else{
+        //         alert("请先登录");
+        //         $(".dlus").click();
+        //         return false;
+        //     }
+        // });
         $(".gouwuc").click(function () {
             if(account!=""&&account!=null&&account!="null"){
                 var userid=$(".userid").text();
@@ -209,6 +216,7 @@
                 return false;
             }
         });
+
         $(".shdz").click(function () {
             var userid=$(".userid").text();
             location.href="http://localhost:8080/Project_war_exploded/seleord?userid="+userid+"";
@@ -250,8 +258,6 @@
             }
         }
 
-
-
       $(".wcenter").click(function() {
           var id=$(this).val();
           var userid = $(".userid").text();
@@ -269,7 +275,6 @@
           } else {
               alert("请先选中地址！");
           }
-
       });
 
         //提交订单
@@ -279,9 +284,20 @@
             var ids=new Array();
             for(var i=0;i<count;i++){
                     var name=$(".collname:eq("+i+")").html();
+                    alert(name)
                     ids.push(name);
             }
-            location.href="http://localhost:8080/Project_war_exploded/payment/index.jsp?ids="+ids+"&money="+money;
+            var ordernumbers=new Array();
+            for(var i=0;i<count;i++){
+                var name=$(".collname:eq("+i+")").next().html();
+                alert(name)
+                ordernumbers.push(name);
+            }
+            var id=$("input[name='goodsId']:checked").val();
+            var name=$("input[name='goodsId']:checked").next().text();
+
+            // location.href="http://localhost:8080/Project_war_exploded/orderup?ids="+ids+"&money="+money;
+            // location.href="http://localhost:8080/Project_war_exploded/payment/index.jsp?ids="+ids+"&money="+money;
         })
     });
 </script>
@@ -294,24 +310,22 @@
             <div align="right">
                 <img src="\subject\gb.png" style="cursor:pointer;width: 50px;height: 30px" class="gb">
             </div>
+<%--            <form action="">--%>
+<%--                <div align="center"style="z-index: 101">--%>
+<%--                    <img style="width: 80px;padding-top:-5px;" src="\subject\loading.png" alt="">--%>
+<%--                    <p style="font-size: 11px;color: #ccc;margin-bottom: 1px;">魄罗登录</p>--%>
+<%--                    <br/>--%>
+<%--                </div>--%>
+<%--                <input type="text" class="name" name="username" style="margin-top: -5px;width: 250px;height: 35px;margin-bottom: 25px;font-size: 13px;display: block"  placeholder="用户名">--%>
 
-            <form action="">
-                <div align="center"style="z-index: 101">
-                    <img style="width: 80px;padding-top:-5px;" src="\subject\loading.png" alt="">
-                    <p style="font-size: 11px;color: #ccc;margin-bottom: 1px;">魄罗登录</p>
-                    <br/>
-                </div>
-                <input type="text" class="name" name="username" style="margin-top: -5px;width: 250px;height: 35px;margin-bottom: 25px;font-size: 13px;display: block"  placeholder="用户名">
+<%--                <input type="password" name="userpwd" class="pwd" style="margin-left: 5px;width: 250px;height: 35px;font-size: 13px"  placeholder="密码">--%>
 
-
-                <input type="password" name="userpwd" class="pwd" style="margin-left: 5px;width: 250px;height: 35px;font-size: 13px"  placeholder="密码">
-
-                <br/>
-                <input type="button" class="userdl" style="background-color: #ffffff;color: #05c46b;border-radius: 25px;font-weight:bold ;margin-top: 20px;width: 95px" value="登录" >
-                <div align="right" style="margin-right: 15px;margin-top: 10px">
-                    <a href="http://localhost:8080/Project_war_exploded/loldemo/denlv.jsp" style="font-size: 11px;" >注册新用户/忘记密码</a>
-                </div>
-            </form>
+<%--                <br/>--%>
+<%--                <input type="button" class="userdl" style="background-color: #ffffff;color: #05c46b;border-radius: 25px;font-weight:bold ;margin-top: 20px;width: 95px" value="登录" >--%>
+<%--                <div align="right" style="margin-right: 15px;margin-top: 10px">--%>
+<%--                    <a href="http://localhost:8080/Project_war_exploded/loldemo/denlv.jsp" style="font-size: 11px;" >注册新用户/忘记密码</a>--%>
+<%--                </div>--%>
+<%--            </form>--%>
         </div>
     </div>
     <div <%--style="position: fixed;z-index: 999"--%>>
@@ -386,11 +400,11 @@
                </tr>
                    <c:forEach items="${list1}" var="lit">
                        <tr style="text-align: center;" class="collect" >
-                           <td><img src="${lit.comOve}" height="80" width="80"></td>
-                            <td class="collname">${lit.comName}</td>
+                           <td><img src="${lit.ove}" height="80" width="80"></td>
+                           <td><span class="collname">${lit.name}</span><span hidden>${lit.ordernumber}</span></td>
                            <td>￥<span>${lit.comMoney}</span></td>
                            <td>
-                               <input  type="text" value="${lit.comSize}" readonly="readonly" size="1">
+                               <input  type="text" value="${lit.size}" readonly="readonly" size="1">
                            </td>
                            <td>￥<span class="moye"></span></td>
                        </tr>
@@ -403,21 +417,16 @@
     <%--结算DIV --%>
             <div align="right">
                     <div align="right" style="width: 350px;border: 1px #ccc solid;background-color: #ffffff;margin-right: 40px;margin-bottom: 15px" >
-
                         <div style="display: inline;margin-left: 15px;margin-right: 15px">总额:¥<span id="summonry" style="color: #e84118;font-size: 19px;font-weight: bold"></span></div>
                         <div style="display:inline-block;">
                             <div align="right" style="margin-top: 1px">
                                 <input type="button" id="sumrder" value="提交订单" style="border:none;font-size: 15px;font-weight: bold;color: #ffffff;background-color: orangered;width: 203px;height: 50px;margin-top: -1px">
                             </div>
-
                     </div>
                     </div>
             </div>
-
         </div>
-
     </div>
-
     </div>
 
     <%--三个标标--%>
@@ -446,9 +455,5 @@
         </ul>
     </div>
 </div>
-<%--   <div style="padding-left: 200px;padding-top: 20px" id="deleteAll" class="usershop">删除选中的商品</div>--%>
-
-
 </body>
-
 </html>

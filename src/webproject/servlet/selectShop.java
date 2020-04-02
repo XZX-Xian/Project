@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * 购物车查询
  */
@@ -26,14 +25,7 @@ public class selectShop extends HttpServlet {
         List<Comm> list = new ArrayList<>();
         UserService use = new UserServiceImpl();
         Comm com = new Comm();
-//        com.setComID(spid);
-//        if (spid > 0) {
             list = use.shopdemo(spid);
-//            for (int i = 0; i < list.size(); i++) {
-//                System.out.println("xx"+list.get(i).getComQuantity());
-//                System.out.println(list.get(i).getComName());
-//            }
-//            System.out.println("个数"+list.size());
             if (list.size()>0){
 //                System.out.println("查询成功！");
 //                req.setAttribute("listname", list.get(0).getComName());
@@ -47,7 +39,6 @@ public class selectShop extends HttpServlet {
                 System.out.println("没有查询到值");
                 req.getRequestDispatcher("loldemo/shopping.jsp").forward(req, resp);
             }
-//        }
     }
 
     @Override

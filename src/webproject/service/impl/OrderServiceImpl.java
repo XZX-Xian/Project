@@ -16,11 +16,27 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     OrderDao str = new OrderDaoImpl();
 
-    //订单查询
+    //用户订单查询
     @Override
     public List<Order> OrderList(String account) {
         List<Order> list = new ArrayList<>();
         list = str.OrderList(account);
+        return list;
+    }
+
+    //订单查询
+    @Override
+    public List<Order> OrderList() {
+        List<Order> list = new ArrayList<>();
+        list = str.OrderList();
+        return list;
+    }
+
+    //提交的订单查询
+    @Override
+    public List<Order> OrderList(String shopid, String userid) {
+        List<Order> list = new ArrayList<>();
+        list = str.OrderList(shopid,userid);
         return list;
     }
 

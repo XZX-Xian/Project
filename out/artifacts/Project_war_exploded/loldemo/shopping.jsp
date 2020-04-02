@@ -291,7 +291,7 @@
         var url=document.referrer;
         //判断是否直接跳入
         if (url == null || url == "") {
-            location.href = "http://localhost:8080/Project_war_exploded/comselete";
+            location.href = "http://localhost:8080/Project_war_exploded/loldemo/home.jsp";
         }
 
         //注销

@@ -30,13 +30,12 @@ public class seleOrder extends HttpServlet {
         List<Address> list=new ArrayList<>();
         Address ads=new Address();
         ads.setAccount(userid);
-        System.out.println(ads.getAccount());
         UserService use=new UserServiceImpl();
             list=use.Seleorder(ads);
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i).getId());
-                System.out.println(list.get(i).getName());
-            }
+//            for (int i = 0; i < list.size(); i++) {
+//                System.out.println(list.get(i).getId());
+//                System.out.println(list.get(i).getName());
+//            }
             if (list.size()>0){
                 System.out.println("查询地址成功！");
           /*      req.setAttribute("listid", list.get(0).getId());
@@ -49,11 +48,11 @@ public class seleOrder extends HttpServlet {
                 req.setAttribute("listphone", list.get(0).getPhone());
                 req.setAttribute("listcode", list.get(0).getCode());
                 req.setAttribute("liststate", list.get(0).getState());*/
-
+//                req.setAttribute("list1", list);
                 req.setAttribute("listord",list);
                 req.getRequestDispatcher("/loldemo/order.jsp").forward(req, resp);
-                String demo=req.getHeader("Referer");
-                resp.sendRedirect(demo);
+//                String demo=req.getHeader("Referer");
+//                resp.sendRedirect(demo);
             }else{
                 System.out.println("没有查询到值");
                 req.getRequestDispatcher("/loldemo/shopping.jsp").forward(req, resp);

@@ -292,7 +292,7 @@
 
         if (account != null && account != "" && account != "null") {
             $(".userid").text(account);
-            $(".dltis").css("right", "110px")
+            $(".dltis").css("right", "110px");
             $(".hyp").show();
         } else {
             $(".userid").hide();
@@ -407,7 +407,6 @@
         $("#user").click(function () {
             location.href = "http://localhost:8080/Project_war_exploded/userquery";
         })
-
 
     });
 </script>
@@ -526,14 +525,12 @@
                                                                                             height="502px"
                                                                                             class="imgs" name="2"
                                                                                             style="display: none"></a>
-
                 <ul id="smk">
                     <li></li>
                     <li></li>
                     <li></li>
                 </ul>
             </div>
-
 
             <div style="border: 1px #ffffff solid;width: 1517px;height: 460px" id="spl">
                 <div align="center"

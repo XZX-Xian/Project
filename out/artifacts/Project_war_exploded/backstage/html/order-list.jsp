@@ -1,4 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="webproject.service.OrderService" %>
+<%@ page import="webproject.service.impl.OrderServiceImpl" %>
+<%@ page import="webproject.entity.Order" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -25,7 +29,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  
+  <%
+    OrderService str=new OrderServiceImpl();
+    List<Order> list=new ArrayList<>();
+    list=str.OrderList();
+    request.setAttribute("list",list);
+  %>
   <body>
     <div class="x-nav">
       <span class="layui-breadcrumb">
@@ -40,32 +49,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付状态</option>
-              <option>已支付</option>
-              <option>未支付</option>
-            </select>
-          </div>
-          <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付方式</option>
-              <option>支付宝</option>
-              <option>微信</option>
-              <option>货到付款</option>
-            </select>
-          </div>
           <div class="layui-input-inline">
             <select name="contrller">
               <option value="">订单状态</option>
-              <option value="0">待确认</option>
-              <option value="1">已确认</option>
-              <option value="2">已收货</option>
-              <option value="3">已取消</option>
-              <option value="4">已完成</option>
-              <option value="5">已作废</option>
+              <option value="0">待付款</option>
+              <option value="1">待发货</option>
+              <option value="2">待收货</option>
+              <option value="3">待评价</option>
             </select>
           </div>
           <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input">
@@ -86,22 +76,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>订单编号</th>
             <th>收货人</th>
             <th>总金额</th>
-            <th>应付金额</th>
             <th>订单状态</th>
-            <th>支付状态</th>
-            <th>发货状态</th>
-            <th>支付方式</th>
-            <th>配送方式</th>
             <th>下单时间</th>
             <th >操作</th>
             </tr>
         </thead>
         <tbody>
+        <c:forEach items="${list}" var="in">
           <tr>
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>2017009171822298053</td>
+            <td>${in.ordernumber}</td>
+            <td>${in}</td>
+            <td>${in}</td>
+            <td>${in}</td>
+            <td>${in}</td>
+            <td>${in}</td>
+            <td>${in}</td>
             <td>老王:18925139194</td>
             <td>7829.10</td>
             <td>7854.10</td>
@@ -120,6 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </a>
             </td>
           </tr>
+        </c:forEach>
         </tbody>
       </table>
       <div class="page">

@@ -9,6 +9,14 @@ import java.util.List;
  */
 public interface OrderDao {
 
-        //订单查询
+        //用户订单查询
         List<Order> OrderList(String account);
+
+        //订单查询
+        List<Order> OrderList();
+
+        //提交的订单查询
+        List<Order> OrderList(String shopid,String userid);
+
+
 }
