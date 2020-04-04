@@ -24,6 +24,14 @@ public class OrderServiceImpl implements OrderService {
         return list;
     }
 
+    //订单状态查询
+    @Override
+    public List<Order> OrderState(int state) {
+        List<Order> list = new ArrayList<>();
+        list = str.OrderState(state);
+        return list;
+    }
+
     //用户订单查询
     @Override
     public List<Order> OrderList(String account) {

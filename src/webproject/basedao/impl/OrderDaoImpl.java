@@ -44,6 +44,37 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
         return list;
     }
 
+    //订单状态查询
+    @Override
+    public List<Order> OrderState(int state) {
+        String sql="SELECT * FROM userorder WHERE state LIKE '%"+state+"%'";
+        System.out.println(sql);
+        List<Order> list=new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            rs=super.exceuteQuery(sql,null);
+            while (rs.next()){
+                Order order=new Order();
+                order.setOrdernumber(rs.getInt(1));
+                order.setShopID(rs.getInt(2));
+                order.setName(rs.getString(3));
+                order.setUsername(rs.getString(4));
+                order.setMoney(rs.getString(5));
+                order.setSize(rs.getInt(6));
+                order.setOve(rs.getString(7));
+                order.setUserid(rs.getString(8));
+                order.setState(rs.getInt(9));
+                order.setAddress(rs.getString(10));
+                order.setAddressID(rs.getInt(11));
+                order.setDate(rs.getString(12));
+                list.add(order);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     //用户订单查询
     @Override
     public List<Order> OrderList(String account) {

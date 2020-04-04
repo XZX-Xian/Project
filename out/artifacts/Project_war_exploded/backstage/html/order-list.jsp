@@ -43,13 +43,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <a>
           <cite>导航元素</cite></a>
       </span>
-      <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+      <a id="refresh" class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
     </div>
     <div class="x-body">
       <div class="layui-row">
           <div class="layui-input-inline">
-            <select name="contrller">
+            <select name="contrller" onchange="state()" id="state">
               <option value="">订单状态</option>
               <option value="0">待付款</option>
               <option value="1">待发货</option>
@@ -116,27 +116,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       });
 
       $(function () {
+        oderstate();
+        //订单状态查询
+        state=function () {
+        var state=$("#state").val();
+        if (state==""){
+      location.href="javascript:location.replace(location.href);";
+        }
+          var json={"state":state};
+          $("#listall").html("");
+          $.getJSON("http://localhost:8080/Project_war_exploded/orderstate",json,function (data) {
+            var list="";
+            $.each(data,function (i,item) {
+              list+="<tr>\n" +
+                      "            <td>\n" +
+                      "              <div class=\"layui-unselect layui-form-checkbox\" lay-skin=\"primary\" data-id='2'><span hidden=\"\">"+item.ordernumber+"</span><i class=\"layui-icon\">&#xe605;</i></div>\n" +
+                      "            </td>\n" +
+                      "            <td>"+item.ordernumber+"</td>\n" +
+                      "            <td>"+item.username+"</td>\n" +
+                      "            <td>"+item.money+"</td>\n" +
+                      "            <td><span hidden class=\"state\">"+item.state+"</span><span></span></td>\n" +
+                      "            <td>"+item.date+"</td>\n" +
+                      "            <td class=\"td-manage\">\n" +
+                      "              <a title=\"删除\" onclick=\"member_del(this,'"+item.ordernumber+"')\" href=\"javascript:;\">\n" +
+                      "                <i class=\"layui-icon\">&#xe640;</i>\n" +
+                      "              </a>\n" +
+                      "            </td>\n" +
+                      "          </tr>";
+            });
+            $("#listall").html(list);
+            oderstate();
+          })
+        };
 
         //订单状态
-        var count=$(".state").length;
-        for (var i=0;i<count;i++){
-          var id=$(".state:eq("+i+")").text();
-          switch (id) {
-            case "0":
-              $(".state:eq("+i+")").next().text("待付款");
-              break;
-            case "1":
-              $(".state:eq("+i+")").next().text("待发货");
-              break;
-            case "2":
-              $(".state:eq("+i+")").next().text("待收货");
-              break;
-            case "3":
-              $(".state:eq("+i+")").next().text("待评价");
-              break;
-          }
-        }
-
+        function oderstate() {
+          var count = $(".state").length;
+          for (var i = 0; i < count; i++) {
+            var id = $(".state:eq(" + i + ")").text();
+            switch (id) {
+              case "0":
+                $(".state:eq(" + i + ")").next().text("待付款");
+                break;
+              case "1":
+                $(".state:eq(" + i + ")").next().text("待发货");
+                break;
+              case "2":
+                $(".state:eq(" + i + ")").next().text("待收货");
+                break;
+              case "3":
+                $(".state:eq(" + i + ")").next().text("待评价");
+                break;
+            }
+          };
+        };
         //订单模糊查询
         fuzzy=function () {
           var name=$("#fuzzy").val();
@@ -163,10 +196,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     "          </tr>";
           });
             $("#listall").html(list);
+            oderstate();
           })
         };
 
-        /*用户-删除*/
+        /*订单-删除*/
         member_del=function(obj, id) {
           layer.confirm('确认要删除吗？', function (index) {
             //发异步删除数据
@@ -180,7 +214,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
           });
         };
-        //选中删除
+        //订单选中删除
         delAll=function(argument) {
           var date=new Array();
           var index=$(".layui-form-checked").length;

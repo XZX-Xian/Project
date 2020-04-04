@@ -12,6 +12,9 @@ public interface OrderService {
         //订单模糊查询
         List<Order> OrderLike(String ordernumber);
 
+        //订单状态查询
+        List<Order> OrderState(int state);
+
         //用户订单查询
         List<Order> OrderList(String account);
 

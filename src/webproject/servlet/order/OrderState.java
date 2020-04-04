@@ -1,10 +1,9 @@
-package webproject.servlet.admin;
+package webproject.servlet.order;
 
 import com.alibaba.fastjson.JSON;
-import webproject.entity.Admin;
-import webproject.entity.User;
-import webproject.service.UserService;
-import webproject.service.impl.UserServiceImpl;
+import webproject.entity.Order;
+import webproject.service.OrderService;
+import webproject.service.impl.OrderServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,19 +16,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 模糊查询管理员
+ * 订单状态查询
  */
-@WebServlet(name = "AdminList",urlPatterns = "/adminlist")
-public class AdminList extends HttpServlet {
+@WebServlet(name = "OrderState",urlPatterns = "/orderstate")
+public class OrderState extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=utf-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out=response.getWriter();
-        String name=request.getParameter("name");
+        int state=Integer.parseInt(request.getParameter("state"));
+        System.out.println(state);
+        List<Order> list = new ArrayList<>();
+        OrderService str=new OrderServiceImpl();
 
-        UserService str = new UserServiceImpl();
-        List<Admin> list = new ArrayList<>();
-        list = str.AdminDimList(name);
+        list=str.OrderState(state);
         String json=null;
+
         json= JSON.toJSONString(list);
         out.print(json);
         out.close();
