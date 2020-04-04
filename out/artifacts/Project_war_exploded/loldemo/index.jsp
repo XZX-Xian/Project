@@ -182,13 +182,6 @@
         $("#sel").change(function () {
             shopsele();
         });
-        //弹框登录
-        // $(".userdl").click(function () {
-        //     var username = $("input[name=username]").val();
-        //     var userpwd = $("input[name=userpwd ]").val();
-        //     location.href = "http://localhost:8080/Project_war_exploded/seluer?username=" + username + "&userpwd=" + userpwd + "";
-        // });
-
         $(".shopsele").click(function () {
             name = $(".shopse").val();
             size = 0;

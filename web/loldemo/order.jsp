@@ -284,20 +284,22 @@
             var ids=new Array();
             for(var i=0;i<count;i++){
                     var name=$(".collname:eq("+i+")").html();
-                    alert(name)
                     ids.push(name);
             }
             var ordernumbers=new Array();
             for(var i=0;i<count;i++){
-                var name=$(".collname:eq("+i+")").next().html();
-                alert(name)
-                ordernumbers.push(name);
+                var order=$(".collname:eq("+i+")").next().html();
+                ordernumbers.push(order);
             }
             var id=$("input[name='goodsId']:checked").val();
             var name=$("input[name='goodsId']:checked").next().text();
-
-            // location.href="http://localhost:8080/Project_war_exploded/orderup?ids="+ids+"&money="+money;
-            // location.href="http://localhost:8080/Project_war_exploded/payment/index.jsp?ids="+ids+"&money="+money;
+            var address=$("input[name='goodsId']:checked").next().next().text();
+            var json={"name":name,"id":id,"address":address};
+            $.getJSON("http://localhost:8080/Project_war_exploded/orderaddress?ordernumbers="+ordernumbers, json, function (data) {
+                if (data>0){
+                    location.href="http://localhost:8080/Project_war_exploded/payment/index.jsp?ids="+ids+"&money="+money+"&name="+name;
+                }
+            });
         })
     });
 </script>
@@ -310,22 +312,6 @@
             <div align="right">
                 <img src="\subject\gb.png" style="cursor:pointer;width: 50px;height: 30px" class="gb">
             </div>
-<%--            <form action="">--%>
-<%--                <div align="center"style="z-index: 101">--%>
-<%--                    <img style="width: 80px;padding-top:-5px;" src="\subject\loading.png" alt="">--%>
-<%--                    <p style="font-size: 11px;color: #ccc;margin-bottom: 1px;">魄罗登录</p>--%>
-<%--                    <br/>--%>
-<%--                </div>--%>
-<%--                <input type="text" class="name" name="username" style="margin-top: -5px;width: 250px;height: 35px;margin-bottom: 25px;font-size: 13px;display: block"  placeholder="用户名">--%>
-
-<%--                <input type="password" name="userpwd" class="pwd" style="margin-left: 5px;width: 250px;height: 35px;font-size: 13px"  placeholder="密码">--%>
-
-<%--                <br/>--%>
-<%--                <input type="button" class="userdl" style="background-color: #ffffff;color: #05c46b;border-radius: 25px;font-weight:bold ;margin-top: 20px;width: 95px" value="登录" >--%>
-<%--                <div align="right" style="margin-right: 15px;margin-top: 10px">--%>
-<%--                    <a href="http://localhost:8080/Project_war_exploded/loldemo/denlv.jsp" style="font-size: 11px;" >注册新用户/忘记密码</a>--%>
-<%--                </div>--%>
-<%--            </form>--%>
         </div>
     </div>
     <div <%--style="position: fixed;z-index: 999"--%>>
@@ -369,7 +355,7 @@
                         <li  style="border: 1px #cccccc solid;line-height: 40px;background-color: #ffffff;height: 40px;width: 1000px">
                             <input  class="wcenter" name="goodsId" value="${lits.id}" type="radio" >
                             收货人：<span>${lits.name}</span>
-                            收货地址： <span>${lits.province}${lits.city}${lits.county}${lits.address}</span>
+                            收货地址： <span>${lits.province}|${lits.city}|${lits.county}|${lits.address}</span>
                             <span style="position: absolute;left: 780px;font-size: 14px;color: #ccc">${lits.state}</span>
                         </li>
                     </ul>
@@ -402,7 +388,7 @@
                        <tr style="text-align: center;" class="collect" >
                            <td><img src="${lit.ove}" height="80" width="80"></td>
                            <td><span class="collname">${lit.name}</span><span hidden>${lit.ordernumber}</span></td>
-                           <td>￥<span>${lit.comMoney}</span></td>
+                           <td>￥<span>${lit.money}</span></td>
                            <td>
                                <input  type="text" value="${lit.size}" readonly="readonly" size="1">
                            </td>

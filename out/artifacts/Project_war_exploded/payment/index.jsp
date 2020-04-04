@@ -209,7 +209,7 @@ h2 {
 				<dl class="content">
 					<dt>商户订单号 ：</dt>
 					<dd>
-						<input id="WIDout_trade_no" name="WIDout_trade_no" value="<%=request.getParameter("ordernumber")%>" readonly />
+						<input id="WIDout_trade_no" name="WIDout_trade_no" <%--value="<%=request.getParameter("ordernumber")%>"--%> readonly />
 					</dd>
 					<hr class="one_line">
 					<dt>收货人 ：</dt>
@@ -395,7 +395,7 @@ h2 {
 		sNow += String(vNow.getMilliseconds());
 		<%--var money=<%=request.getParameter("money")%>;--%>
 		<%--var ids="<%=request.getParameter("ids")%>";--%>
-		// document.getElementById("WIDout_trade_no").value =  sNow;
+		document.getElementById("WIDout_trade_no").value =  sNow;
 		// document.getElementById("WIDsubject").value = "商品";
 		// document.getElementById("WIDtotal_amount").value = money;
 	}

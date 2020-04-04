@@ -183,7 +183,6 @@
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
-
 <script type="text/javascript">
     $(function () {
         //获得跳转这里的地址

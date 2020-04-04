@@ -17,8 +17,8 @@ import java.util.List;
 @WebServlet(name = "Orderlist",urlPatterns = "/orderlist")
 public class Orderlist extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //获得账号
         response.setContentType("text/html;charset=UTF-8");
+        //获得账号
         HttpSession session=request.getSession();
         String account=(String)session.getAttribute("account");
         OrderService str=new OrderServiceImpl();

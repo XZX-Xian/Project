@@ -22,11 +22,10 @@ public class AdminAdd extends HttpServlet {
         String phone=request.getParameter("phone");
         String email=request.getParameter("email");
         String pwd=request.getParameter("pass");
-//获取当前系统时间
+        //获取当前系统时间
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         Date date = new Date();
         String dateTime = df.format(date); // Formats a Date into a date/time string.
-        System.out.println(dateTime);  // 2019-07-03 10:14:14
 
         Admin admin=new Admin();
         admin.setAccount(account);

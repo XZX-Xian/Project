@@ -162,12 +162,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteUsers(String ids, String useid) {
         int count=str.deleteUsers(ids,useid);
-        System.out.println("业务逻辑ID"+useid);
-        if (count>0){
-            System.out.println("选中删除成功！");
-        }else {
-            System.out.println("选中删除失败！");
-        }
+//        if (count>0){
+//            System.out.println("选中删除成功！");
+//        }else {
+//            System.out.println("选中删除失败！");
+//        }
         return count;
     }
 

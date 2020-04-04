@@ -123,10 +123,9 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //新增订单
     @Override
     public int orderInse(Order ord) {
-        int random=(int)(Math.random()*1889999999);
         String states="0";
-        String sql="INSERT INTO userorder(ordernumber,shopID,Name,Money,Size,Ove,userid,state)VALUES("+random+",?,?,?,?,?,?,"+states+")";
-        Object[] obj={ord.getShopID(),ord.getName(),ord.getMoney(),ord.getSize(),ord.getOve(),ord.getUserid()};
+        String sql="INSERT INTO userorder(ordernumber,shopID,Name,Money,Size,Ove,userid,state,Date)VALUES(?,?,?,?,?,?,?,"+states+",?)";
+        Object[] obj={ord.getOrdernumber(),ord.getShopID(),ord.getName(),ord.getMoney(),ord.getSize(),ord.getOve(),ord.getUserid(),ord.getDate()};
         int count=super.executeUpdate(sql,obj);
         //手动关闭mysql
         super.closeAll();
@@ -316,7 +315,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //购物车多个删除
     public int deleteUsers(String ids,String account) {
         String sql="delete from shopping where Addid in("+ids+") AND userid=?";
-        System.out.println(sql);
         Object [] params={account};
         int count=super.executeUpdate(sql,params);
         //手动关闭mysql

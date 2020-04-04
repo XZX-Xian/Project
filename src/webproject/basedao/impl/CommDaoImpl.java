@@ -2,6 +2,7 @@ package webproject.basedao.impl;
 
 import webproject.basedao.BaseDao;
 import webproject.basedao.CommDao;
+import webproject.entity.Comm;
 
 public class CommDaoImpl extends BaseDao implements CommDao {
 
@@ -14,5 +15,18 @@ public class CommDaoImpl extends BaseDao implements CommDao {
         //手动关闭mysql
         super.closeAll();
         return count;
+    }
+
+    //新增商品
+    @Override
+    public  int ComAdd(Comm comm){
+        String sql="INSERT INTO addcommodityy(AddMoney,AddColour,AddSize,AddQuantity,AddName,AddJilu,AddPingjia,Mouseove,Mouseoveout,Addleixing)VALUES(?,?,?,?,?,?,?,?,?,?)";
+        int ccc=0;
+        try {
+            ccc=super.executeUpdate(sql,null);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return ccc;
     }
 }

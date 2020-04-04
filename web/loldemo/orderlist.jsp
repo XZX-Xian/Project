@@ -85,16 +85,19 @@
                 <table class="mermtab" width="100%" cellspacing="0" cellpadding="10" border="0">
                     <tr>
                         <th>订单商品</th>
-                        <th>订单号/时间</th>
+                        <th>订单号</th>
                         <th>总金额</th>
+                        <th>收货地址</th>
+                        <th>订单日期/时间</th>
                         <th>状态</th>
-                        <th>操作</th>
                     </tr>
                     <c:forEach items="${list}" var="in">
                         <tr>
                             <td>${in.name}</td>
                             <td>${in.ordernumber}</td>
                             <td>${in.money}</td>
+                            <td>${in.address}</td>
+                            <td>${in.date}</td>
                             <td><span hidden class="state">${in.state}</span><span></span></td>
                         </tr>
                     </c:forEach>
@@ -249,7 +252,6 @@
         }, function () {
             $(this).removeClass("a");
         });
-
         //列表样式
         $("#list li:eq(1)").addClass("list");
 

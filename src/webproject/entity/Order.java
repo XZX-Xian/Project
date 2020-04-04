@@ -7,12 +7,15 @@ public class Order {
     private int ordernumber;
     private int shopID;
     private String name;
+    private String username;
     private String money;
     private int size;
     private String ove;
     private String userid;
-    private String state;
+    private int state;
+    private String address;
     private int addressID;
+    private String date;
 
     public int getOrdernumber() {
         return ordernumber;
@@ -36,6 +39,14 @@ public class Order {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getMoney() {
@@ -70,12 +81,20 @@ public class Order {
         this.userid = userid;
     }
 
-    public String getState() {
+    public int getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(int state) {
         this.state = state;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getAddressID() {
@@ -84,5 +103,13 @@ public class Order {
 
     public void setAddressID(int addressID) {
         this.addressID = addressID;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

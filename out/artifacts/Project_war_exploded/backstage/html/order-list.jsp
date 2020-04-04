@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <%
     OrderService str=new OrderServiceImpl();
-    List<Order> list=new ArrayList<>();
+    List<Order> list=new ArrayList<Order>();
     list=str.OrderList();
     request.setAttribute("list",list);
   %>
@@ -48,7 +48,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
           <div class="layui-input-inline">
             <select name="contrller">
               <option value="">订单状态</option>
@@ -58,14 +57,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <option value="3">待评价</option>
             </select>
           </div>
-          <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
+          <input type="text" name="username" placeholder="请输入订单号"  size="20" id="fuzzy" style="height: 40px;">
+          <button class="layui-btn" onclick="fuzzy()"><i class="layui-icon">&#xe615;</i></button>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px">共有数据：${list.size()} 条</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -81,33 +78,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th >操作</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="listall">
         <c:forEach items="${list}" var="in">
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><span hidden="">${in.ordernumber}</span><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>${in.ordernumber}</td>
-            <td>${in}</td>
-            <td>${in}</td>
-            <td>${in}</td>
-            <td>${in}</td>
-            <td>${in}</td>
-            <td>${in}</td>
-            <td>老王:18925139194</td>
-            <td>7829.10</td>
-            <td>7854.10</td>
-            <td>待确认</td>
-            <td>未支付</td>
-            <td>未发货</td>
-            <td>其他方式</td>
-            <td>申通物流</td>
-            <td>2017-08-17 18:22</td>
+            <td>${in.username}</td>
+            <td>${in.money}</td>
+            <td><span hidden class="state">${in.state}</span><span></span></td>
+            <td>${in.date}</td>
             <td class="td-manage">
-              <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+              <a title="删除" onclick="member_del(this,'${in.ordernumber}')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
@@ -115,16 +98,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </c:forEach>
         </tbody>
       </table>
-      <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
-      </div>
 
     </div>
     <script>
@@ -142,51 +115,91 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
       });
 
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
+      $(function () {
 
-              if($(obj).attr('title')=='启用'){
+        //订单状态
+        var count=$(".state").length;
+        for (var i=0;i<count;i++){
+          var id=$(".state:eq("+i+")").text();
+          switch (id) {
+            case "0":
+              $(".state:eq("+i+")").next().text("待付款");
+              break;
+            case "1":
+              $(".state:eq("+i+")").next().text("待发货");
+              break;
+            case "2":
+              $(".state:eq("+i+")").next().text("待收货");
+              break;
+            case "3":
+              $(".state:eq("+i+")").next().text("待评价");
+              break;
+          }
+        }
 
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
+        //订单模糊查询
+        fuzzy=function () {
+          var name=$("#fuzzy").val();
+          var json={"ordernumber":name};
+          $("#listall").html("");
+          $.getJSON("http://localhost:8080/Project_war_exploded/orderlike",json,function (data) {
+            var list="";
+            $("#listall").html("");
+            $.each(data,function (i,item) {
+             list+="<tr>\n" +
+                    "            <td>\n" +
+                    "              <div class=\"layui-unselect layui-form-checkbox\" lay-skin=\"primary\" data-id='2'><span hidden=\"\">"+item.ordernumber+"</span><i class=\"layui-icon\">&#xe605;</i></div>\n" +
+                    "            </td>\n" +
+                    "            <td>"+item.ordernumber+"</td>\n" +
+                    "            <td>"+item.username+"</td>\n" +
+                    "            <td>"+item.money+"</td>\n" +
+                    "            <td><span hidden class=\"state\">"+item.state+"</span><span></span></td>\n" +
+                    "            <td>"+item.date+"</td>\n" +
+                    "            <td class=\"td-manage\">\n" +
+                    "              <a title=\"删除\" onclick=\"member_del(this,'"+item.ordernumber+"')\" href=\"javascript:;\">\n" +
+                    "                <i class=\"layui-icon\">&#xe640;</i>\n" +
+                    "              </a>\n" +
+                    "            </td>\n" +
+                    "          </tr>";
+          });
+            $("#listall").html(list);
+          })
+        };
 
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
+        /*用户-删除*/
+        member_del=function(obj, id) {
+          layer.confirm('确认要删除吗？', function (index) {
+            //发异步删除数据
+            var json={"ordernumber":id};
+            $.getJSON("http://localhost:8080/Project_war_exploded/orderdel",json,function (data) {
+              if (data>0){
+                $(obj).parents("tr").remove();
+                //提示弹窗
+                layer.msg('已删除!', {icon: 111, time: 1000});
               }
-              
+            });
           });
-      }
-
-      /*用户-删除*/
-      function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+        };
+        //选中删除
+        delAll=function(argument) {
+          var date=new Array();
+          var index=$(".layui-form-checked").length;
+          for(var i=0;i<index;i++){
+            var id=$(".layui-form-checked:eq("+i+")>span").text(); // value被绑定了ID
+            date.push(id);
+          }
+          layer.confirm('确认要删除吗？' + date, function (index) {
+            $.getJSON("http://localhost:8080/Project_war_exploded/orderdel?ordernumber="+date,"",function (data) {
+              if (data>0){
+                //提示弹窗
+                layer.msg('删除成功', {icon: 1,time:2000});
+                $(".layui-form-checked").not('.header').parents('tr').remove();
+              }
+            });
+            // location.href="http://localhost:8080/Project_war_exploded/userdelall?account="+date;
           });
-      }
-
-
-
-      function delAll (argument) {
-
-        var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-      }
+        };
+      });
     </script>
   </body>
 

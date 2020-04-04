@@ -31,9 +31,6 @@ public class AdminList extends HttpServlet {
         list = str.AdminDimList(name);
         String json=null;
         json= JSON.toJSONString(list);
-
-        System.out.println(json);
-
         out.print(json);
         out.close();
 
