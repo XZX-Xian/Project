@@ -1,3 +1,9 @@
+<%@ page import="webproject.service.CommService" %>
+<%@ page import="webproject.service.impl.CommServiceImpl" %>
+<%@ page import="webproject.entity.Comm" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 康爸爸
@@ -25,6 +31,13 @@
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+<%
+    CommService str=new CommServiceImpl();
+    List<Comm> list = new ArrayList<Comm>();
+    String name="";
+    list=str.CommLike(name);
+    request.setAttribute("list",list);
+%>
 <body>
 <div class="x-nav">
       <span class="layui-breadcrumb">
@@ -38,75 +51,65 @@
 </div>
 <div class="x-body">
     <div class="layui-row">
-        <!-- <form class="layui-form layui-col-md12 x-so">
-           <input class="layui-input" placeholder="开始日" name="start" id="start">
-           <input class="layui-input" placeholder="截止日" name="end" id="end">
-           <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-         </form>-->
+        <input type="text" name="username" placeholder="请输入商品名称" size="20" id="fuzzy" style="height: 40px;">
+        <button class="layui-btn" onclick="fuzzy()"><i class="layui-icon">&#xe615;</i></button>
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加商品','./admin-add.jsp')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加商品','./comm-add.jsp')"><i class="layui-icon"></i>添加</button>
 
-      <%--  <span class="x-right" style="line-height:40px">共有数据：88 条</span>--%>
-    <%--</xblock>
+        <span class="x-right" style="line-height:40px">共有数据：${list.size()} 条</span>
+</xblock>
     <table class="layui-table">
         <thead>
         <tr>
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>ID</th>
-            <th>登录名</th>
-            <th>手机</th>
-            <th>邮箱</th>
-            <th>角色</th>
-            <th>加入时间</th>
-            <th>状态</th>
+            <th>商品编号</th>
+            <th>单价</th>
+            <th>颜色</th>
+            <th>大小</th>
+            <th>库存</th>
+            <th>名称</th>
+            <th>销量</th>
+            <th>评价</th>
+            <th>展示图(一)</th>
+            <th>展示图(二)</th>
+            <th>商品详情展示图</th>
+            <th>类型</th>
             <th>操作</th>
         </thead>
-        <tbody>
+        <tbody id="listall">
+        <c:forEach items="${list}" var="in">
         <tr>
             <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><span hidden>${in.comID}</span><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>1</td>
-            <td>admin</td>
-            <td>18925139194</td>
-            <td>113664000@qq.com</td>
-            <td>超级管理员</td>
-            <td>2017-01-01 11:11:42</td>
-            <td class="td-status">
-                <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+            <td>${in.comID}</td>
+            <td>${in.comMoney}</td>
+            <td>${in.comColor}</td>
+            <td><span class="size" hidden>${in.comSize}</span><span></span></td>
+            <td>${in.comQuantity}</td>
+            <td>${in.comName}</td>
+            <td>${in.comCount}</td>
+            <td>${in.comAppCount}</td>
+            <td><img src="${in.comOve}" title="展示图(一)"></td>
+            <td><img src="${in.comOut}" title="展示图(二)"></td>
+            <td><img src="${in.comCCTV}" title="商品详情展示图" height="100px"></td>
+            <td><span class="type" hidden>${in.comtype}</span><span></span></td>
             <td class="td-manage">
-                <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                    <i class="layui-icon">&#xe601;</i>
-                </a>
                 <a title="编辑"  onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
-                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                <a title="删除" onclick="member_del(this,'${in.comID}')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
             </td>
         </tr>
+        </c:forEach>
         </tbody>
-    </table>--%>
-
-
-
-
-
-    <!--<div class="page">
-      <div>
-        <a class="prev" href="">&lt;&lt;</a>
-        <a class="num" href="">1</a>
-        <span class="current">2</span>
-        <a class="num" href="">3</a>
-        <a class="num" href="">489</a>
-        <a class="next" href="">&gt;&gt;</a>
-      </div>-->
+    </table>
 </div>
 
 </div>
@@ -124,52 +127,118 @@
             elem: '#end' //指定元素
         });
     });
+    $(function () {
+        state();
 
-    /*用户-停用*/
-    function member_stop(obj,id){
-        layer.confirm('确认要停用吗？',function(index){
+        //商品模糊查询
+        fuzzy = function () {
+            var name = $("#fuzzy").val();
+            var json = {"name": name};
+            $("#listall").html("");
+            $.getJSON("http://localhost:8080/Project_war_exploded/comlike", json, function (data) {
+                var list = "";
+                $("#listall").html("");
+                $.each(data, function (i, item) {
+                    list += "    <tr>\n" +
+                        "            <td>\n" +
+                        "                <div class=\"layui-unselect layui-form-checkbox\" lay-skin=\"primary\" data-id='2'><span hidden>"+item.comID+"</span><i class=\"layui-icon\">&#xe605;</i></div>\n" +
+                        "            </td>\n" +
+                        "            <td>"+item.comID+"</td>\n" +
+                        "            <td>"+item.comMoney+"</td>\n" +
+                        "            <td>"+item.comColor+"</td>\n" +
+                        "            <td><span class=\"size\" hidden>"+item.comSize+"</span><span></span></td>\n" +
+                        "            <td>"+item.comQuantity+"</td>\n" +
+                        "            <td>"+item.comName+"</td>\n" +
+                        "            <td>"+item.comCount+"</td>\n" +
+                        "            <td>"+item.comAppCount+"</td>\n" +
+                        "            <td><img src=\""+item.comOve+"\" title=\"展示图(一)\"></td>\n" +
+                        "            <td><img src=\""+item.comOut+"\" title=\"展示图(二)\"></td>\n" +
+                        "            <td><img src=\""+item.comCCTV+"\" title=\"商品详情展示图\" height=\"100px\"></td>\n" +
+                        "            <td><span class=\"type\" hidden>"+item.comtype+"</span><span></span></td>\n" +
+                        "            <td class=\"td-manage\">\n" +
+                        "                <a title=\"编辑\"  onclick=\"x_admin_show('编辑','admin-edit.html')\" href=\"javascript:;\">\n" +
+                        "                    <i class=\"layui-icon\">&#xe642;</i>\n" +
+                        "                </a>\n" +
+                        "                <a title=\"删除\" onclick=\"member_del(this,'"+item.comID+"')\" href=\"javascript:;\">\n" +
+                        "                    <i class=\"layui-icon\">&#xe640;</i>\n" +
+                        "                </a>\n" +
+                        "            </td>\n" +
+                        "        </tr>";
+                });
+                $("#listall").html(list);
+               state();
+            })
+        };
 
-            if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-            }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
+        /*商品-删除*/
+        member_del = function (obj, id) {
+            layer.confirm('确认要删除吗？', function (index) {
+                //发异步删除数据
+                var json = {"ids": id};
+                $.getJSON("http://localhost:8080/Project_war_exploded/commdel",json, function (data) {
+                    if (data > 0) {
+                        $(obj).parents("tr").remove();
+                        //提示弹窗
+                        layer.msg('已删除!', {icon: 111, time: 1000});
+                    }
+                });
+            });
+        };
+        //商品选中删除
+        delAll = function (argument) {
+            var date = new Array();
+            var index = $(".layui-form-checked").length;
+            for (var i = 0; i < index; i++) {
+                var id = $(".layui-form-checked:eq(" + i + ")>span").text(); // value被绑定了ID
+                date.push(id);
             }
+            layer.confirm('确认要删除吗？' + date, function (index) {
+                $.getJSON("http://localhost:8080/Project_war_exploded/commdel?ids=" + date, "", function (data) {
+                    if (data > 0) {
+                        //提示弹窗
+                        layer.msg('删除成功', {icon: 1, time: 2000});
+                        $(".layui-form-checked").not('.header').parents('tr').remove();
+                    }
+                });
+            });
+        };
 
-        });
-    }
+        //状态
+        function state() {
+            var count = $(".size").length;
+            for (var i = 0; i < count; i++) {
+                var size = $(".size:eq(" + i + ")").text();
+                switch (size) {
+                    case "1":
+                        $(".size:eq(" + i + ")").next().text("迷你型");
+                        break;
+                    case "2":
+                        $(".size:eq(" + i + ")").next().text("中型");
+                        break;
+                    case "3":
+                        $(".size:eq(" + i + ")").next().text("大型");
+                        break;
+                }
 
-    /*用户-删除*/
-    function member_del(obj,id){
-        layer.confirm('确认要删除吗？',function(index){
-            //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!',{icon:1,time:1000});
-        });
-    }
-
-
-
-    function delAll (argument) {
-
-        var data = tableCheck.getData();
-
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-    }
+                var type = $(".type:eq(" + i + ")").text();
+                switch (type) {
+                    case "1":
+                        $(".type:eq(" + i + ")").next().text("手办");
+                        break;
+                    case "2":
+                        $(".type:eq(" + i + ")").next().text("公仔");
+                        break;
+                    case "11":
+                        $(".type:eq(" + i + ")").next().text("手办套装");
+                        break;
+                    case "22":
+                        $(".type:eq(" + i + ")").next().text("公仔套装");
+                        break;
+                }
+            }
+            ;
+        };
+    });
 </script>
 </body>
 </html>
