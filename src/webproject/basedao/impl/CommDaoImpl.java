@@ -28,9 +28,9 @@ public class CommDaoImpl extends BaseDao implements CommDao {
     //新增商品
     @Override
     public int ComAdd(Comm comm) {
-        String sql = "INSERT INTO addcommodity(AddMoney,AddColour,AddSize,AddQuantity,AddName,AddJilu,AddPingjia,Mouseove,Mouseoveout,AddCCTV,Addleixing)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-        Object[] parqams={comm.getComMoney(),comm.getComColor(),comm.getSize(),comm.getComQuantity(),comm.getComName(),comm.getComCount(),comm.getComAppCount(),comm.getComOve(),comm.getComOut(),comm.getComCCTV(),comm.getComtype()};
-        int count = super.executeUpdate(sql, null);
+        String sql = "INSERT INTO addcommodity(AddMoney,AddColour,AddSize,AddQuantity,AddName,Mouseove,Mouseoveout,AddCCTV,Addleixing)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        Object[] parqams={comm.getComMoney(),comm.getComColor(),comm.getSize(),comm.getComQuantity(),comm.getComName(),comm.getComOve(),comm.getComOut(),comm.getComCCTV(),comm.getComtype()};
+        int count = super.executeUpdate(sql, parqams);
         return count;
     }
 

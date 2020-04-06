@@ -31,5 +31,6 @@
     <orderEntry type="library" name="api (3)" level="project" />
     <orderEntry type="library" name="api (4)" level="project" />
     <orderEntry type="library" name="alipay-sdk-java20170324180803 (2)" level="project" />
+    <orderEntry type="library" name="commons-fileupload-1.2.1" level="project" />
   </component>
 </module>
