@@ -301,6 +301,10 @@
                 }
             });
         })
+        //个人中心
+        $("#user").click(function () {
+            location.href = "http://localhost:8080/Project_war_exploded/userquery";
+        })
     });
 </script>
 <%--遮罩层--%>
@@ -330,7 +334,7 @@
                         <div class="grdiv" style=";margin-left: 50px;border-top: 1px #ffffff solid">
                             <p hidden class="hyp" style="position: absolute;top: 12px;margin-top: 10px;"><strong style="font-size: 12px;">(<label class="userid"></label>)</strong></p>
                             <ul style=" padding:0; margin:0;list-style-type: none;margin-top: 60px" hidden class="grzx">
-                                <li>个人中心</li>
+                                <li id="user">个人中心</li>
                                 <li id="nullopen">注销</li>
                             </ul>
                         </div>

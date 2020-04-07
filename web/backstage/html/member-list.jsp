@@ -80,7 +80,7 @@
             <tr>
                 <td>
                     <div class="layui-unselect layui-form-checkbox layui-form-checkbox" lay-skin="primary" data-id='2'><i
-                            class="layui-icon">&#xe605;</i><span hidden>${in.account}</span></div>
+                            class="layui-icon">&#xe605;</i><span style="display:none">${in.account}</span></div>
                 </td>
                 <td>${in.account}</td>
                 <td>${in.sex}</td>
@@ -138,7 +138,7 @@
                     list+="    <tr>\n" +
                         "                <td>\n" +
                         "                    <div class=\"layui-unselect layui-form-checkbox layui-form-checkbox\" lay-skin=\"primary\" data-id='2'><i\n" +
-                        "                            class=\"layui-icon\">&#xe605;</i><span hidden>"+item.account+"</span></div>\n" +
+                        "                            class=\"layui-icon\">&#xe605;</i><span style=\"display:none\">"+item.account+"</span></div>\n" +
                         "                </td>\n" +
                         "                <td>"+item.account+"</td>\n" +
                         "                <td>"+item.sex+"</td>\n" +

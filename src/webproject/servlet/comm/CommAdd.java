@@ -50,9 +50,8 @@ public class CommAdd extends HttpServlet {
         int of=0;
         while(iter.hasNext()){
             FileItem item = (FileItem) iter.next();
-            System.out.println("item"+item);
             if(!item.isFormField()){
-                System.out.println("name"+item.getFieldName());
+//                System.out.println("name"+item.getFieldName());
                 String value = item.getString();
                 value = new String(value.getBytes("ISO-8859-1"), "UTF-8");
 //                System.out.println("值"+value);
@@ -63,7 +62,7 @@ public class CommAdd extends HttpServlet {
                 /*File f = new File(getServletContext().getRealPath("upload"));*/
                 of++;
                 File f=null;
-                System.out.println("个数"+of);
+//                System.out.println("个数"+of);
 
                 if (of>2){
                     filename="/commo/"+filename;
@@ -72,13 +71,13 @@ public class CommAdd extends HttpServlet {
                 }
                 lists.add(filename);
 //                map.put(item.getFieldName(),filename);
-                System.out.println(filename);
+//                System.out.println(filename);
                 f= new File("E://idealU//Project//web//image");
                 if (!f.exists()) {
                     f.mkdir();
                 }
                 String imgsrc = f+ filename;
-                System.out.println("图片"+imgsrc);
+//                System.out.println("图片"+imgsrc);
                 // 复制文件
                 InputStream is = item.getInputStream();
                 FileOutputStream fos = new FileOutputStream(imgsrc);
@@ -90,10 +89,10 @@ public class CommAdd extends HttpServlet {
                 fos.flush();
                 fos.close();
             }else {
-                System.out.println("name"+item.getFieldName());
+//                System.out.println("name"+item.getFieldName());
                 String value = item.getString();
                 value = new String(value.getBytes("ISO-8859-1"), "UTF-8");
-                System.out.println("值"+value);
+//                System.out.println("值"+value);
                 lists.add(value);
 //                map.put(item.getFieldName(),value);
             }
@@ -118,13 +117,14 @@ public class CommAdd extends HttpServlet {
             System.out.println("新增失败");
         }
         //获取登陆页面所设定的访问路径
-        String preUrl = request.getHeader("Referer");
+//        String preUrl = request.getHeader("Referer");
         //重定向到指定页面
 //        response.sendRedirect("backstage/htm/comm-list.jsp");
         PrintWriter out=response.getWriter();
         out.print("<script type=\"text/javascript\">location.href=\"http://localhost:8080/Project_war_exploded/backstage/html/comm-add.jsp\";// 获得frame索引\n" +
                 "                var index = parent.layer.getFrameIndex(window.name);\n" +
-                "               //关闭当前frame\n" +
+                "               //提示弹窗\n" +
+                "                        layer.msg('新增成功', {icon: 1, time: 2000});//关闭当前frame\n" +
                 "                parent.layer.close(index);</script>");
     }
 }

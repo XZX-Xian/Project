@@ -87,7 +87,7 @@
             <tr>
                 <td>
                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><span
-                            hidden="">${in.ordernumber}</span><i class="layui-icon">&#xe605;</i></div>
+                            style="display:none">${in.ordernumber}</span><i class="layui-icon">&#xe605;</i></div>
                 </td>
                 <td>${in.ordernumber}</td>
                 <td>${in.username}</td>
@@ -136,7 +136,7 @@
                 $.each(data, function (i, item) {
                     list += "<tr>\n" +
                         "            <td>\n" +
-                        "              <div class=\"layui-unselect layui-form-checkbox\" lay-skin=\"primary\" data-id='2'><span hidden=\"\">" + item.ordernumber + "</span><i class=\"layui-icon\">&#xe605;</i></div>\n" +
+                        "              <div class=\"layui-unselect layui-form-checkbox\" lay-skin=\"primary\" data-id='2'><span style=\"display:none\">" + item.ordernumber + "</span><i class=\"layui-icon\">&#xe605;</i></div>\n" +
                         "            </td>\n" +
                         "            <td>" + item.ordernumber + "</td>\n" +
                         "            <td>" + item.username + "</td>\n" +
@@ -188,7 +188,7 @@
                 $.each(data, function (i, item) {
                     list += "<tr>\n" +
                         "            <td>\n" +
-                        "              <div class=\"layui-unselect layui-form-checkbox\" lay-skin=\"primary\" data-id='2'><span hidden=\"\">" + item.ordernumber + "</span><i class=\"layui-icon\">&#xe605;</i></div>\n" +
+                        "              <div class=\"layui-unselect layui-form-checkbox\" lay-skin=\"primary\" data-id='2'><span style=\"display:none\">" + item.ordernumber + "</span><i class=\"layui-icon\">&#xe605;</i></div>\n" +
                         "            </td>\n" +
                         "            <td>" + item.ordernumber + "</td>\n" +
                         "            <td>" + item.username + "</td>\n" +

@@ -11,49 +11,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     UserDao str=new UserDaoImpl();
 
-    //新增管理员
-    @Override
-    public int AdminAdd(Admin admin) {
-        int count=str.AdminAdd(admin);
-        return count;
-    }
 
-    //删除管理员
-    @Override
-    public int AdminDel(String account) {
-        int count=str.AdminDel(account);
-        return count;
-    }
-
-    //修改管理员
-    @Override
-    public int AdminUP(Admin admin) {
-        int count=str.AdminUP(admin);
-        return count;
-    }
-
-    //查询管理员
-    @Override
-    public List<Admin> AdminList(String account) {
-        List<Admin> list=new ArrayList<>();
-        list=str.AdminList(account);
-        return list;
-    }
-
-    //模糊查询管理员
-    @Override
-    public List<Admin> AdminDimList(String account) {
-        List<Admin> list=new ArrayList<>();
-        list=str.AdminDimList(account);
-        return list;
-    }
-
-    //管理员登录
-    @Override
-    public int AdminLogin(String account, String pwd) {
-        int count=str.AdminLogin(account,pwd);
-        return count;
-    }
 
     //判断商品是否被用户收藏
     @Override
@@ -119,9 +77,9 @@ public class UserServiceImpl implements UserService {
         int count=str.addressUp(ids,userid);
         System.out.println(userid);
         if (count>0){
-            System.out.println("默认地址以外清空成功！impl");
+            System.out.println("默认地址以外清空成功！");
         }else{
-            System.out.println("默认地址以外清空失败！impl");
+            System.out.println("默认地址以外清空失败！");
         }
         return count;
     }

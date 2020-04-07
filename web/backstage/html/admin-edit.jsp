@@ -1,4 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="webproject.service.AdminService" %>
+<%@ page import="webproject.service.impl.AdminServiceImpl" %>
+<%@ page import="webproject.entity.Admin" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -25,7 +28,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  
+  <%
+      String account=request.getParameter("account");
+      AdminService str=new AdminServiceImpl();
+      List<Admin> list = new ArrayList<Admin>();
+      list=str.AdminChar(account);
+      request.setAttribute("list",list);
+  %>
   <body>
     <div class="x-body">
         <form class="layui-form" action="http://localhost:8080/Project_war_exploded/adminup" >
@@ -35,10 +44,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" id="username" name="username" required lay-verify="required"
-                  autocomplete="off" value="<%=request.getParameter("account")%>" class="layui-input" readonly >
+                  autocomplete="off" value="${list.get(0).account}" class="layui-input" readonly >
               </div>
               <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>将会成为您唯一的登入名
+                  <span class="x-red">*</span>
               </div>
           </div>
           <div class="layui-form-item">
@@ -46,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <span class="x-red">*</span>手机
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="" id="phone" name="phone" required lay-verify="phone"
+                  <input type="text" value="${list.get(0).phone}" id="phone" name="phone" required lay-verify="phone"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -55,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <span class="x-red">*</span>邮箱
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="" id="L_email" name="email" required lay-verify="email"
+                  <input type="text" value="${list.get(0).email}" id="L_email" name="email" required lay-verify="email"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -63,6 +72,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <label class="layui-form-label"><span class="x-red">*</span>角色</label>
                 <div class="layui-input-block">
                     <input type="checkbox" name="like1[write]" title="管理员" checked="">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_pass" class="layui-form-label">
+                    <span class="x-red">*</span>原密码
+                </label>
+                <div class="layui-input-inline">
+                    <input type="pwd" id="pwd" name="pass" required lay-verify="pass"
+                           autocomplete="off" class="layui-input" >
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span hidden id="pwds">${list.get(0).pwd}</span>
+                    <span hidden id="pwdtext" style="color: red">输入原密码错误</span>
                 </div>
             </div>
           <div class="layui-form-item">
@@ -89,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" lay-filter="add" id="add" lay-submit="">
+              <button type="submit"  class="layui-btn" lay-filter="add" id="add" lay-submit="">
                   修改
               </button>
           </div>
@@ -115,17 +137,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             }
           });
-
-          //修改
-            $("#add").click(function () {
-                var index = parent.layer.getFrameIndex(window.name);
-                layer.alert("修改成功", {icon: 6,time:2000},function () {});
-                //关闭当前framea
-                parent.layer.close(index);
-            })
-          
-          
         });
+        $(function () {
+            $("form").submit(function () {
+                var pwd=$("#pwd").val();
+                var pwds=$("#pwds").text();
+                alert(pwds);
+                if (pwd!=pwds){
+                    $("#pwdtext").show();
+                    return false;
+                }else {
+                    $("#pwdtext").hide();
+                    return false;
+                }
+            })
+        })
     </script>
   </body>
 

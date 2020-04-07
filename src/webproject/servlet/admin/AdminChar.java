@@ -1,5 +1,6 @@
 package webproject.servlet.admin;
 
+import webproject.entity.Admin;
 import webproject.service.AdminService;
 import webproject.service.impl.AdminServiceImpl;
 
@@ -9,21 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet(name = "AdminDelAll",urlPatterns = "/admindelall")
-public class AdminDelAll extends HttpServlet {
+@WebServlet(name = "AdminChar")
+public class AdminChar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter out=response.getWriter();
+        String name=request.getParameter("name");
+
+        AdminService str=new AdminServiceImpl();
+        List<Admin> list = new ArrayList<>();
+        list = str.AdminDimList(name);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=utf-8");
-        String IdAll=request.getParameter("account");
-        AdminService str=new AdminServiceImpl();
-        int count=str.AdminDel(IdAll);
-        //获取登陆页面所设定的访问路径
-        String preUrl = request.getHeader("Referer");
-        //重定向到指定页面
-        response.sendRedirect(preUrl);
+        doPost(request,response);
     }
 }

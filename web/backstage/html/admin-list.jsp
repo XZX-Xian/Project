@@ -2,6 +2,8 @@
 <%@ page import="webproject.service.UserService" %>
 <%@ page import="webproject.service.impl.UserServiceImpl" %>
 <%@ page import="webproject.entity.Admin" %>
+<%@ page import="webproject.service.AdminService" %>
+<%@ page import="webproject.service.impl.AdminServiceImpl" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -31,7 +33,7 @@
 </head>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    UserService str = new UserServiceImpl();
+    AdminService str=new AdminServiceImpl();
     List<Admin> list = new ArrayList<Admin>();
     list = str.AdminList("1");
     request.setAttribute("list", list);
@@ -78,7 +80,7 @@
             <tr>
                 <td>
                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i
-                            class="layui-icon">&#xe605;</i><span hidden>${in.account}</span></div>
+                            class="layui-icon">&#xe605;</i><span style="display:none">${in.account}</span></div>
                 </td>
                 <td>${in.account}</td>
                 <td>${in.phone}</td>

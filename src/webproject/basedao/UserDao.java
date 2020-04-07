@@ -30,24 +30,6 @@ public interface UserDao {
     //购物车查询
 //    List<Comm> shopdemo(Comm comm);
 
-    //新增管理员
-    int AdminAdd(Admin admin);
-
-    //删除管理员
-    int AdminDel(String account);
-
-    //修改管理员
-    int AdminUP(Admin admin);
-
-    //查询全部管理员
-    List<Admin> AdminList(String account);
-
-    //模糊查询管理员
-    List<Admin> AdminDimList(String account);
-
-    //管理员登录
-    int AdminLogin(String account,String pwd);
-
     //查询收货地址
     List<Address> Seleorder(Address ads);
 

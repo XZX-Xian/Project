@@ -3,6 +3,7 @@ package webproject.basedao.impl;
 import webproject.basedao.BaseDao;
 import webproject.basedao.UserDao;
 import webproject.entity.*;
+import webproject.service.impl.UserServiceImpl;
 
 import javax.jws.soap.SOAPBinding;
 import java.sql.ResultSet;
@@ -98,28 +99,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         return list;
     }
 
-    //新增管理员
-    @Override
-    public int AdminAdd(Admin admin) {
-        String sql="INSERT INTO admin_data(account,pwd,phone,email,time)VALUES(?,?,?,?,?)";
-        Object[] params={admin.getAccount(),admin.getPwd(),admin.getPhone(),admin.getEmail(),admin.getDate()};
-        int count=super.executeUpdate(sql,params);
-        //手动关闭mysql
-        super.closeAll();
-        return count;
-    }
-
-    //删除管理员
-    @Override
-    public int AdminDel(String account) {
-        String sql="DELETE FROM admin_data WHERE account in ("+account+",?)";
-        Object[] params={account};
-        int count=super.executeUpdate(sql,params);
-        //手动关闭mysql
-        super.closeAll();
-        return count;
-    }
-
     //新增订单
     @Override
     public int orderInse(Order ord) {
@@ -135,7 +114,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //地址的状态清空
     @Override
     public int addressUp(String ids, String userid) {
-        String sql="UPDATE user_address set state=\"\" where id in("+ids+") AND user_account=?";
+        String sql="UPDATE user_address set state=\"\" where id <> '"+ids+"' AND user_account=?";
+        System.out.println(sql);
         Object[] obj={userid};
         int count=super.executeUpdate(sql,obj);
         //手动关闭mysql
@@ -157,10 +137,10 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //通过ID 查询用户购物车
     @Override
     public List<Comm> shopdemo(String account) {
-        String sql="SELECT  B.addid,C.AddQuantity,B.AddName,B.AddMoney,B.Addsize,B.mouseove \n" +
-                "FROM user_data as A\n" +
-                "INNER JOIN shopping as B ON A.user_account=B.userid\n" +
-                "INNER JOIN addcommodity as C ON B.Addid=C.AddId\n" +
+        String sql="SELECT  B.addid,C.AddQuantity,B.AddName,B.AddMoney,B.Addsize,B.mouseove \n"+
+                "FROM user_data as A\n"+
+                "INNER JOIN shopping as B ON A.user_account=B.userid\n"+
+                "INNER JOIN addcommodity as C ON B.Addid=C.AddId\n"+
                 "WHERE A.user_account=?;";
         List<Comm> list=new ArrayList<>();
         Object[] obj={account};
@@ -181,82 +161,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             e.printStackTrace();
         }
         return list;
-    }
-
-    //修改管理员
-    @Override
-    public int AdminUP(Admin admin) {
-        String sql="UPDATE admin_data SET pwd=?,phone=?,email=? WHERE  account=?";
-        Object[] params={admin.getPwd(),admin.getPhone(),admin.getEmail(),admin.getAccount()};
-        int count=super.executeUpdate(sql,params);
-        //手动关闭mysql
-        super.closeAll();
-        return count;
-    }
-
-    //查询全部管理员
-    @Override
-    public List<Admin> AdminList(String account) {
-        String sql="SELECT * FROM admin_data WHERE account <> '"+account+"'";
-        List<Admin> list=new ArrayList<>();
-        ResultSet rs=null;
-        try {
-            rs=super.exceuteQuery(sql,null);
-            while (rs.next()){
-                Admin admin=new Admin();
-                admin.setAccount(rs.getString(1));
-                admin.setPwd(rs.getString(2));
-                admin.setPhone(rs.getString(3));
-                admin.setEmail(rs.getString(4));
-                admin.setRole(rs.getString(5));
-                admin.setDate(rs.getString(6));
-                list.add(admin);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    //模糊查询全部管理员
-    @Override
-    public List<Admin> AdminDimList(String account) {
-        String sql="SELECT * FROM admin_data WHERE account LIKE '%"+account+"%'";
-        List<Admin> list=new ArrayList<>();
-        ResultSet rs=null;
-        try {
-            rs=super.exceuteQuery(sql,null);
-            while (rs.next()){
-                Admin admin=new Admin();
-                admin.setAccount(rs.getString(1));
-                admin.setPwd(rs.getString(2));
-                admin.setPhone(rs.getString(3));
-                admin.setEmail(rs.getString(4));
-                admin.setRole(rs.getString(5));
-                admin.setDate(rs.getString(6));
-                list.add(admin);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    //管理员登录
-    @Override
-    public int AdminLogin(String account, String pwd) {
-        String sql="SELECT COUNT(1) FROM admin_data WHERE account=? AND pwd=?";
-        Object[] params={account,pwd};
-        int count=0;
-        ResultSet rs=null;
-        try {
-            rs=super.exceuteQuery(sql,params);
-            rs.next();
-            count=rs.getInt(1);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return count;
     }
 
     //查询收货地址

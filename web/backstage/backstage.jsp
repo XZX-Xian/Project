@@ -52,8 +52,8 @@
         <li class="layui-nav-item">
             <a href="javascript:;"><%=admin%></a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a onClick="x_admin_show('个人信息','')">个人信息</a></dd>
-                <dd><a onClick="x_admin_show('切换帐号','')">切换帐号</a></dd>
+                <dd><a onclick="x_admin_show('编辑','html/admin-edit.jsp?account='+<%=admin%>)">个人信息</a></dd>
+<%--                <dd><a onClick="x_admin_show('切换帐号','')">切换帐号</a></dd>--%>
                 <dd><a href="http://localhost:8080/Project_war_exploded/adminclear">退出</a></dd>
             </dl>
         </li>
@@ -74,7 +74,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="html/welcome.jsp"><i class="iconfont">&#xe6a7;</i><cite>控制台</cite></a></li>
+                    <li><a _href="html/comm-list.jsp"><i class="iconfont">&#xe6a7;</i><cite>控制台</cite></a></li>
                 </ul>
             </li>
             <li>

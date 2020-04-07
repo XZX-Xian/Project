@@ -43,23 +43,24 @@
                 <img src="\subject\cx.png" alt="" width="35px" style="position: absolute;top: 8px">
             </div>
 
-                <%--登录框--%>
-                <div style="width: 160px;height: 55px;display:inline-block;margin-left: 50px">
-                    <img src="\subject\yhu.png" alt="" width="30"
-                         style="position: absolute;top: 12px;margin-left: 260px;margin-top: 5px">
-                    <strong style="position: absolute;top: 12px;margin-left: 295px;margin-top: 10px;width: 200px"><span
-                            id="greet">欢迎,请</span><a href="#" id="register" class="dlu">登录</a>
-                        <%--存放账号--%>
-                        <label class="userid"></label>
-                        <span id="account"></span>
-                        <span id="cancel" hidden style="padding-left: 10px;color:#EE5A24; ">注销</span></strong>
-                </div>
+            <%--登录框--%>
+            <div style="width: 160px;height: 55px;display:inline-block;margin-left: 50px">
+                <img src="\subject\yhu.png" alt="" width="30"
+                     style="position: absolute;top: 12px;margin-left: 260px;margin-top: 5px">
+                <strong style="position: absolute;top: 12px;margin-left: 295px;margin-top: 10px;width: 200px"><span
+                        id="greet">欢迎,请</span><a href="#" id="register" class="dlu">登录</a>
+                    <%--存放账号--%>
+                    <label class="userid"></label>
+                    <span id="account"></span>
+                    <span id="cancel" hidden style="padding-left: 10px;color:#EE5A24; ">注销</span></strong>
+            </div>
             <%--购物车框--%>
-                <%--购物车框--%>
-                <div class="gouwuc" style="width: 120px;height: 55px;display:inline-block;margin-right: 10px">
-                    <img src="\subject\gwc.png" alt="" width="35px" style="position: absolute;top: 12px;margin-left: 280px;margin-top: 3px">
-                    <strong style="position: absolute;top: 12px;margin-left: 320px;margin-top: 10px;width: 90px"><a>购物车</a></strong>
-                </div>
+            <%--购物车框--%>
+            <div class="gouwuc" style="width: 120px;height: 55px;display:inline-block;margin-right: 10px">
+                <img src="\subject\gwc.png" alt="" width="35px"
+                     style="position: absolute;top: 12px;margin-left: 280px;margin-top: 3px">
+                <strong style="position: absolute;top: 12px;margin-left: 320px;margin-top: 10px;width: 90px"><a>购物车</a></strong>
+            </div>
 
         </div>
         <%--导航栏内容--%>
@@ -95,8 +96,8 @@
                     <%--                                      style="background-color: red;color: white;">加入购物车</a>--%>
                     <%--                        </span>--%>
                     <span>
-                                     <a href="javascript:deleteAllFavorite();" class="shouc2"
-                                        style="color: black;">删除</a>
+                                     <a href="javascript:;" class="shouc2"
+                                        style="color: black;" onclick="delAll()">删除</a>
                         </span>
                 </div>
                 <table class="mermtab" width="100%" cellspacing="0" cellpadding="10" border="0">
@@ -110,12 +111,14 @@
                         <tr class="collect">
                             <td>
                                 <label>
-                                    <input class="wcenter" name="goodsId" value="" type="checkbox">
+                                    <input class="wcenter" name="goodsId" value="" type="checkbox"><span
+                                        hidden>${lit.shopid}</span>
                                 </label>
                             </td>
                             <td><img src="${lit.oce}" onclick="collimg(${lit.shopid})" height="80" width="80"></td>
                             <td>${lit.name}</td>
-                            <td><%--<span style="padding-left: 0px">加入购物车</span>--%><span>删除</span></td>
+                            <td><%--<span style="padding-left: 0px">加入购物车</span>--%><span
+                                    onclick="collectdel('${lit.shopid}')">删除</span></td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -164,8 +167,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        collimg=function (id) {
-            location.href = "http://localhost:8080/Project_war_exploded/selehome?name="+id;
+        collimg = function (id) {
+            location.href = "http://localhost:8080/Project_war_exploded/selehome?name=" + id;
         };
         // 判断是否直接跳入
         var url = document.referrer;
@@ -205,12 +208,12 @@
 
         //单击购物车
         $(".gouwuc").click(function () {
-            location.href="http://localhost:8080/Project_war_exploded/seleshop";
+            location.href = "http://localhost:8080/Project_war_exploded/seleshop";
         });
 
         // 我的订单
         $("#order").click(function () {
-            location.href="http://localhost:8080/Project_war_exploded/orderlist";
+            location.href = "http://localhost:8080/Project_war_exploded/orderlist";
         });
 
         // 商品收藏
@@ -238,7 +241,34 @@
                 });
             }
         });
-
+        /*删除*/
+        collectdel = function (id) {
+            var pd = confirm('确认要删除吗？');
+            if (pd) {
+                //发异步删除数据
+                location.href = "http://localhost:8080/Project_war_exploded/collectdel?ids=" + id;
+            }
+            ;
+        };
+        //选中删除
+        delAll = function (argument) {
+            var date = new Array();
+            var index = $(".wcenter").length;
+            var db = false;
+            for (var i = 0; i < index; i++) {
+                if ($(".wcenter:checked")) {
+                    var id = $(".wcenter:eq(" + i + ")>span").text(); // value被绑定了ID
+                    date.push(id);
+                    db = true;
+                }
+            }
+            if (db) {
+                var pd = confirm('确认要删除吗？' + date);
+                if (pd) {
+                    location.href = "http://localhost:8080/Project_war_exploded/collectdel?ids=" + date;
+                };
+            }
+        };
     });
 </script>
 </html>

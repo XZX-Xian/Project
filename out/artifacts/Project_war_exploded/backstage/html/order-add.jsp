@@ -164,22 +164,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
           });
 
-          //监听提交
-          form.on('submit(add)', function(data){
-            console.log(data);
-            //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6},function () {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
-            });
-            return false;
-          });
-          
-          
+            // window.parent.close();
         });
     </script>
+<%--  <script type="text/javascript">location.href="http://localhost:8080/Project_war_exploded/backstage/html/comm-add.jsp";window.parent.close();</script>--%>
   </body>
 
 </html>

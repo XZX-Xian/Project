@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" lay-filter="add" id="add" lay-submit="">增加</button>
+              <button type="submit"  class="layui-btn" lay-filter="add" id="add" lay-submit="">增加</button>
           </div>
       </form>
     </div>
@@ -113,12 +113,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             }
           });
-          $("#add").click(function () {
-              var index = parent.layer.getFrameIndex(window.name);
-              layer.alert("增加成功", {icon: 6,time:2000},function () {});
-              //关闭当前frame
-              parent.layer.close(index);
-          })
         });
     </script>
   </body>

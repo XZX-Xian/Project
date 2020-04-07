@@ -2,9 +2,8 @@ package webproject.servlet.admin;
 
 import com.alibaba.fastjson.JSON;
 import webproject.entity.Admin;
-import webproject.entity.User;
-import webproject.service.UserService;
-import webproject.service.impl.UserServiceImpl;
+import webproject.service.AdminService;
+import webproject.service.impl.AdminServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +25,7 @@ public class AdminList extends HttpServlet {
         PrintWriter out=response.getWriter();
         String name=request.getParameter("name");
 
-        UserService str = new UserServiceImpl();
+        AdminService str=new AdminServiceImpl();
         List<Admin> list = new ArrayList<>();
         list = str.AdminDimList(name);
         String json=null;

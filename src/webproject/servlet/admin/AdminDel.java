@@ -1,7 +1,7 @@
 package webproject.servlet.admin;
 
-import webproject.service.UserService;
-import webproject.service.impl.UserServiceImpl;
+import webproject.service.AdminService;
+import webproject.service.impl.AdminServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +16,7 @@ public class AdminDel extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         String account=request.getParameter("account");
-        UserService str=new UserServiceImpl();
+        AdminService str=new AdminServiceImpl();
         int count=str.AdminDel(account);
         PrintWriter out=response.getWriter();
         out.print(count);

@@ -1,17 +1,14 @@
 package webproject.service.impl;
 
-import webproject.basedao.BaseDao;
 import webproject.basedao.CommDao;
-import webproject.basedao.UserDao;
 import webproject.basedao.impl.CommDaoImpl;
-import webproject.basedao.impl.UserDaoImpl;
 import webproject.entity.Comm;
 import webproject.service.CommService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommServiceImpl extends BaseDao implements CommService {
+public class CommServiceImpl implements CommService {
             CommDao str=new CommDaoImpl();
 
     //修改库存

@@ -84,7 +84,7 @@
         <c:forEach items="${list}" var="in">
         <tr>
             <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><span hidden>${in.comID}</span><i class="layui-icon">&#xe605;</i></div>
+                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><span style="display:none">${in.comID}</span><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>${in.comID}</td>
             <td>${in.comMoney}</td>
@@ -141,7 +141,7 @@
                 $.each(data, function (i, item) {
                     list += "    <tr>\n" +
                         "            <td>\n" +
-                        "                <div class=\"layui-unselect layui-form-checkbox\" lay-skin=\"primary\" data-id='2'><span hidden>"+item.comID+"</span><i class=\"layui-icon\">&#xe605;</i></div>\n" +
+                        "                <div class=\"layui-unselect layui-form-checkbox\" lay-skin=\"primary\" data-id='2'><span style=\"display:none\">"+item.comID+"</span><i class=\"layui-icon\">&#xe605;</i></div>\n" +
                         "            </td>\n" +
                         "            <td>"+item.comID+"</td>\n" +
                         "            <td>"+item.comMoney+"</td>\n" +

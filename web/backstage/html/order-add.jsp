@@ -167,7 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             // window.parent.close();
         });
     </script>
-  <script type="text/javascript">location.href="http://localhost:8080/Project_war_exploded/backstage/html/comm-add.jsp";window.parent.close();</script>
+<%--  <script type="text/javascript">location.href="http://localhost:8080/Project_war_exploded/backstage/html/comm-add.jsp";window.parent.close();</script>--%>
   </body>
 
 </html>

@@ -34,7 +34,7 @@ public class ShippingQuery extends HttpServlet {
 
         String json= JSON.toJSONString(address);
 
-        System.out.println("收货地址修改后的数据"+json);
+//        System.out.println("收货地址修改后的数据"+json);
         out.print(json);
         out.close();
     }

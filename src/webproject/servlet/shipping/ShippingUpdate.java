@@ -35,7 +35,6 @@ public class ShippingUpdate extends HttpServlet {
         HttpSession session=req.getSession();
         String account=(String)session.getAttribute("account");
 
-
         String name=req.getParameter("name");
         String province=req.getParameter("province");
         String city=req.getParameter("city");
@@ -62,12 +61,20 @@ public class ShippingUpdate extends HttpServlet {
         UserService str=new UserServiceImpl();
         int count=str.ShiUpdate(address);
         if (count>0){
-            out.print("<script type=\"text/javascript\">   alert(\"修改成功\"); location.href = \"http://localhost:8080/Project_war_exploded/shiselete\"</script>");
+            String ids=id+"";
+            System.out.println(ids);
+            System.out.println(state);
+            if (state!=""){
+                UserService use=new UserServiceImpl();
+                int sun=use.addressUp(ids,account);
+                resp.sendRedirect("http://localhost:8080/Project_war_exploded/shiselete");
+            }else {
+                System.out.println("不等于空");
+            }
+//            out.print("<script type=\"text/javascript\">location.href = \"http://localhost:8080/Project_war_exploded/shiselete\"</script>");
         }else {
-            out.print("<script type=\"text/javascript\">   alert(\"修改失败\"); location.href = \"http://localhost:8080/Project_war_exploded/shiselete\"</script>");
+//            out.print("<script type=\"text/javascript\">location.href = \"http://localhost:8080/Project_war_exploded/shiselete\"</script>");
         }
-
-
 
     }
 }
