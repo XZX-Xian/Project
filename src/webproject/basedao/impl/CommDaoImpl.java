@@ -28,9 +28,11 @@ public class CommDaoImpl extends BaseDao implements CommDao {
     //新增商品
     @Override
     public int ComAdd(Comm comm) {
-        String sql = "INSERT INTO addcommodity(AddMoney,AddColour,AddSize,AddQuantity,AddName,Mouseove,Mouseoveout,AddCCTV,Addleixing)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO addcommodity(AddMoney,AddColour,AddSize,AddQuantity,AddName,Mouseove,Mouseoveout,AddCCTV,Addleixing)VALUES(?,?,?,?,?,?,?,?,?)";
         Object[] parqams={comm.getComMoney(),comm.getComColor(),comm.getSize(),comm.getComQuantity(),comm.getComName(),comm.getComOve(),comm.getComOut(),comm.getComCCTV(),comm.getComtype()};
         int count = super.executeUpdate(sql, parqams);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 
@@ -71,6 +73,8 @@ public class CommDaoImpl extends BaseDao implements CommDao {
         System.out.println(sql);
         Object[] params={ids};
         int count=super.executeUpdate(sql,params);
+        //手动关闭mysql
+        super.closeAll();
         return count;
     }
 

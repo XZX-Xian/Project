@@ -42,6 +42,7 @@
 </script>
 <body>
 <!-- 顶部开始 -->
+
 <div class="container">
     <div class="logo"><a href="index.html">魄罗商城后台</a></div>
     <div class="left_open">
@@ -73,7 +74,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="html/welcome.jsp"><i class="iconfont">&#xe6a7;</i><cite>控制台</cite></a></li >
+                    <li><a _href="html/welcome.jsp"><i class="iconfont">&#xe6a7;</i><cite>控制台</cite></a></li>
                 </ul>
             </li>
             <li>

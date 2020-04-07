@@ -117,7 +117,14 @@ public class CommAdd extends HttpServlet {
         }else {
             System.out.println("新增失败");
         }
+        //获取登陆页面所设定的访问路径
+        String preUrl = request.getHeader("Referer");
         //重定向到指定页面
-        response.sendRedirect("backstage/htm/comm-list.jsp?");
+//        response.sendRedirect("backstage/htm/comm-list.jsp");
+        PrintWriter out=response.getWriter();
+        out.print("<script type=\"text/javascript\">location.href=\"http://localhost:8080/Project_war_exploded/backstage/html/comm-add.jsp\";// 获得frame索引\n" +
+                "                var index = parent.layer.getFrameIndex(window.name);\n" +
+                "               //关闭当前frame\n" +
+                "                parent.layer.close(index);</script>");
     }
 }
