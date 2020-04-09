@@ -183,8 +183,8 @@
                                     <td width="200" class="right">默认收货：</td>
                                     <td width="740">
                                         <select id="isDefault" name="isDefault">
-                                            <option value="否">否</option>
-                                            <option value="是">是</option>
+                                            <option value="">否</option>
+                                            <option value="默认地址">是</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -351,7 +351,12 @@
                 $("#address").val(data.address);
                 $("#moblie").val(data.phone);
                 $("#postCode").val(data.code);
-                $("#isDefault").val(data.state);
+                var address=data.state;
+                if(address==""){
+                    $("#isDefault").prop('selectedIndex', 0);
+                }else {
+                    $("#isDefault").prop('selectedIndex', 1);
+                }
             })
         };
 

@@ -214,7 +214,7 @@
             <div>
                 <p style=";margin-bottom: 10px" class="deleshop">删除</p>
                 <label hidden class="shopid">${lit.comID}</label>
-                <p>移入收藏夹</p>
+<%--                <p>移入收藏夹</p>--%>
             </div>
         </td>
     </tr>

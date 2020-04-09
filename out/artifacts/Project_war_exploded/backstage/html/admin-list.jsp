@@ -147,7 +147,7 @@
                         "                <td>"+item.role+"</td>\n" +
                         "                <td>"+item.date+"</td>\n" +
                         "                <td class=\"td-manage\">\n" +
-                        "                    <a title=\"编辑\" onclick=\"x_admin_show('编辑','admin-edit.jsp')\" href=\"javascript:;\">\n" +
+                        "                    <a title=\"编辑\" onclick=\"x_admin_show('编辑','admin-edit.jsp?account='"+item.account+")\" href=\"javascript:;\">\n" +
                         "                        <i class=\"layui-icon\">&#xe642;</i>\n" +
                         "                    </a>\n" +
                         "                    <a title=\"删除\" onclick=\"member_del(this,'"+item.account+"')\" href=\"javascript:;\">\n" +

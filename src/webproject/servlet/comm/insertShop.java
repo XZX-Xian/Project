@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 加入购物车
+ */
 @WebServlet(name = "insertShop",urlPatterns = "/inseshop")
 public class insertShop extends HttpServlet {
     @Override
@@ -31,6 +34,8 @@ public class insertShop extends HttpServlet {
         //获得账号
         HttpSession session = req.getSession();
         String userid = (String) session.getAttribute("account");
+        int volume=Integer.parseInt(req.getParameter("volume"));
+
 
         UserService use = new UserServiceImpl();
         Comm com = new Comm();
@@ -51,9 +56,12 @@ public class insertShop extends HttpServlet {
             int count = use.shopinse(com);
             if (count > 0) {
                 System.out.println("添加到购物车成功！");
+                //库存数
                 int inve=inventory-size;
+                //交易量
+                int volumes=volume+size;
                 CommService str=new CommServiceImpl();
-                int con=str.ComUP(inve,id);
+                int con=str.ComUP(inve,volumes,id);
                 if (con>0){
                     resp.sendRedirect("http://localhost:8080/Project_war_exploded/seleshop");
                 }else {

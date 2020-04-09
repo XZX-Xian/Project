@@ -13,8 +13,8 @@ public class CommServiceImpl implements CommService {
 
     //修改库存
     @Override
-    public int ComUP(int quantity,int id) {
-        int count=str.ComUP(quantity,id);
+    public int ComUP(int quantity,int volumes,int id) {
+        int count=str.ComUP(quantity,volumes,id);
         return count;
     }
 
@@ -37,6 +37,21 @@ public class CommServiceImpl implements CommService {
     @Override
     public int ComDel(String ids) {
         int count=str.ComDel(ids);
+        return count;
+    }
+
+    //单个商品查询
+    @Override
+    public List<Comm> CommID(String comid) {
+        List<Comm> list=new ArrayList<>();
+        list=str.CommID(comid);
+        return list;
+    }
+
+    //商品修改
+    @Override
+    public int ComListUP(Comm comm) {
+        int count=str.ComListUP(comm);
         return count;
     }
 }

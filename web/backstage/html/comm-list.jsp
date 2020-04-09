@@ -78,6 +78,7 @@
             <th>展示图(二)</th>
             <th>商品详情展示图</th>
             <th>类型</th>
+            <th>状态</th>
             <th>操作</th>
         </thead>
         <tbody id="listall">
@@ -98,8 +99,9 @@
             <td><img src="${in.comOut}" title="展示图(二)"></td>
             <td><img src="${in.comCCTV}" title="商品详情展示图" height="100px"></td>
             <td><span class="type" hidden>${in.comtype}</span><span></span></td>
+            <td><span class="limit" hidden>${in.limit}</span><span></span></td>
             <td class="td-manage">
-                <a title="编辑"  onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
+                <a title="编辑"  onclick="x_admin_show('编辑','comm-edit.jsp?comid='+${in.comID})" href="javascript:;">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
                 <a title="删除" onclick="member_del(this,'${in.comID}')" href="javascript:;">
@@ -156,7 +158,7 @@
                         "            <td><img src=\""+item.comCCTV+"\" title=\"商品详情展示图\" height=\"100px\"></td>\n" +
                         "            <td><span class=\"type\" hidden>"+item.comtype+"</span><span></span></td>\n" +
                         "            <td class=\"td-manage\">\n" +
-                        "                <a title=\"编辑\"  onclick=\"x_admin_show('编辑','admin-edit.html')\" href=\"javascript:;\">\n" +
+                        "                <a title=\"编辑\"  onclick=\"x_admin_show('编辑','comm-edit.jsp?comid='"+item.comID+")\" href=\"javascript:;\">\n" +
                         "                    <i class=\"layui-icon\">&#xe642;</i>\n" +
                         "                </a>\n" +
                         "                <a title=\"删除\" onclick=\"member_del(this,'"+item.comID+"')\" href=\"javascript:;\">\n" +
@@ -203,7 +205,7 @@
             });
         };
 
-        //状态
+        //默认大小
         function state() {
             var count = $(".size").length;
             for (var i = 0; i < count; i++) {
@@ -220,6 +222,7 @@
                         break;
                 }
 
+                //默认类型
                 var type = $(".type:eq(" + i + ")").text();
                 switch (type) {
                     case "1":
@@ -233,6 +236,17 @@
                         break;
                     case "22":
                         $(".type:eq(" + i + ")").next().text("公仔套装");
+                        break;
+                }
+
+                //默认状态
+                var limit = $(".limit:eq(" + i + ")").text();
+                switch (limit) {
+                    case "0":
+                        $(".limit:eq(" + i + ")").next().text("已下架");
+                        break;
+                    case "1":
+                        $(".limit:eq(" + i + ")").next().text("在售");
                         break;
                 }
             }

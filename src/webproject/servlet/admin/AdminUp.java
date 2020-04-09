@@ -34,11 +34,17 @@ public class AdminUp extends HttpServlet {
         }
         //重定向到指定页面
         PrintWriter out=response.getWriter();
-        out.print("<script type=\"text/javascript\">location.href=\"http://localhost:8080/Project_war_exploded/backstage/html/admin-edit.jsp\";// 获得frame索引\n" +
+//        location.href=\"http://localhost:8080/Project_war_exploded/backstage/html/admin-edit.jsp?account="+account+"\";
+        out.print("<script type=\"text/javascript\">" +
+                "// 获得frame索引\n" +
                 "                var index = parent.layer.getFrameIndex(window.name);\n" +
-                "               //提示弹窗\n" +
-                "                        layer.msg('修改成功', {icon: 1, time: 2000});//关闭当前frame\n" +
-                "                parent.layer.close(index);</script>");
+                "     /* alert(index);*///提示弹窗\n" +
+//                "window.opener.reload();" +
+//                "                        layer.msg('修改成功', {icon: 1, time: 2000});//关闭当前frame\n" +
+//                "window.parent.location.href=\"http://localhost:8080/Project_war_exploded/backstage/html/admin-edit.jsp?account="+account+"\";                " +
+                "parent.layer.close(index);" +
+                "window.close()</script>" +
+                "");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -24,6 +24,7 @@ public class Comm {
     private String userid;      //用户商品添加id
     private int size;           //用户添加商品数量
     private int id;             //商品详情ID
+    private int limit;          //商品状态
 
     //封装
     public int getComID() {
@@ -184,5 +185,13 @@ public class Comm {
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
     }
 }
