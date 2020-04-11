@@ -60,13 +60,13 @@
                 $(".userdhdl").show();
                 $(".dh").show();
             });
+
             $(".zh").click(function () {
                 $(this).parent().parent().hide();
                 $(".userdl").show();
                 $(".userdhdl").hide();
                 $(".zhanh").show();
             });
-
 
             //用户登录
             $(".userdl").click(function () {
@@ -80,13 +80,16 @@
                 var Updh=$("input[name=Updh]").val();
                 var Uppwd=$("input[name=Uppwd ]").val();
                 var Upname=$("input[name=Upname ]").val();
+                alert(Updh)
+                alert(Uppwd)
+                alert(Upname)
 
                 if(Upname==""||Updh==""||Uppwd==""){
                     $(".c2cyh").show();
                     $(".c2cyh").children("p").text("请先填完全部框!");
                     $(".c2cyh").delay(1000).hide(0);
                 }else{
-                    location.href="http://localhost:8080/Project_war_exploded/upuser?Uppwd="+Uppwd+"&Upname="+Upname+"&Updh="+Upname;
+                    location.href="http://localhost:8080/Project_war_exploded/upuser?Uppwd="+Uppwd+"&Upname="+Upname+"&Updh="+Updh;
 
                 }
 
@@ -297,9 +300,12 @@
                                     </ul>
 
                                     <div align="left" style="margin-left: 30px;margin-top:20px;" class="zhanh">
-                                        <label   style="font-size: 10px;font-weight: bold">用户账户*</label><span style="font-size: 8px;color: #ccc">(6-10位字符)</span>
-                                        <div style="margin-top: 5px;margin-bottom: 5px"><input name="Upname" type="text" style="width: 470px;height: 40px"></div>
-                                        <div style="margin-top: 15px;margin-bottom: 5px">  <label style="font-size: 12px" ><span  style="font-weight: bold">补全手机号*</span><span style="font-size: 8px;color: #ccc">(11位号码)</span></label>
+                                        <label   style="font-size: 10px;font-weight: bold">用户账户*</label>
+                                        <span style="font-size: 8px;color: #ccc">(6-10位字符)</span>
+                                        <div style="margin-top: 5px;margin-bottom: 5px">
+                                            <input name="Upname" type="text" style="width: 470px;height: 40px"></div>
+                                        <div style="margin-top: 15px;margin-bottom: 5px">
+                                            <label style="font-size: 12px" ><span  style="font-weight: bold">补全手机号*</span><span style="font-size: 8px;color: #ccc">(11位号码)</span></label>
                                             <input type="text" name="Updh" style="width: 470px;height: 40px">
                                         </div>
                                     </div>
@@ -317,7 +323,7 @@
                                         </div>
                                     </div>
                                     <div style="margin-top: 20px;margin-left: 30px" align="left">
-                                        <input align="center" type="checkbox" checked="checked" style="width: 16px;height: 16px"><span style="font-size: 12px">欢迎登录（魄罗商城）</span>
+<%--                                        <input align="center" type="checkbox" checked="checked" style="width: 16px;height: 16px"><span style="font-size: 12px">欢迎登录（魄罗商城）</span>--%>
                         </div>
                                     <div align="center" style="margin-top: 25px">
                                         <input type="button" class="userupda" value="确认修改" style="border:none;font-size: 15px;font-weight: bold;color: white;background-color: black;border-radius: 5px;width: 295px;height: 50px;">

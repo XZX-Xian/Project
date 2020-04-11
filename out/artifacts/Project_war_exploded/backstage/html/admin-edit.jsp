@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <span class="x-red">*</span>原密码
                 </label>
                 <div class="layui-input-inline">
-                    <input type="pwd" id="pwd" name="pass" required lay-verify="pass"
+                    <input type="pwd" id="pwd" name="pwd" required lay-verify="pass"
                            autocomplete="off" class="layui-input" >
                 </div>
                 <div class="layui-form-mid layui-word-aux">
@@ -142,13 +142,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $("form").submit(function () {
                 var pwd=$("#pwd").val();
                 var pwds=$("#pwds").text();
-                alert(pwds);
+                //查看密码
+                // alert(pwds);
                 if (pwd!=pwds){
                     $("#pwdtext").show();
                     return false;
                 }else {
                     $("#pwdtext").hide();
-                    return false;
                 }
             })
         })

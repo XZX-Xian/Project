@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 忘记密码通过手机号修改密码
+ */
 @WebServlet(name = "Upuser",urlPatterns = "/upuser")
 public class Upuser extends HttpServlet {
     @Override
@@ -29,10 +32,11 @@ public class Upuser extends HttpServlet {
         int count=us.UpdateUser(user);
     if (count>0){
         System.out.println("修改成功！");
-        req.getRequestDispatcher("/loldemo/home.jsp").forward(req, resp);
+        resp.sendRedirect("http://localhost:8080/Project_war_exploded/loldemo/home.jsp");
+//        req.getRequestDispatcher("/loldemo/home.jsp").forward(req, resp);
     }else{
-        System.out.println("登录失败！");
-        resp.sendRedirect("http://localhost:8080/Project_war_exploded/loldemo/index.jsp");
+        System.out.println("修改失败！");
+        resp.sendRedirect("http://localhost:8080/Project_war_exploded/loldemo/denlv.jsp");
     }
     }
 

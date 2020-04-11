@@ -19,6 +19,7 @@ import java.util.Date;
  */
 @WebServlet(name = "AdminAdd",urlPatterns = "/adminadd")
 public class AdminAdd extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
 
@@ -46,13 +47,16 @@ public class AdminAdd extends HttpServlet {
             System.out.println("新增失败");
         }
         PrintWriter out=response.getWriter();
-        out.print("<script type=\"text/javascript\">location.href=\"http://localhost:8080/Project_war_exploded/backstage/html/admin-list.jsp\";// 获得frame索引\n" +
+//        location.href="http://localhost:8080/Project_war_exploded/backstage/html/admin-list.jsp"
+        out.print("<script type=\"text/javascript\">// 获得frame索引\n" +
                 "                var index = parent.layer.getFrameIndex(window.name);\n" +
                 "               //提示弹窗\n" +
                 "                        layer.msg('新增成功', {icon: 1, time: 2000});//关闭当前frame\n" +
-                "                parent.layer.close(index);</script>");
+                "                parent.layer.close(index);" +
+                "window.close();</script>");
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

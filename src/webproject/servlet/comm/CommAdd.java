@@ -24,12 +24,14 @@ import java.util.List;
  */
 @WebServlet(name = "CommAdd",urlPatterns = "/comadd")
 public class CommAdd extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }
     @SuppressWarnings("rawtypes")
     public static String filename = null;
     private static final long serialVersionUID = 1L;
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
 
@@ -121,10 +123,12 @@ public class CommAdd extends HttpServlet {
         //重定向到指定页面
 //        response.sendRedirect("backstage/htm/comm-list.jsp");
         PrintWriter out=response.getWriter();
-        out.print("<script type=\"text/javascript\">location.href=\"http://localhost:8080/Project_war_exploded/backstage/html/comm-add.jsp\";// 获得frame索引\n" +
+//        location.href="http://localhost:8080/Project_war_exploded/backstage/html/comm-add.jsp";
+        out.print("<script type=\"text/javascript\">// 获得frame索引\n" +
                 "                var index = parent.layer.getFrameIndex(window.name);\n" +
                 "               //提示弹窗\n" +
                 "                        layer.msg('新增成功', {icon: 1, time: 2000});//关闭当前frame\n" +
-                "                parent.layer.close(index);</script>");
+                "                parent.layer.close(index);" +
+                "window.close();</script>");
     }
 }

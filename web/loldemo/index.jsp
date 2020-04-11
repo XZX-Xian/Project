@@ -273,7 +273,7 @@
                     } else {
                         a += "                                    <li hidden style=\"display: inline-block;margin: 16px 35px;text-align: center;\" class=\"tup\" >\n" +
                             "                                    <div hidden style=\"width: 185px; height: 195px;margin: 0 46px\">\n" +
-                            "                                        <a href=\"http://localhost:6060/League_of_Legends_war_exploded/selehome?name=" + item.comID + "\"><img src=\"" + item.comOve + "\" alt=\"\" height='215px' width=\"178px\">\n" +
+                            "                                        <a href=\"http://localhost:8080/Project_war_exploded/selehome?name=" + item.comID + "\"><img src=\"" + item.comOve + "\" alt=\"\" height='215px' width=\"178px\">\n" +
                             "                                            <img src=\"" + item.comOut + "\" alt=\"\" width=\"137px\" hidden ></a>\n" +
                             "                                    </div>\n" +
                             "                                    <div hidden style=\"margin-bottom: 0\" >\n" +
@@ -521,7 +521,6 @@
         <div align="right">
             <img src="\subject\gb.png" style="cursor:pointer;width: 50px;height: 30px" class="gb">
         </div>
-
         <form action="">
             <div align="center" style="z-index: 101">
                 <img style="width: 80px;padding-top:-5px;" src="\subject\loading.png" alt="">
@@ -531,11 +530,8 @@
             <input type="text" class="name" name="username"
                    style="margin-top: -5px;width: 250px;height: 35px;margin-bottom: 25px;font-size: 13px;display: block"
                    placeholder="用户名">
-
-
             <input type="password" name="userpwd" class="pwd"
                    style="margin-left: 5px;width: 250px;height: 35px;font-size: 13px" placeholder="密码">
-
             <br/>
             <input type="button" class="userdl"
                    style="background-color: #ffffff;color: #05c46b;border-radius: 25px;font-weight:bold ;margin-top: 20px;width: 95px"
@@ -556,12 +552,10 @@
         <br/>
     </div>
 </div>
-
 <%--最大的主体框--%>
 <div style="width:1518px;min-width:100%">
     <%--头部导航栏框--%>
     <div style="height:55px;background-color: white">
-
         <%--logo框--%>
         <div style="width: 300px;height: 55px;display:inline-block;margin-right:600px;margin-left: -20px;text-align: center">
             <img src="\subject\loading.png" width="100" style="margin-right: 5px">
@@ -587,7 +581,6 @@
                     </ul>
                 </div>
             </div>
-
             <%--购物车框--%>
             <div class="gouwuc" style="width: 120px;height: 55px;display:inline-block;position: absolute;right: 10px">
                 <img src="\subject\gwc.png" alt="" width="40px" style="position: absolute;top: 10px;margin-top: 2px">
@@ -601,7 +594,6 @@
             <li><strong><a href="home.jsp">商城首页</a></strong><img src="\subject\zuo.png" alt="" width="14px"></li>
             <li><a href="http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo=">商品区</a><img
                     src="\subject\zuo.png" alt="" width="14px"></li>
-
         </ul>
     </div>
 </div>

@@ -54,7 +54,7 @@ public class selectHome extends HttpServlet {
             req.setAttribute("listquantity",list.get(0).getComQuantity());
             req.setAttribute("listmodell",list.get(0).getModell());
             req.setAttribute("liststate",list.get(0).getState());
-            req.getRequestDispatcher("loldemo/index4.jsp").forward(req, resp);
+            req.getRequestDispatcher("loldemo/particulars.jsp").forward(req, resp);
         }else{
             System.out.println("查询失败！");
         }
