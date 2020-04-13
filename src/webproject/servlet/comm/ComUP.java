@@ -27,6 +27,7 @@ public class ComUP extends HttpServlet {
     @SuppressWarnings("rawtypes")
     public static String filename = null;
     private static final long serialVersionUID = 1L;
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
 //        DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -152,6 +153,7 @@ public class ComUP extends HttpServlet {
                 "</script>");
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

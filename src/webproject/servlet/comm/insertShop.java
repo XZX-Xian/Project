@@ -50,7 +50,18 @@ public class insertShop extends HttpServlet {
         if (sumdemo > 0) {
             System.out.println("数据库内包含并且，商品详情页选中的数是:" + com.getSize());
             int sum = (com.getSize()) + (sumdemo);
-            req.getRequestDispatcher("/shopud?userid=" + userid + "&shopid=" + id + "&sum=" + sum + "").forward(req, resp);
+            //库存数
+            int inve=inventory-size;
+            //交易量
+            int volumes=volume+size;
+            CommService str=new CommServiceImpl();
+            int con=str.ComUP(inve,volumes,id);
+            if (con>0){
+                req.getRequestDispatcher("http://localhost:8080/Project_war_exploded/shopud?userid=" + userid + "&shopid=" + id + "&sum=" + sum + "").forward(req, resp);
+            }else {
+                System.out.println("库存修改失败");
+            }
+
         } else {
             System.out.println("数据库没有包含包含并且，商品详情页选中的数是::" + com.getSize());
             int count = use.shopinse(com);

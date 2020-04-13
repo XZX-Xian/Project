@@ -17,6 +17,7 @@ import java.io.PrintWriter;
  */
 @WebServlet(name = "OrderDel",urlPatterns = "/orderdel")
 public class OrderDel extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out=response.getWriter();
@@ -29,6 +30,7 @@ public class OrderDel extends HttpServlet {
         out.close();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

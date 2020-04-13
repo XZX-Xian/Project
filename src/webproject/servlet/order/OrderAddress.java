@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "OrderAddress",urlPatterns = "/orderaddress")
 public class OrderAddress extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String name=request.getParameter("name");
@@ -46,6 +47,7 @@ public class OrderAddress extends HttpServlet {
         out.close();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

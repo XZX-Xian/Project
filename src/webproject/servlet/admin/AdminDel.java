@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "AdminDel",urlPatterns = "/admindel")
 public class AdminDel extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         String account=request.getParameter("account");
@@ -24,6 +25,7 @@ public class AdminDel extends HttpServlet {
         out.close();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

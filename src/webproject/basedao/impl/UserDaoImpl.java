@@ -407,10 +407,10 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //忘记密码
     @Override
     public int Updateuser(User user) {
-        String sql="update user SET pwd=? where account=? and phone=?";
-        Object []obj={user.getPwd(),user.getAccount(),user.getPhone()};
+        String sql="update user_data SET user_pwd=? where user_account=? and user_phone=?";
+        Object[] obj={user.getPwd(),user.getAccount(),user.getPhone()};
         int count=super.executeUpdate(sql,obj);
-
+        System.out.println(count);
         return count;
     }
 

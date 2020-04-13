@@ -80,10 +80,6 @@
                 var Updh=$("input[name=Updh]").val();
                 var Uppwd=$("input[name=Uppwd ]").val();
                 var Upname=$("input[name=Upname ]").val();
-                alert(Updh)
-                alert(Uppwd)
-                alert(Upname)
-
                 if(Upname==""||Updh==""||Uppwd==""){
                     $(".c2cyh").show();
                     $(".c2cyh").children("p").text("请先填完全部框!");
@@ -104,7 +100,7 @@
 
             //(忘记密码)失去焦点正则判断
 
-            $($("input[name=Upname ]")).blur(function () {
+            $($("input[name=Upname]")).blur(function () {
                 var Upnames=$("input[name=Upname ]").val();
                 var red=/^\S{6,10}$/;
                 if (Upnames==null||Upnames==""){

@@ -6,7 +6,6 @@ package webproject.entity;
 public class User {
     private String account;     //账号
     private String pwd;         //密码
-//    private String name;        //昵称
     private String sex;         //性别
     private String birthday;    //生日
     private String phone;       //电话号
@@ -29,14 +28,6 @@ public class User {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
-
-//    public String getName() {
-//        return name;
-//    }
-
-//    public void setName(String name) {
-//        this.name = name;
-//    }
 
     public String getSex() {
         return sex;

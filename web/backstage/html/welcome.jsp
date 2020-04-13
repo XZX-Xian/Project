@@ -31,14 +31,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <ul class="layui-row layui-col-space10 layui-this">
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>文章数</h3>
+                                                <h3>用户人数</h3>
                                                 <p>
                                                     <cite>66</cite></p>
                                             </a>
                                         </li>
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>会员数</h3>
+                                                <h3>管理员人数</h3>
                                                 <p>
                                                     <cite>12</cite></p>
                                             </a>
@@ -59,18 +59,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         </li>
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>文章数</h3>
+                                                <h3>总评价数</h3>
                                                 <p>
                                                     <cite>67</cite></p>
                                             </a>
                                         </li>
-                                        <li class="layui-col-xs2">
-                                            <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>文章数</h3>
-                                                <p>
-                                                    <cite>6766</cite></p>
-                                            </a>
-                                        </li>
+<%--                                        <li class="layui-col-xs2">--%>
+<%--                                            <a href="javascript:;" class="x-admin-backlog-body">--%>
+<%--                                                <h3>文章数</h3>--%>
+<%--                                                <p>--%>
+<%--                                                    <cite>6766</cite></p>--%>
+<%--                                            </a>--%>
+<%--                                        </li>--%>
                                     </ul>
                                 </div>
                             </div>

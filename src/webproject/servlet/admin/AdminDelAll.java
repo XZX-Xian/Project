@@ -12,10 +12,12 @@ import java.io.IOException;
 
 @WebServlet(name = "AdminDelAll",urlPatterns = "/admindelall")
 public class AdminDelAll extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         String IdAll=request.getParameter("account");

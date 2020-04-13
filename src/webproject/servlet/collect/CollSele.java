@@ -19,6 +19,7 @@ import java.util.List;
  */
 @WebServlet(name = "CollSele",urlPatterns = "/collsele")
 public class CollSele extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
@@ -38,6 +39,7 @@ public class CollSele extends HttpServlet {
 
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

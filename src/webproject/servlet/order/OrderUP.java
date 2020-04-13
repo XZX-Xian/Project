@@ -16,6 +16,7 @@ import java.io.PrintWriter;
  */
 @WebServlet(name = "OrderUP",urlPatterns = "/orderup")
 public class OrderUP extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String ordernumber=request.getParameter("ordernumber");
@@ -31,6 +32,7 @@ public class OrderUP extends HttpServlet {
         out.print("");
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

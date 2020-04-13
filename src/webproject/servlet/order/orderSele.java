@@ -33,7 +33,6 @@ public class orderSele extends HttpServlet {
                 System.out.println("没有查询到值");
                 req.getRequestDispatcher("/loldemo/order.jsp").forward(req, resp);
             }
-
     }
 
     @Override

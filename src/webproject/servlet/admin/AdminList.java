@@ -20,6 +20,7 @@ import java.util.List;
  */
 @WebServlet(name = "AdminList",urlPatterns = "/adminlist")
 public class AdminList extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out=response.getWriter();
@@ -34,6 +35,7 @@ public class AdminList extends HttpServlet {
         out.close();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

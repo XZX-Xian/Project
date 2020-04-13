@@ -212,9 +212,12 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    //手机号修改密码
     @Override
     public int Updateuser(User user) {
-        return 0;
+        int count=str.Updateuser(user);
+        System.out.println(count);
+        return count;
     }
 
     //删除用户

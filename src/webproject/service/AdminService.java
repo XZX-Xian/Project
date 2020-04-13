@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * 管理员
  */
+@SuppressWarnings("all")
 public interface AdminService {
 
     //管理员账号查询

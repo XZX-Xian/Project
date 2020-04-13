@@ -20,6 +20,7 @@ import java.util.List;
  */
 @WebServlet(name = "OrderLike",urlPatterns = "/orderlike")
 public class OrderLike extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out=response.getWriter();
@@ -36,6 +37,7 @@ public class OrderLike extends HttpServlet {
         out.close();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

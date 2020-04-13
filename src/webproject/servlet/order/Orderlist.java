@@ -16,6 +16,7 @@ import java.util.List;
 
 @WebServlet(name = "Orderlist",urlPatterns = "/orderlist")
 public class Orderlist extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         //获得账号
@@ -28,6 +29,7 @@ public class Orderlist extends HttpServlet {
         request.getRequestDispatcher("loldemo/orderlist.jsp").forward(request,response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

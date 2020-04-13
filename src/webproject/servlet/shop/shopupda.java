@@ -6,6 +6,7 @@ import webproject.service.UserService;
 import webproject.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import java.io.IOException;
 /**
  * 购物车商品加减修改
  */
+@WebServlet(name = "shopupda",urlPatterns = "/shopud")
 public class shopupda extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

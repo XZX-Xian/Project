@@ -11,10 +11,11 @@ import java.util.List;
 /**
  * 订单
  */
+@SuppressWarnings("all")
 public class OrderServiceImpl implements OrderService {
     OrderDao str = new OrderDaoImpl();
 
-    //订单模糊查询
+//    订单模糊查询
     @Override
     public List<Order> OrderLike(String ordernumber) {
         List<Order> list = new ArrayList<>();

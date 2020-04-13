@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "CollectDel",urlPatterns = "/collectdel")
 public class CollectDel extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String ids=request.getParameter("ids");
@@ -40,6 +41,7 @@ public class CollectDel extends HttpServlet {
         response.sendRedirect("http://localhost:8080/Project_war_exploded/collsele");
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }
