@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * 订单信息补全
+ */
 @WebServlet(name = "OrderAddress",urlPatterns = "/orderaddress")
 public class OrderAddress extends HttpServlet {
     @Override

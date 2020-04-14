@@ -277,8 +277,9 @@
             $("#greet").show();
             $("#cancel").hide();
             $("#account").text("");
-            $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {});
-            // location.href="http://localhost:8080/Project_war_exploded/comselete";
+            $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {
+                location.href="http://localhost:8080/Project_war_exploded/loldemo/home.jsp";
+            });
         });
 
         // 单击账号

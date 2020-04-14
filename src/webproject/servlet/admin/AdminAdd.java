@@ -51,7 +51,6 @@ public class AdminAdd extends HttpServlet {
         out.print("<script type=\"text/javascript\">// 获得frame索引\n" +
                 "                var index = parent.layer.getFrameIndex(window.name);\n" +
                 "               //提示弹窗\n" +
-                "                        layer.msg('新增成功', {icon: 1, time: 2000});//关闭当前frame\n" +
                 "                parent.layer.close(index);" +
                 "window.close();</script>");
     }

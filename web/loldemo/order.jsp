@@ -191,21 +191,7 @@
             $(".c2").hide();
             $("#bg").hide();
         });
-        // $(".gwc").click(function () {
-        //     if(account!=""&&account!=null&&account!="null"){
-        //         var id=$(".bh").text();
-        //         var name=$(".nam").text();
-        //         var money=$(".mone").text();
-        //         var size=$("input[name=size]").val();
-        //         var ove=  $(".oves").text();
-        //         var userid=$(".userid").text();
-        //         location.href="http://localhost:8080/Project_war_exploded/inseshop?id="+id+"&name="+name+"&money="+money+"&size="+size+"&ove="+ove+"&userid="+userid+"";
-        //     }else{
-        //         alert("请先登录");
-        //         $(".dlus").click();
-        //         return false;
-        //     }
-        // });
+
         $(".gouwuc").click(function () {
             if(account!=""&&account!=null&&account!="null"){
                 var userid=$(".userid").text();
@@ -219,13 +205,11 @@
 
         $(".shdz").click(function () {
             var userid=$(".userid").text();
-            location.href="http://localhost:8080/Project_war_exploded/seleord?userid="+userid+"";
+            location.href="http://localhost:8080/Project_war_exploded/shiselete";
+            // location.href="http://localhost:8080/Project_war_exploded/seleord?userid="+userid+"";
         });
-
-
         //总量计算
-
-            //总金额
+        //总金额
             var moyesum = 0.00;
             var index = $(".collect").length;
 
@@ -263,7 +247,7 @@
           var userid = $(".userid").text();
           var count = document.getElementsByName("goodsId");
           var ids = new Array();
-
+          //除被选中的其它地址的ID
           for (var i = 0; i < count.length; i++) {
               if (count[i].checked != true) {
                   var idm = count[i].value; // value被绑定了ID
@@ -271,7 +255,19 @@
               }
           }
           if (ids.length > 0) {
-              location.href = "http://localhost:8080/Project_war_exploded/oraddup?id=" + id + "&userid=" + userid + "&ids="+ids+"";
+              var collname=$(".collname");
+              var orders = "";
+              //订单的全部id
+              for (var i = 0; i < collname.length; i++) {
+                  if (collname.length-1==i){
+                      var orederId=$(".collname:eq("+i+")").next().text();
+                      orders=orders+orederId;
+                  }else {
+                      var orederId=$(".collname:eq("+i+")").next().text();
+                      orders=orders+orederId+",";
+                  }
+              }
+            location.href="http://localhost:8080/Project_war_exploded/oraddup?id="+id+"&userid="+userid+"&orders="+orders;
           } else {
               alert("请先选中地址！");
           }

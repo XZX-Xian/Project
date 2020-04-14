@@ -38,7 +38,6 @@ public class selectuser extends HttpServlet {
             session.setAttribute("account",account);
         }else{
             //设置页面状态
-            session.setAttribute("pd",!flag);
             session.removeAttribute("account");
             session.setAttribute("pd",true);
         }

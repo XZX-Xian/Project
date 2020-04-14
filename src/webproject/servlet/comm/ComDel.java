@@ -22,7 +22,6 @@ public class ComDel extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out=response.getWriter();
         String ids=request.getParameter("ids");
-        System.out.println(ids);
         CommService str=new CommServiceImpl();
         int count=str.ComDel(ids);
         String json=null;

@@ -91,12 +91,11 @@
 
             });
 
-            $(".userdhdl").click(function () {
-                var userdh=$("input[name=userdh]").val();
-                var userpwd=$("input[name=userpwd ]").val();
-                location.href="http://localhost:8080/Project_war_exploded/seluerdh?userdh="+userdh+"&userpwd="+userpwd+"";
-
-            });
+            // $(".userdhdl").click(function () {
+            //     var userdh=$("input[name=userdh]").val();
+            //     var userpwd=$("input[name=userpwd ]").val();
+            //     location.href="http://localhost:8080/Project_war_exploded/seluerdh?userdh="+userdh+"&userpwd="+userpwd+"";
+            // });
 
             //(忘记密码)失去焦点正则判断
 

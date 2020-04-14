@@ -166,10 +166,7 @@
         var type = 1;//默认为1
         var name;
 
-        shopsele();
-        var homesele = "<%=request.getParameter("shopdemo")%>";
-
-
+        // shopsele();
         $("#btlist").hide();
         $(".shoubs").prepend().css("background-color", "red");
         $("#zhuti div").click(function () {
@@ -183,7 +180,7 @@
             shopsele();
         });
         $(".shopsele").click(function () {
-            name = $(".shopse").val();
+          var  name = $(".shopse").val();
             size = 0;
             type = 0;
             $("#sel").val(0);
@@ -203,45 +200,9 @@
 
         });
 
-        if (homesele != "") {
-            $(".shopse").val(homesele);
-            $(".shopsele").click();
-        }
-        //得到账号
-        <%--var account = "<%= session.getAttribute("account")%>";--%>
-        <%--if (account != "" && account != null && account != "null") {--%>
-        <%--    $("#register").hide();--%>
-        <%--    $("#greet").hide();--%>
-        <%--    $("#cancel").show();--%>
-        <%--    $("#account").text(account);--%>
-        <%--} else {--%>
-        <%--    if (url == href && pd == "true") {--%>
-        <%--        alert("登录失败!");--%>
-        <%--        //重置页面状态--%>
-        <%--        location.href = "http://localhost:8080/Project_war_exploded/pagestate";--%>
-        <%--    }--%>
-        <%--}--%>
-        <%--;--%>
-
-        // //注销
-        // $("#cancel").click(function () {
-        //     $("#register").show();
-        //     $("#greet").show();
-        //     $("#cancel").hide();
-        //     $("#account").text("");
-        //     $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {
-        //     })
-        // });
-        //
-        // // 单击账号
-        // $("#account").click(function () {
-        //     var id = $(this).text();
-        //     location.href = "http://localhost:8080/Project_war_exploded/userquery?id=" + id;
-        // });
-
-
         function shopsele() {
-            size = $('#sel option:selected').val();
+           var size= $('#sel option:selected').val();
+            var name=$(".shopse").val();
             var json = {"size": size, "type": type, "name": name};
             $.getJSON("http://localhost:8080/Project_war_exploded/selcom", json, function (data) {
                 $("#sese").html("");
@@ -333,7 +294,6 @@
             // $(".cs").val(a);a
             $(this).children(".cs").val(a);
             var qis = 2;
-
             var json = {"leix": leix, "cs": cs, "qis": qis};
             $.getJSON("http://localhost:8080/Project_war_exploded/selhyh", json, function (data) {
                 var jsonData = JSON.stringify(data);// 转成JSON格式
@@ -510,6 +470,13 @@
             location.href = "http://localhost:8080/Project_war_exploded/userquery";
         })
 
+        var homesele = "<%=request.getParameter("shopdemo")%>";
+        //判断homesele是否有值
+        if (homesele != "") {
+            $(".shopse").val(homesele);
+            //搜索触发单击事件
+            $(".shopsele").click();
+        }
     });
 </script>
 

@@ -57,7 +57,7 @@ public class insertShop extends HttpServlet {
             CommService str=new CommServiceImpl();
             int con=str.ComUP(inve,volumes,id);
             if (con>0){
-                req.getRequestDispatcher("http://localhost:8080/Project_war_exploded/shopud?userid=" + userid + "&shopid=" + id + "&sum=" + sum + "").forward(req, resp);
+                req.getRequestDispatcher("/shopud?userid=" + userid + "&shopid=" + id + "&sum=" + sum + "").forward(req, resp);
             }else {
                 System.out.println("库存修改失败");
             }

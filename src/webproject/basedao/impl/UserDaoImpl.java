@@ -115,8 +115,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     //地址的状态清空
     @Override
     public int addressUp(String ids, String userid) {
-        String sql="UPDATE user_address set state=\"\" where id <> '"+ids+"' AND user_account=?";
-        System.out.println(sql);
+        String sql="UPDATE user_address set state=\"\" where id <>"+ids+" AND user_account=?";
         Object[] obj={userid};
         int count=super.executeUpdate(sql,obj);
         //手动关闭mysql
@@ -406,11 +405,10 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     //忘记密码
     @Override
-    public int Updateuser(User user) {
+    public int UpdateUser(User user) {
         String sql="update user_data SET user_pwd=? where user_account=? and user_phone=?";
         Object[] obj={user.getPwd(),user.getAccount(),user.getPhone()};
         int count=super.executeUpdate(sql,obj);
-        System.out.println(count);
         return count;
     }
 

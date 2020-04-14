@@ -74,7 +74,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="html/comm-list.jsp"><i class="iconfont">&#xe6a7;</i><cite>控制台</cite></a></li>
+                    <li><a _href="html/welcome.jsp"><i class="iconfont">&#xe6a7;</i><cite>控制台</cite></a></li>
                 </ul>
             </li>
             <li>

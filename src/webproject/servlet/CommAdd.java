@@ -1,4 +1,4 @@
-package webproject.servlet.comm;
+package webproject.servlet;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,13 +23,15 @@ import java.util.List;
  */
 @WebServlet(name = "CommAdd",urlPatterns = "/comadd")
 public class CommAdd extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    @SuppressWarnings("rawtypes")
+    public static String filename = null;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }
-    @SuppressWarnings("rawtypes")
-    public static String filename = null;
-    private static final long serialVersionUID = 1L;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
@@ -55,17 +56,18 @@ public class CommAdd extends HttpServlet {
                 // 设置字符
                 request.setCharacterEncoding("UTF-8");
                 response.setCharacterEncoding("UTF-8");
-                String fieldName = item.getFieldName(); // 文件域中name属性的值
-//                System.out.println("name"+fieldName);
-                String filename = item.getName(); // 文件的全路径，绝对路径名加文件名
-                System.out.println("名字"+filename);
-//                value = new String(value.getBytes("ISO-8859-1"), "UTF-8");
+//                System.out.println("name"+item.getFieldName());
+                String value = item.getString();
+                value = new String(value.getBytes("ISO-8859-1"), "UTF-8");
+//                System.out.println("值"+value);
                 // 根据时间戳创建头像文件
-//                filename  = System.currentTimeMillis() + ".png";
+                filename  = System.currentTimeMillis() + ".png";
 //                System.out.println("图片信息"+filename);
 //                System.out.println(request.getContextPath());
                 /*File f = new File(getServletContext().getRealPath("upload"));*/
                 of++;
+                File f=null;
+//                System.out.println("个数"+of);
 
                 if (of>2){
                     filename="/commo/"+filename;
@@ -73,53 +75,31 @@ public class CommAdd extends HttpServlet {
                     filename = "/commodity/" + filename;
                 }
                 lists.add(filename);
-                // 获得图片的存放路径
-				String folderPath = "E:/idealU/Project/web/image";
-//				// D:/uploadImgs
-//				// C:/Users/86185/Desktop/S2项目/后台/superuser/WebRoot/images/w2
-//				// 判断文件夹是否存在
-				File foder = new File(folderPath);
-				if (!foder.exists()) {
-					foder.mkdirs();
-				}
-                filename = filename.substring(filename.lastIndexOf("\\") + 1);
-                //输入和输出流
-				InputStream is = item.getInputStream();
-				FileOutputStream fos = new FileOutputStream(new File(folderPath + "/" + filename));
-                System.out.println("数据"+filename);
-                // 写入数据
-				byte[] buffer = new byte[1024];
-				int len = 0;
-				while ((len = (is.read(buffer))) > -1) {
-					fos.write(buffer, 0, len);
-				}
-				//关闭输入输出流
-				fos.close();
-				is.close();
-				System.out.println("图片成功上传到" + folderPath + "/" + filename);
-//                File f=null;
-//                f= new File("E://idealU//Project//web//image");
-//                if (!f.exists()) {
-//                    f.mkdir();
-//                }
-//                String imgsrc = f+ filename;
+//                map.put(item.getFieldName(),filename);
+//                System.out.println(filename);
+                f= new File("E://idealU//Project//web//image");
+                if (!f.exists()) {
+                    f.mkdir();
+                }
+                String imgsrc = f+ filename;
 //                System.out.println("图片"+imgsrc);
                 // 复制文件
-//                InputStream is = item.getInputStream();
-//                FileOutputStream fos = new FileOutputStream(imgsrc);
-//                byte b[] = new byte[1024 * 1024];
-//                int length = 0;
-//                while (-1 != (length = is.read(b))) {
-//                    fos.write(b, 0, length);
-//                }
-//                fos.flush();
-//                fos.close();
+                InputStream is = item.getInputStream();
+                FileOutputStream fos = new FileOutputStream(imgsrc);
+                byte b[] = new byte[1024 * 1024];
+                int length = 0;
+                while (-1 != (length = is.read(b))) {
+                    fos.write(b, 0, length);
+                }
+                fos.flush();
+                fos.close();
             }else {
 //                System.out.println("name"+item.getFieldName());
                 String value = item.getString();
                 value = new String(value.getBytes("ISO-8859-1"), "UTF-8");
 //                System.out.println("值"+value);
                 lists.add(value);
+//                map.put(item.getFieldName(),value);
             }
         }
 
@@ -150,6 +130,7 @@ public class CommAdd extends HttpServlet {
         out.print("<script type=\"text/javascript\">// 获得frame索引\n" +
                 "                var index = parent.layer.getFrameIndex(window.name);\n" +
                 "               //提示弹窗\n" +
+                "                        layer.msg('新增成功', {icon: 1, time: 2000});//关闭当前frame\n" +
                 "                parent.layer.close(index);" +
                 "window.close();</script>");
     }

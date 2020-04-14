@@ -67,7 +67,7 @@ public interface UserDao {
     List<Comm>Seletedemo(Comm comm);
 
     //忘记密码
-    int Updateuser(User user);
+    int UpdateUser(User user);
 
     //删除用户
     int DelUser(String account);

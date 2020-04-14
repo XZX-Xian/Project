@@ -71,7 +71,6 @@ public class CommDaoImpl extends BaseDao implements CommDao {
     @Override
     public int ComDel(String ids) {
         String sql = "DELETE FROM addcommodity WHERE AddId in(" + ids + ",?)";
-        System.out.println(sql);
         Object[] params = {ids};
         int count = super.executeUpdate(sql, params);
         //手动关闭mysql

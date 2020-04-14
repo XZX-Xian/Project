@@ -212,13 +212,6 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
-    //手机号修改密码
-    @Override
-    public int Updateuser(User user) {
-        int count=str.Updateuser(user);
-        System.out.println(count);
-        return count;
-    }
 
     //删除用户
     @Override
@@ -263,10 +256,13 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    //手机号修改密码
     @Override
     public int UpdateUser(User user) {
-        return 0;
+        int count=str.UpdateUser(user);
+        return count;
     }
+
 
     //查询全部用户
     @Override

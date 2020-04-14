@@ -20,13 +20,11 @@ import java.io.PrintWriter;
 public class Upuser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=utf-8");
         String name=req.getParameter("Upname");
         String pwd=req.getParameter("Uppwd");
         String phone=req.getParameter("Updh");
 
-        System.out.println("account"+name);
-        System.out.println(pwd);
-        System.out.println(phone);
         UserService us=new UserServiceImpl();
 
         User user=new User();
@@ -34,7 +32,6 @@ public class Upuser extends HttpServlet {
         user.setAccount(name);
         user.setPhone(phone);
         int count=us.UpdateUser(user);
-        System.out.println(count);
         PrintWriter out=resp.getWriter();
     if (count>0){
         System.out.println("修改成功！");

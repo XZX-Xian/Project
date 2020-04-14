@@ -1,5 +1,6 @@
 package webproject.servlet.order;
 
+import webproject.entity.Order;
 import webproject.service.OrderService;
 import webproject.service.impl.OrderServiceImpl;
 
@@ -9,29 +10,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * 修改订单状态
+ * 选择默认地址重新查询数据
  */
-@WebServlet(name = "OrderUP",urlPatterns = "/orderup")
-public class OrderUP extends HttpServlet {
-    @Override
+@WebServlet(name = "OrderListAddress",urlPatterns = "/orderlistaddress")
+public class OrderListAddress extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String ordernumber=request.getParameter("ordernumber");
-        String name=request.getParameter("name");
-        String money=request.getParameter("money");
-        String ids=request.getParameter("ids");
+        String orders = request.getParameter("orders");
+        String userid = request.getParameter("useid");
 
-        PrintWriter out=response.getWriter();
+        //订单查询
         OrderService str=new OrderServiceImpl();
-        
-
-        out.print("");
+        List<Order> list1 = new ArrayList<>();
+        list1=str.OrderList(orders,userid);
+        request.setAttribute("list1", list1);
+        request.getRequestDispatcher("/seleord").forward(request,response);
     }
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

@@ -192,8 +192,8 @@
             $("#cancel").hide();
             $("#account").text("");
             $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {
+                location.href="http://localhost:8080/Project_war_exploded/loldemo/home.jsp";
             })
-            location.href = "http://localhost:8080/Project_war_exploded/comselete";
         });
 
         // 单击账号

@@ -67,6 +67,7 @@ public class ddcgSelect extends HttpServlet {
         }
         //删除最后一个字符
         ordernumber = ordernumber.substring(0, ordernumber.length() -1);
+
         if (list.size() > 0) {
             //订单查询
             OrderService str=new OrderServiceImpl();

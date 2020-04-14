@@ -56,7 +56,8 @@ public interface UserService {
     List<Comm> Seletedemo(Comm comm);
 
     //忘记密码
-    int Updateuser(User user);
+    int UpdateUser(User user);
+
     //删除用户
     int DelUser(String account);
 
@@ -73,9 +74,6 @@ public interface UserService {
 
     //查询全部用户
     List<User> Seleuser();
-
-    //用户登录修改状态
-    int UpdateUser(User user);
 
     //查询用户信息
     List<User> Selete(String id);

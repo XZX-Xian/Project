@@ -134,8 +134,8 @@
                 <span class="x-red">*</span>展示图(一)
             </label>
             <div class="layui-input-inline">
-                <input type="file" name="Mouseove" class="form-control" style="padding: 0px;" onchange="imagesrc('imgove')" id="imgove"
-                       placeholder="&nbsp;上传文件" src="">
+                <input type="file" name="Mouseove" <%--class="form-control"--%> style="padding: 0px;" onchange="imagesrc('imgove')" id="imgove"
+                       placeholder="&nbsp;上传文件">
                 <span hidden> <img src="" height="100px" width="100px" ></span>
             </div>
             <div class="layui-form-mid layui-word-aux">

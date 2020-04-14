@@ -244,8 +244,7 @@
             $("#greet").show();
             $("#cancel").hide();
             $("#account").text("");
-            $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {
-            })
+            $.getJSON("http://localhost:8080/Project_war_exploded/userclear", "", function (data) {});
         });
 
         pwdblur = function () {
@@ -398,7 +397,7 @@
                     location.href = "http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo="
                 } else {}
             } else {
-                location.href = "http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo=" + shop;
+                location.href = "http://localhost:8080/Project_war_exploded/loldemo/index.jsp?shopdemo="+ shop;
             }
         });
 
